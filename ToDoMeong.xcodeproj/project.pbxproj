@@ -11,6 +11,7 @@
 		44ED3AC92C92E3F200E3E9CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* ContentView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
 		44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */; };
+		44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AD72C92E45600E3E9CF /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		44ED3AC82C92E3F200E3E9CF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		44ED3AD72C92E45600E3E9CF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +37,7 @@
 		44ED3ABA2C92E3F200E3E9CF = {
 			isa = PBXGroup;
 			children = (
+				44ED3AD72C92E45600E3E9CF /* .gitignore */,
 				44ED3AC52C92E3F200E3E9CF /* ToDoMeong */,
 				44ED3AC42C92E3F200E3E9CF /* Products */,
 			);
@@ -51,10 +54,9 @@
 		44ED3AC52C92E3F200E3E9CF /* ToDoMeong */ = {
 			isa = PBXGroup;
 			children = (
-				44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */,
-				44ED3AC82C92E3F200E3E9CF /* ContentView.swift */,
-				44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */,
-				44ED3ACC2C92E3F300E3E9CF /* Preview Content */,
+				44ED3AD62C92E41000E3E9CF /* Application */,
+				44ED3AD52C92E40400E3E9CF /* Presentation */,
+				44ED3AD42C92E3FA00E3E9CF /* Resource */,
 			);
 			path = ToDoMeong;
 			sourceTree = "<group>";
@@ -65,6 +67,31 @@
 				44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		44ED3AD42C92E3FA00E3E9CF /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */,
+				44ED3ACC2C92E3F300E3E9CF /* Preview Content */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		44ED3AD52C92E40400E3E9CF /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AC82C92E3F200E3E9CF /* ContentView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		44ED3AD62C92E41000E3E9CF /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -126,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */,
+				44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */,
 				44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,15 +299,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "투두멍";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -287,9 +317,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -300,15 +334,17 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "투두멍";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -316,9 +352,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
