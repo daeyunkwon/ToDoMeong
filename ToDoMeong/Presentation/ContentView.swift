@@ -9,14 +9,36 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationView {
+            Text("테스트")
+            
+            
+            
+            
+            
+            
+                .toolbar {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Text("오늘 할 일")
+                            .font(Constant.AppFont.jalnanBold23)
+                            
+                    }
+                }
         }
-        .padding()
+       
+        
     }
+    
+    init() {
+        
+        for fontFamily in UIFont.familyNames {
+            for fontName in UIFont.fontNames(forFamilyName: fontFamily) {
+                print(fontName)
+            }
+        }
+        
+    }
+    
 }
 
 #Preview {
