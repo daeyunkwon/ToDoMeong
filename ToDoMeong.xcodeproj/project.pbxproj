@@ -12,6 +12,10 @@
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
 		44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */; };
 		44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AD72C92E45600E3E9CF /* .gitignore */; };
+		44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3ADB2C92E51B00E3E9CF /* Constant.swift */; };
+		44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */; };
+		44ED3AE22C92EF1900E3E9CF /* Jalnan2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */; };
+		44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,11 @@
 		44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		44ED3AD72C92E45600E3E9CF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		44ED3ADB2C92E51B00E3E9CF /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan2.otf; sourceTree = "<group>"; };
+		44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan2TTF.ttf; sourceTree = "<group>"; };
+		44ED3AE42C92EFC500E3E9CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +64,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED3AD62C92E41000E3E9CF /* Application */,
+				44ED3ADA2C92E4C100E3E9CF /* Common */,
 				44ED3AD52C92E40400E3E9CF /* Presentation */,
 				44ED3AD42C92E3FA00E3E9CF /* Resource */,
 			);
@@ -72,6 +82,8 @@
 		44ED3AD42C92E3FA00E3E9CF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3AE42C92EFC500E3E9CF /* Info.plist */,
+				44ED3ADF2C92EF0900E3E9CF /* Font */,
 				44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */,
 				44ED3ACC2C92E3F300E3E9CF /* Preview Content */,
 			);
@@ -81,6 +93,7 @@
 		44ED3AD52C92E40400E3E9CF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */,
 				44ED3AC82C92E3F200E3E9CF /* ContentView.swift */,
 			);
 			path = Presentation;
@@ -92,6 +105,23 @@
 				44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */,
 			);
 			path = Application;
+			sourceTree = "<group>";
+		};
+		44ED3ADA2C92E4C100E3E9CF /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3ADB2C92E51B00E3E9CF /* Constant.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		44ED3ADF2C92EF0900E3E9CF /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */,
+				44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,9 +182,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ED3AE22C92EF1900E3E9CF /* Jalnan2.otf in Resources */,
 				44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */,
 				44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */,
 				44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */,
+				44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +199,8 @@
 			files = (
 				44ED3AC92C92E3F200E3E9CF /* ContentView.swift in Sources */,
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
+				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
+				44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,12 +337,12 @@
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "투두멍";
+				INFOPLIST_FILE = ToDoMeong/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,12 +372,12 @@
 				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "투두멍";
+				INFOPLIST_FILE = ToDoMeong/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
