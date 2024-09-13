@@ -19,6 +19,7 @@ struct TodoRowView: View {
                 
                 Button(action: {
                     print(1111)
+                    HapticManager.shared.impact(style: .light)
                 }, label: {
                     Image("checkbox", bundle: nil)
                         .resizable()
