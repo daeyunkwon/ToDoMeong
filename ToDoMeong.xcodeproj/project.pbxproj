@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
-		44ED3AC92C92E3F200E3E9CF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* ContentView.swift */; };
+		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
 		44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */; };
 		44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AD72C92E45600E3E9CF /* .gitignore */; };
@@ -16,12 +16,18 @@
 		44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */; };
 		44ED3AE22C92EF1900E3E9CF /* Jalnan2.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */; };
 		44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */; };
+		44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AE62C94328F00E3E9CF /* NavigationLazyView.swift */; };
+		44ED3AEA2C94336000E3E9CF /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AE92C94336000E3E9CF /* Date+Extension.swift */; };
+		44ED3AED2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AEB2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf */; };
+		44ED3AEE2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AEC2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf */; };
+		44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */; };
+		44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF22C94B27700E3E9CF /* HapticManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
-		44ED3AC82C92E3F200E3E9CF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
 		44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		44ED3ACD2C92E3F300E3E9CF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		44ED3AD72C92E45600E3E9CF /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -30,6 +36,12 @@
 		44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan2.otf; sourceTree = "<group>"; };
 		44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Jalnan2TTF.ttf; sourceTree = "<group>"; };
 		44ED3AE42C92EFC500E3E9CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44ED3AE62C94328F00E3E9CF /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
+		44ED3AE92C94336000E3E9CF /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		44ED3AEB2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TmoneyRoundWindRegular.otf; sourceTree = "<group>"; };
+		44ED3AEC2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TmoneyRoundWindExtraBold.otf; sourceTree = "<group>"; };
+		44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
+		44ED3AF22C94B27700E3E9CF /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,7 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */,
-				44ED3AC82C92E3F200E3E9CF /* ContentView.swift */,
+				44ED3AF12C94ADFE00E3E9CF /* Todo */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -110,7 +122,10 @@
 		44ED3ADA2C92E4C100E3E9CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3AE52C94327C00E3E9CF /* CustomViews */,
+				44ED3AE82C94334300E3E9CF /* Extensions */,
 				44ED3ADB2C92E51B00E3E9CF /* Constant.swift */,
+				44ED3AF22C94B27700E3E9CF /* HapticManager.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -120,8 +135,35 @@
 			children = (
 				44ED3AE02C92EF1900E3E9CF /* Jalnan2.otf */,
 				44ED3AE12C92EF1900E3E9CF /* Jalnan2TTF.ttf */,
+				44ED3AEC2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf */,
+				44ED3AEB2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		44ED3AE52C94327C00E3E9CF /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AE62C94328F00E3E9CF /* NavigationLazyView.swift */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		44ED3AE82C94334300E3E9CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AE92C94336000E3E9CF /* Date+Extension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		44ED3AF12C94ADFE00E3E9CF /* Todo */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3AC82C92E3F200E3E9CF /* TodoView.swift */,
+				44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */,
+			);
+			path = Todo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +229,8 @@
 				44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */,
 				44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */,
 				44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */,
+				44ED3AEE2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf in Resources */,
+				44ED3AED2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,10 +241,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44ED3AC92C92E3F200E3E9CF /* ContentView.swift in Sources */,
+				44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */,
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
+				44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */,
+				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
+				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */,
+				44ED3AEA2C94336000E3E9CF /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

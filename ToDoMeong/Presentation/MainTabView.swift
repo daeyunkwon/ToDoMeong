@@ -11,14 +11,20 @@ struct MainTabView: View {
     
     var body: some View {
         TabView {
-            ContentView()
+            TodoView()
                 .tabItem {
                     Image(systemName: "checklist")
                     Text("할 일")
                 }
+                
         }
-        .tint(.black)
-        
+        .tint(Color(uiColor: UIColor.label))
+        .onAppear() {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = .systemBackground
+            UITabBar.appearance().standardAppearance = appearance
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
     }
 }
 
