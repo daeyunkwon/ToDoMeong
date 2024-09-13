@@ -4,8 +4,10 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>TmoneyRoundWindRegular.otf</string>
 		<string>Jalnan2.otf</string>
 		<string>Jalnan2TTF.ttf</string>
+		<string>TmoneyRoundWindExtraBold.otf</string>
 	</array>
 </dict>
 </plist>
