@@ -9,21 +9,22 @@ import SwiftUI
 
 struct MainTabView: View {
     
+    @State private var tabSelection = 0
+    
     var body: some View {
-        TabView {
-            TodoView()
-                .tabItem {
-                    Image(systemName: "checklist")
-                    Text("할 일")
-                }
-                
+        TabView(selection: $tabSelection,
+                content:  {
+            TodoView().tag(0)
+            Text("Tab Content 2").tag(1)
+            Text("Tab Content 3").tag(2)
+            Text("Tab Content 4").tag(3)
+        })
+        .overlay(alignment: .bottom) {
+            CustomTabView(tabSelection: $tabSelection)
+                .offset(y: 15)
         }
-        .tint(Color(uiColor: UIColor.label))
         .onAppear() {
-            let appearance = UITabBarAppearance()
-            appearance.backgroundColor = .systemBackground
-            UITabBar.appearance().standardAppearance = appearance
-            UITabBar.appearance().scrollEdgeAppearance = appearance
+            UITabBar.appearance().isHidden = true
         }
     }
 }

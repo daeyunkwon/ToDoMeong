@@ -22,6 +22,7 @@
 		44ED3AEE2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3AEC2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf */; };
 		44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */; };
 		44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF22C94B27700E3E9CF /* HapticManager.swift */; };
+		44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		44ED3AEC2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = TmoneyRoundWindExtraBold.otf; sourceTree = "<group>"; };
 		44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		44ED3AF22C94B27700E3E9CF /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED3AE62C94328F00E3E9CF /* NavigationLazyView.swift */,
+				44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
+				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
 				44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */,
 				44ED3AEA2C94336000E3E9CF /* Date+Extension.swift in Sources */,
 			);

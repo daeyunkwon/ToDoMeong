@@ -26,6 +26,9 @@ struct TodoView: View {
                     }
                 }
                 .frame(maxWidth: .infinity)
+                .safeAreaInset(edge: .bottom, content: {
+                    Color.clear.frame(height: 80)
+                })
                 .background(Color.gray.opacity(0.1))
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: {
@@ -44,6 +47,7 @@ struct TodoView: View {
                             .clipShape(Circle())
                             .padding()
                     })
+                    .offset(x: -10, y: -50)
                     .buttonStyle(PlainButtonStyle())
                 }
             }
