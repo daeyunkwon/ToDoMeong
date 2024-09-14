@@ -14,11 +14,24 @@ struct TodoView: View {
     var body: some View {
         
         NavigationStack {
-            VStack {
-                Text(Date().dateString)
-                    .font(Constant.AppFont.jalnan13)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 15)
+            VStack(alignment: .leading) {
+                UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
+                    .fill(.brandGreen)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 40)
+                    .overlay {
+                        Text(Date().dateString)
+                            .font(Constant.AppFont.jalnan13)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 15)
+                            .background(.clear)
+                    }
+                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 0, style: .continuous))
+                    .padding(.vertical, -4)
+                    .padding(.horizontal, 5)
+                    .offset(y: 3)
+                    .shadow(radius: 1.5)
+                
                 ScrollView {
                     Spacer()
                     ForEach(todoList, id: \.self) { item in
@@ -29,7 +42,8 @@ struct TodoView: View {
                 .safeAreaInset(edge: .bottom, content: {
                     Color.clear.frame(height: 80)
                 })
-                .background(Color.gray.opacity(0.1))
+                .background(Color(uiColor: .systemGray6))
+                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: {
                         print("할일 추가 버튼 탭")
@@ -49,7 +63,9 @@ struct TodoView: View {
                     })
                     .offset(x: -10, y: -50)
                     .buttonStyle(PlainButtonStyle())
+                    .shadow(radius: 2)
                 }
+                
             }
             
             
@@ -62,12 +78,9 @@ struct TodoView: View {
             }
             
             
-                
+            .background(Color(uiColor: .systemGray6))
         }
-       
-        
     }
-    
 }
 
 #Preview {

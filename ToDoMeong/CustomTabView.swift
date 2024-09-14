@@ -26,10 +26,17 @@ struct CustomTabView: View {
                 .foregroundStyle(Color.init(uiColor: .systemBackground))
                 .shadow(radius: 2)
             
+            Capsule()
+                .stroke(.gray, lineWidth: 0.1)
+                .frame(height: 60)
+                
+            
             HStack {
                 ForEach(0..<4) { index in
                     Button(action: {
-                        tabSelection = index
+                        withAnimation {
+                            tabSelection = index
+                        }
                     }, label: {
                         VStack(spacing: 8) {
                             Spacer()
