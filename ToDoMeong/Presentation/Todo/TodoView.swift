@@ -9,6 +9,8 @@ import SwiftUI
 
 struct TodoView: View {
     
+    @State private var showTodoEditView = false
+    
     var todoList = Array(repeating: "할일 할일", count: 50)
     
     var body: some View {
@@ -19,6 +21,7 @@ struct TodoView: View {
                     .fill(.brandGreen)
                     .frame(maxWidth: .infinity)
                     .frame(height: 40)
+                    .padding(.horizontal, 7)
                     .overlay {
                         Text(Date().dateString)
                             .font(Constant.AppFont.jalnan13)
@@ -46,18 +49,18 @@ struct TodoView: View {
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: {
-                        print("할일 추가 버튼 탭")
+                        showTodoEditView = true
                     }, label: {
                         Image(systemName: "plus")
                             .resizable()
                             .aspectRatio(contentMode: .fill)
-                            .frame(width: 30, height: 30)
+                            .frame(width: 24, height: 24)
                             .fontWeight(.bold)
                             .foregroundStyle(.white)
                             .clipShape(Circle())
                             .padding()
                             .background(Color.brandGreen)
-                            .frame(width: 60, height: 60)
+                            .frame(width: 54, height: 54)
                             .clipShape(Circle())
                             .padding()
                     })
@@ -65,10 +68,7 @@ struct TodoView: View {
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 2)
                 }
-                
             }
-            
-            
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -77,8 +77,10 @@ struct TodoView: View {
                 }
             }
             
-            
             .background(Color(uiColor: .systemGray6))
+            .fullScreenCover(isPresented: $showTodoEditView, content: {
+                TodoEditView(isShowing: $showTodoEditView)
+            })
         }
     }
 }
