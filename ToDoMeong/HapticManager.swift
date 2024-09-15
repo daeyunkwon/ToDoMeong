@@ -22,4 +22,9 @@ final class HapticManager {
         let generator = UIImpactFeedbackGenerator(style: style)
         generator.impactOccurred()
     }
+    
+    func impact(intensity: Double) {
+        let generator = UIImpactFeedbackGenerator()
+        generator.impactOccurred(intensity: intensity)
+    }
 }

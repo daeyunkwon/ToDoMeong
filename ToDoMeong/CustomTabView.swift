@@ -34,6 +34,7 @@ struct CustomTabView: View {
             HStack {
                 ForEach(0..<4) { index in
                     Button(action: {
+                        HapticManager.shared.impact(intensity: 0.5)
                         withAnimation(.easeInOut(duration: 0.2)) {
                             tabSelection = index
                         }
