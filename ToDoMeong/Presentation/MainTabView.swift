@@ -21,7 +21,7 @@ struct MainTabView: View {
         })
         .overlay(alignment: .bottom) {
             CustomTabView(tabSelection: $tabSelection)
-                .offset(y: 15)
+                .offset(y: 7)
         }
         .onAppear() {
             UITabBar.appearance().isHidden = true

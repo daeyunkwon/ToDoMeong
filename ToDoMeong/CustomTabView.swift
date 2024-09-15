@@ -22,13 +22,13 @@ struct CustomTabView: View {
     var body: some View {
         ZStack {
             Capsule()
-                .frame(height: 60)
+                .frame(height: 65)
                 .foregroundStyle(Color.init(uiColor: .systemBackground))
                 .shadow(radius: 2)
             
             Capsule()
                 .stroke(.gray, lineWidth: 0.1)
-                .frame(height: 60)
+                .frame(height: 65)
                 
             
             HStack {
@@ -52,12 +52,12 @@ struct CustomTabView: View {
                                     .frame(height: 5)
                                     .foregroundStyle(.brandGreen)
                                     .matchedGeometryEffect(id: "SelecedTabId", in: animationNamespace)
-                                    .offset(y: -4)
+                                    .offset(y: -2)
                             } else {
                                 Capsule()
                                     .frame(height: 5)
                                     .foregroundStyle(.clear)
-                                    .offset(y: -4)
+                                    .offset(y: -2)
                             }
                         }
                         .foregroundStyle(index == tabSelection ? .brandGreen : .gray)
