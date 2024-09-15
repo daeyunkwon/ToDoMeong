@@ -34,7 +34,7 @@ struct CustomTabView: View {
             HStack {
                 ForEach(0..<4) { index in
                     Button(action: {
-                        withAnimation {
+                        withAnimation(.easeInOut(duration: 0.2)) {
                             tabSelection = index
                         }
                     }, label: {
