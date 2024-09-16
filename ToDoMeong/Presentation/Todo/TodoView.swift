@@ -6,17 +6,22 @@
 //
 
 import SwiftUI
+import PopupView
+import RealmSwift
 
 struct TodoView: View {
     
-    @State private var showTodoEditView = false
+    @State private var showAddTodoView = false
     
-    var todoList = Array(repeating: "할일 할일", count: 50)
+    //var todoList = Array(repeating: "할일 할일", count: 50)
+    
+    @ObservedResults(Todo.self) var todoList
     
     var body: some View {
         
         NavigationStack {
             VStack(alignment: .leading) {
+                
                 UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
                     .fill(.brandGreen)
                     .frame(maxWidth: .infinity)
@@ -38,7 +43,7 @@ struct TodoView: View {
                 ScrollView {
                     Spacer()
                     ForEach(todoList, id: \.self) { item in
-                        TodoRowView(text: item)
+                        TodoRowView(todo: item)
                     }
                 }
                 .frame(maxWidth: .infinity)
@@ -47,9 +52,16 @@ struct TodoView: View {
                 })
                 .background(Color(uiColor: .systemGray6))
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
+                
+                .overlay {
+                    if todoList.isEmpty {
+                        DogMessageBubbleView(message: "오늘은 어떤 일을 해야 하나요?\n새로운 할 일을 추가해 보세요🐾")
+                    }
+                }
+                
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: {
-                        showTodoEditView = true
+                        showAddTodoView = true
                     }, label: {
                         Image(systemName: "plus")
                             .resizable()
@@ -68,7 +80,15 @@ struct TodoView: View {
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 2)
                 }
+                .ignoresSafeArea(.keyboard)
             }
+//            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .overlay(alignment: .bottom, content: {
+                Rectangle()
+                    .fill(Color(uiColor: .systemGray6))
+                    .frame(height: 50)
+                    .offset(y: 50)
+            })
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -77,10 +97,27 @@ struct TodoView: View {
                 }
             }
             
-            .background(Color(uiColor: .systemGray6))
-            .fullScreenCover(isPresented: $showTodoEditView, content: {
-                TodoEditView(isShowing: $showTodoEditView)
-            })
+            .popup(isPresented: $showAddTodoView) {
+                AddTodoView(isShowing: $showAddTodoView)
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.bottom)
+                    .closeOnTap(false)
+                    .closeOnTapOutside(true)
+                    .dragToDismiss(true)
+                    .backgroundColor(.black.opacity(0.4))
+                    .useKeyboardSafeArea(true)
+                    .isOpaque(true)
+            }
+            
+            .onChange(of: showAddTodoView) { isPresented in
+                if !isPresented {
+                    UIApplication.shared.dismissKeyboard()
+                }
+            }
+            
+            
         }
     }
 }
