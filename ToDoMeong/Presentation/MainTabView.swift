@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct MainTabView: View {
     
@@ -23,8 +24,11 @@ struct MainTabView: View {
             CustomTabView(tabSelection: $tabSelection)
                 .offset(y: 7)
         }
+        .ignoresSafeArea(.keyboard)
         .onAppear() {
             UITabBar.appearance().isHidden = true
+            
+            
         }
     }
 }

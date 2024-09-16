@@ -27,7 +27,27 @@
 		44ED3AFB2C97269F00E3E9CF /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 44ED3AFA2C97269F00E3E9CF /* PopupView */; };
 		44ED3AFF2C973E2B00E3E9CF /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AFE2C973E2B00E3E9CF /* UIApplication+Extension.swift */; };
 		44ED3B052C97F81B00E3E9CF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44ED3B042C97F81B00E3E9CF /* RealmSwift */; };
+		44ED3B062C97F8B500E3E9CF /* RealmSwift in Embed Frameworks */ = {isa = PBXBuildFile; productRef = 44ED3B042C97F81B00E3E9CF /* RealmSwift */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		44ED3B092C97FB2600E3E9CF /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B082C97FB2600E3E9CF /* RealmRepository.swift */; };
+		44ED3B0B2C98039800E3E9CF /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B0A2C98039800E3E9CF /* Todo.swift */; };
+		44ED3B0D2C9812C000E3E9CF /* DogMessageBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B0C2C9812C000E3E9CF /* DogMessageBubbleView.swift */; };
+		44ED3B102C9823E400E3E9CF /* OnChangeWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B0F2C9823E400E3E9CF /* OnChangeWrapper.swift */; };
+		44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B112C98282900E3E9CF /* AddEditCompleteToastView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		44ED3B072C97F8B500E3E9CF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				44ED3B062C97F8B500E3E9CF /* RealmSwift in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +70,11 @@
 		44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		44ED3AF72C95D40C00E3E9CF /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
 		44ED3AFE2C973E2B00E3E9CF /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		44ED3B082C97FB2600E3E9CF /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
+		44ED3B0A2C98039800E3E9CF /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
+		44ED3B0C2C9812C000E3E9CF /* DogMessageBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMessageBubbleView.swift; sourceTree = "<group>"; };
+		44ED3B0F2C9823E400E3E9CF /* OnChangeWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnChangeWrapper.swift; sourceTree = "<group>"; };
+		44ED3B112C98282900E3E9CF /* AddEditCompleteToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEditCompleteToastView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +159,7 @@
 		44ED3ADA2C92E4C100E3E9CF /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3B0E2C9823C200E3E9CF /* CustomModifier */,
 				44ED3AE52C94327C00E3E9CF /* CustomViews */,
 				44ED3AE82C94334300E3E9CF /* Extensions */,
 				44ED3ADB2C92E51B00E3E9CF /* Constant.swift */,
@@ -158,6 +184,8 @@
 			children = (
 				44ED3AE62C94328F00E3E9CF /* NavigationLazyView.swift */,
 				44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */,
+				44ED3B0C2C9812C000E3E9CF /* DogMessageBubbleView.swift */,
+				44ED3B112C98282900E3E9CF /* AddEditCompleteToastView.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -200,6 +228,7 @@
 		44ED3B012C97F7A600E3E9CF /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3B082C97FB2600E3E9CF /* RealmRepository.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -207,8 +236,17 @@
 		44ED3B022C97F7AD00E3E9CF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				44ED3B0A2C98039800E3E9CF /* Todo.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		44ED3B0E2C9823C200E3E9CF /* CustomModifier */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3B0F2C9823E400E3E9CF /* OnChangeWrapper.swift */,
+			);
+			name = CustomModifier;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,6 +259,7 @@
 				44ED3ABF2C92E3F200E3E9CF /* Sources */,
 				44ED3AC02C92E3F200E3E9CF /* Frameworks */,
 				44ED3AC12C92E3F200E3E9CF /* Resources */,
+				44ED3B072C97F8B500E3E9CF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -299,11 +338,16 @@
 				44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */,
 				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
 				44ED3AF82C95D40C00E3E9CF /* AddTodoView.swift in Sources */,
+				44ED3B092C97FB2600E3E9CF /* RealmRepository.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
+				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
+				44ED3B0D2C9812C000E3E9CF /* DogMessageBubbleView.swift in Sources */,
+				44ED3B102C9823E400E3E9CF /* OnChangeWrapper.swift in Sources */,
 				44ED3AFF2C973E2B00E3E9CF /* UIApplication+Extension.swift in Sources */,
 				44ED3ADE2C92EA7C00E3E9CF /* MainTabView.swift in Sources */,
+				44ED3B0B2C98039800E3E9CF /* Todo.swift in Sources */,
 				44ED3AEA2C94336000E3E9CF /* Date+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

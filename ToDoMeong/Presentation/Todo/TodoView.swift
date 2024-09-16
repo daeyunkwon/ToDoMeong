@@ -12,6 +12,8 @@ import RealmSwift
 struct TodoView: View {
     
     @State private var showAddTodoView = false
+    @State private var isAddNewTodo = false
+    @State private var showAddNewCompletionToast = false
     
     //var todoList = Array(repeating: "할일 할일", count: 50)
     
@@ -97,8 +99,9 @@ struct TodoView: View {
                 }
             }
             
+            //새로운 할 일 추가
             .popup(isPresented: $showAddTodoView) {
-                AddTodoView(isShowing: $showAddTodoView)
+                AddTodoView(isShowing: $showAddTodoView, isAddNewTodo: $isAddNewTodo, todoList: $todoList)
             } customize: {
                 $0
                     .type(.toast)
@@ -111,11 +114,32 @@ struct TodoView: View {
                     .isOpaque(true)
             }
             
-            .onChange(of: showAddTodoView) { isPresented in
+            
+            .popup(isPresented: $showAddNewCompletionToast) {
+                AddEditCompleteToastView(type: .addNewTodo)
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.top)
+                    .isOpaque(true)
+                    .closeOnTap(true)
+                    .closeOnTapOutside(true)
+                    .autohideIn(2)
+            }
+            
+            .onChange(value: showAddTodoView, action: { isPresented in
                 if !isPresented {
                     UIApplication.shared.dismissKeyboard()
                 }
+            })
+            
+            .onChange(value: isAddNewTodo) { isAdd in
+                if isAdd {
+                    print("Add함!!!")
+                    showAddNewCompletionToast = true
+                }
             }
+            
             
             
         }

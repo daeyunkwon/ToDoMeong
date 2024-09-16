@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 @main
 struct ToDoMeongApp: App {
+    
     var body: some Scene {
         WindowGroup {
             MainTabView()
         }
+    }
+    
+    init() {
+        print(Realm.Configuration.defaultConfiguration.fileURL ?? "DEBUG: Realm Not Found")
     }
 }

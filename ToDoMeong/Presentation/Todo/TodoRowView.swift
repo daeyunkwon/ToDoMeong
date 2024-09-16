@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct TodoRowView: View {
     
-    let text: String
+    @ObservedRealmObject var todo: Todo
     
     var body: some View {
         
@@ -30,11 +31,12 @@ struct TodoRowView: View {
                 Button(action: {
                     print(2222)
                 }, label: {
-                    Text(text)
+                    Text(todo.content)
                         .font(Constant.AppFont.tmoneyRoundWindRegular14)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
                 })
                 .tint(Color(uiColor: UIColor.label))
                     
@@ -56,8 +58,4 @@ struct TodoRowView: View {
             .padding(.horizontal, 15)
         }
     }
-}
-
-#Preview {
-    TodoRowView(text: "test")
 }
