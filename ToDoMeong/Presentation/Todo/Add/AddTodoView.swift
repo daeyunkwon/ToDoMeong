@@ -12,8 +12,12 @@ struct AddTodoView: View {
     
     @Binding var isShowing: Bool
     @Binding var isAddNewTodo: Bool
-    @State private var inputText: String = ""
-    @ObservedResults(Todo.self) var todoList
+    @Binding var isFailedToAdd: Bool
+    
+    @Binding var todoList: [Todo]
+    
+    @StateObject var viewModel = AddTodoViewModel()
+
     
     var body: some View {
         VStack {
@@ -21,10 +25,15 @@ struct AddTodoView: View {
                 .font(.headline)
             
             ZStack(alignment: .trailing) {
-                TextField("내용을 입력해 주세요", text: $inputText)
+                TextField("내용을 입력해 주세요", text: Binding(get: {
+                    viewModel.output.text
+                }, set: { newValue in
+                    viewModel.input.text.send(newValue)
+                }))
+                    
                 .font(.system(size: 14))
                 .padding()
-                .padding(.trailing, inputText.isEmpty ? 10 : 20)
+                .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
                 .frame(maxWidth: .infinity)
                 .frame(height: 50)
                 .background(Color(uiColor: .systemGray6))
@@ -35,9 +44,9 @@ struct AddTodoView: View {
                 )
                 .padding(.horizontal, 15)
                 
-                if !inputText.isEmpty {
+                if !viewModel.output.text.isEmpty {
                     Button(action: {
-                        inputText = ""
+                        viewModel.input.text.send("")
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.gray)
@@ -48,11 +57,7 @@ struct AddTodoView: View {
             .padding(.top, 15)
             
             Button(action: {
-                //새로운 할 일 추가
-                self.addNewTodo {
-                    isShowing = false
-                    isAddNewTodo = true
-                }
+                viewModel.input.addButtonTapped.send(())
             }, label: {
                 ZStack {
                     RoundedRectangle(cornerRadius: 15)
@@ -77,27 +82,38 @@ struct AddTodoView: View {
                 .clipShape(.rect(topLeadingRadius: 0, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 0, style: .continuous))
                 .offset(y: 50)
         }
+        
         .onTapGesture {
             UIApplication.shared.dismissKeyboard()
         }
         
+        .onReceive(viewModel.output.addTodoResult, perform: { result in
+                switch result {
+                case .success(let todo):
+                    self.todoList.append(todo)
+                    isShowing = false
+                    isAddNewTodo = true
+                
+                case .failure(let error):
+                    print(error)
+                    isShowing = false
+                    isFailedToAdd = true
+                }
+        })
+        
     }
     
     private func isAddButtonDisabled() -> Bool {
-        if !inputText.trimmingCharacters(in: .whitespaces).isEmpty {
+        if !viewModel.output.text.trimmingCharacters(in: .whitespaces).isEmpty {
             return false
         } else {
             return true
         }
     }
     
-    private func addNewTodo(completion: @escaping () -> Void) {
-        let newTodo = Todo(content: self.inputText)
-        self.$todoList.append(newTodo)
-        completion()
-    }
+    
 }
 
 #Preview {
-    AddTodoView(isShowing: .constant(true), isAddNewTodo: .constant(false))
+    AddTodoView(isShowing: .constant(true), isAddNewTodo: .constant(false), isFailedToAdd: .constant(false), todoList: .constant([]))
 }
