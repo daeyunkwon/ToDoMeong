@@ -23,9 +23,10 @@
 		44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */; };
 		44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF22C94B27700E3E9CF /* HapticManager.swift */; };
 		44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */; };
-		44ED3AF82C95D40C00E3E9CF /* TodoEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF72C95D40C00E3E9CF /* TodoEditView.swift */; };
+		44ED3AF82C95D40C00E3E9CF /* AddTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AF72C95D40C00E3E9CF /* AddTodoView.swift */; };
 		44ED3AFB2C97269F00E3E9CF /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 44ED3AFA2C97269F00E3E9CF /* PopupView */; };
 		44ED3AFF2C973E2B00E3E9CF /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AFE2C973E2B00E3E9CF /* UIApplication+Extension.swift */; };
+		44ED3B052C97F81B00E3E9CF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 44ED3B042C97F81B00E3E9CF /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +48,7 @@
 		44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoRowView.swift; sourceTree = "<group>"; };
 		44ED3AF22C94B27700E3E9CF /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 		44ED3AF42C9583C900E3E9CF /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		44ED3AF72C95D40C00E3E9CF /* TodoEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoEditView.swift; sourceTree = "<group>"; };
+		44ED3AF72C95D40C00E3E9CF /* AddTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoView.swift; sourceTree = "<group>"; };
 		44ED3AFE2C973E2B00E3E9CF /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44ED3B052C97F81B00E3E9CF /* RealmSwift in Frameworks */,
 				44ED3AFB2C97269F00E3E9CF /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +87,8 @@
 			children = (
 				44ED3AD62C92E41000E3E9CF /* Application */,
 				44ED3ADA2C92E4C100E3E9CF /* Common */,
+				44ED3B002C97F70D00E3E9CF /* Service */,
+				44ED3B022C97F7AD00E3E9CF /* Model */,
 				44ED3AD52C92E40400E3E9CF /* Presentation */,
 				44ED3AD42C92E3FA00E3E9CF /* Resource */,
 			);
@@ -172,17 +176,39 @@
 			children = (
 				44ED3AC82C92E3F200E3E9CF /* TodoView.swift */,
 				44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */,
-				44ED3AF62C95D3F400E3E9CF /* Edit */,
+				44ED3AF62C95D3F400E3E9CF /* Add */,
 			);
 			path = Todo;
 			sourceTree = "<group>";
 		};
-		44ED3AF62C95D3F400E3E9CF /* Edit */ = {
+		44ED3AF62C95D3F400E3E9CF /* Add */ = {
 			isa = PBXGroup;
 			children = (
-				44ED3AF72C95D40C00E3E9CF /* TodoEditView.swift */,
+				44ED3AF72C95D40C00E3E9CF /* AddTodoView.swift */,
 			);
-			path = Edit;
+			path = Add;
+			sourceTree = "<group>";
+		};
+		44ED3B002C97F70D00E3E9CF /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				44ED3B012C97F7A600E3E9CF /* Database */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		44ED3B012C97F7A600E3E9CF /* Database */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		44ED3B022C97F7AD00E3E9CF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +229,7 @@
 			name = ToDoMeong;
 			packageProductDependencies = (
 				44ED3AFA2C97269F00E3E9CF /* PopupView */,
+				44ED3B042C97F81B00E3E9CF /* RealmSwift */,
 			);
 			productName = ToDoMeong;
 			productReference = 44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */;
@@ -234,6 +261,7 @@
 			mainGroup = 44ED3ABA2C92E3F200E3E9CF;
 			packageReferences = (
 				44ED3AF92C97269F00E3E9CF /* XCRemoteSwiftPackageReference "PopupView" */,
+				44ED3B032C97F81B00E3E9CF /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 44ED3AC42C92E3F200E3E9CF /* Products */;
 			projectDirPath = "";
@@ -270,7 +298,7 @@
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
 				44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */,
 				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
-				44ED3AF82C95D40C00E3E9CF /* TodoEditView.swift in Sources */,
+				44ED3AF82C95D40C00E3E9CF /* AddTodoView.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
@@ -504,6 +532,14 @@
 				minimumVersion = 3.1.0;
 			};
 		};
+		44ED3B032C97F81B00E3E9CF /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				kind = exactVersion;
+				version = 20.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -511,6 +547,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 44ED3AF92C97269F00E3E9CF /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
+		};
+		44ED3B042C97F81B00E3E9CF /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 44ED3B032C97F81B00E3E9CF /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
