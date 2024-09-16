@@ -17,7 +17,7 @@ struct AddEditCompleteToastView: View {
     
     var body: some View {
         HStack {
-            Image("checkmark")
+            Image("checkmark_circle")
                 .frame(width: 48, height: 48)
             
             VStack(alignment: .leading) {
