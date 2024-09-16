@@ -18,16 +18,18 @@ struct TodoRowView: View {
             HStack(spacing: 0) {
                 Spacer()
                 
+                //체크박스 영역
                 Button(action: {
-                    print(1111)
+                    $todo.done.wrappedValue.toggle()
                     HapticManager.shared.impact(style: .light)
                 }, label: {
-                    Image("checkbox", bundle: nil)
+                    Image(todo.done ? "checkbox_completion" : "checkbox", bundle: nil)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 30, height: 30)
                 })
                 
+                //내용 영역
                 Button(action: {
                     print(2222)
                 }, label: {
@@ -40,6 +42,7 @@ struct TodoRowView: View {
                 })
                 .tint(Color(uiColor: UIColor.label))
                     
+                //이미지 영역
                 Button("Test") {
                     print(3333)
                 }

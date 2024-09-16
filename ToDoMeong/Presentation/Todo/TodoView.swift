@@ -11,13 +11,7 @@ import RealmSwift
 
 struct TodoView: View {
     
-    @State private var showAddTodoView = false
-    @State private var isAddNewTodo = false
-    @State private var showAddNewCompletionToast = false
-    
-    //var todoList = Array(repeating: "할일 할일", count: 50)
-    
-    @ObservedResults(Todo.self) var todoList
+    @StateObject private var viewModel = TodoViewModel()
     
     var body: some View {
         
@@ -44,7 +38,7 @@ struct TodoView: View {
                 
                 ScrollView {
                     Spacer()
-                    ForEach(todoList, id: \.self) { item in
+                    ForEach(viewModel.output.todoList, id: \.self) { item in
                         TodoRowView(todo: item)
                     }
                 }
@@ -56,14 +50,14 @@ struct TodoView: View {
                 .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
                 
                 .overlay {
-                    if todoList.isEmpty {
+                    if viewModel.output.todoList.isEmpty {
                         DogMessageBubbleView(message: "오늘은 어떤 일을 해야 하나요?\n새로운 할 일을 추가해 보세요🐾")
                     }
                 }
                 
                 .overlay(alignment: .bottomTrailing) {
                     Button(action: {
-                        showAddTodoView = true
+                        viewModel.output.showAddTodoView = true
                     }, label: {
                         Image(systemName: "plus")
                             .resizable()
@@ -84,7 +78,6 @@ struct TodoView: View {
                 }
                 .ignoresSafeArea(.keyboard)
             }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .overlay(alignment: .bottom, content: {
                 Rectangle()
                     .fill(Color(uiColor: .systemGray6))
@@ -98,52 +91,82 @@ struct TodoView: View {
                         .font(Constant.AppFont.jalnanTopLeading)
                 }
             }
-            
-            //새로운 할 일 추가
-            .popup(isPresented: $showAddTodoView) {
-                AddTodoView(isShowing: $showAddTodoView, isAddNewTodo: $isAddNewTodo, todoList: $todoList)
-            } customize: {
-                $0
-                    .type(.toast)
-                    .position(.bottom)
-                    .closeOnTap(false)
-                    .closeOnTapOutside(true)
-                    .dragToDismiss(true)
-                    .backgroundColor(.black.opacity(0.4))
-                    .useKeyboardSafeArea(true)
-                    .isOpaque(true)
+        }
+        
+        //새로운 할 일 추가 화면 팝업
+        .popup(isPresented: $viewModel.output.showAddTodoView) {
+            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: $viewModel.output.isAddNewTodo, isFailedToAdd: $viewModel.output.isFailedAddTodo, todoList: $viewModel.output.todoList)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .dragToDismiss(true)
+                .backgroundColor(.black.opacity(0.4))
+                .useKeyboardSafeArea(true)
+                .isOpaque(true)
+        }
+        
+        //새로운 할 일 추가 성공 안내 팝업
+        .popup(isPresented: $viewModel.output.showAddNewCompletionToast) {
+            AddEditCompleteToastView(type: .addNewTodo)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
+                .isOpaque(true)
+        }
+        
+        //새로운 할 일 추가 실패 안내 팝업
+        .popup(isPresented: $viewModel.output.showFailedToAddToast) {
+            AddEditFailToastView(type: .failedToAdd)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
+                .isOpaque(true)
+        }
+        
+        .onChange(value: viewModel.output.showAddTodoView, action: { isPresented in
+            if !isPresented {
+                UIApplication.shared.dismissKeyboard()
             }
-            
-            
-            .popup(isPresented: $showAddNewCompletionToast) {
-                AddEditCompleteToastView(type: .addNewTodo)
-            } customize: {
-                $0
-                    .type(.toast)
-                    .position(.top)
-                    .isOpaque(true)
-                    .closeOnTap(true)
-                    .closeOnTapOutside(true)
-                    .autohideIn(2)
+        })
+        
+        //새로운 할 일 추가 팝업 띄우기
+        .onChange(value: viewModel.output.isAddNewTodo) { isAdd in
+            if isAdd {
+                viewModel.output.isAddNewTodo = false
+                viewModel.output.showAddNewCompletionToast = true
+                HapticManager.shared.impact(style: .light)
             }
-            
-            .onChange(value: showAddTodoView, action: { isPresented in
-                if !isPresented {
-                    UIApplication.shared.dismissKeyboard()
-                }
-            })
-            
-            .onChange(value: isAddNewTodo) { isAdd in
-                if isAdd {
-                    print("Add함!!!")
-                    showAddNewCompletionToast = true
-                }
+        }
+        
+        //새로운 할 일 추가 실패 팝업 띄우기
+        .onChange(value: viewModel.output.isFailedAddTodo) { isFailed in
+            if isFailed {
+                viewModel.output.isFailedAddTodo = false
+                viewModel.output.showFailedToAddToast = true
+                HapticManager.shared.impact(style: .light)
             }
-            
-            
-            
+        }
+        
+        
+        .onAppear {
+            viewModel.action(.onAppear)
         }
     }
+    
+    
 }
 
 #Preview {

@@ -27,7 +27,7 @@ struct CustomTabView: View {
                 .shadow(radius: 2)
             
             Capsule()
-                .stroke(.gray, lineWidth: 0.1)
+                .stroke(.gray, lineWidth: 0.25)
                 .frame(height: 65)
                 
             

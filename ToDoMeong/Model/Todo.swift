@@ -22,4 +22,11 @@ final class Todo: Object, ObjectKeyIdentifiable {
         self.createDate = Date()
         self.done = false
     }
+    
+    enum key: String {
+        case content
+        case done
+        case createDate
+        case photo
+    }
 }
