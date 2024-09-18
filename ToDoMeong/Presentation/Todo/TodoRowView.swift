@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import PopupView
 import RealmSwift
 
 struct TodoRowView: View {
     
     @ObservedRealmObject var todo: Todo
+    @State private var showEditView: Bool = false
+    var onDelete: () -> Void
     
     var body: some View {
         
@@ -31,7 +34,7 @@ struct TodoRowView: View {
                 
                 //내용 영역
                 Button(action: {
-                    print(2222)
+                    showEditView = true
                 }, label: {
                     Text(todo.content)
                         .font(Constant.AppFont.tmoneyRoundWindRegular14)
@@ -59,6 +62,38 @@ struct TodoRowView: View {
                     .clipShape(.rect(cornerRadius: 15))
             }
             .padding(.horizontal, 15)
+        }
+        
+        .popup(isPresented: $showEditView) {
+            EditTodoView(viewModel: EditTodoViewModel(todoItem: self.todo, isPresented: $showEditView, onDelete: {
+                showEditView = false
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+                    if !todo.isInvalidated {
+                        self.onDelete()
+                    }
+                }
+            }))
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .dragToDismiss(true)
+                .backgroundColor(.black.opacity(0.4))
+                .useKeyboardSafeArea(true)
+                .isOpaque(true)
+        }
+        
+        .onChange(value: showEditView) { value in
+            if !value {
+                UIApplication.shared.dismissKeyboard()
+            }
+        }
+        
+        .onDisappear {
+            // 이 뷰가 사라질 때 todo 참조를 해제
+            todo.realm?.invalidate()
         }
     }
 }

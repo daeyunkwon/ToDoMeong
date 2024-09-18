@@ -41,13 +41,29 @@ final class TodoRepository {
     func createTodo(data: Todo, completionHandler: @escaping (Result<Todo, RealmError>) -> Void) {
         do {
             try realm.write {
-                realm.add(data)
+                realm.create(Todo.self, value: data)
                 print("DEBUG: Realm Create Succeed")
                 completionHandler(.success(data))
             }
         } catch {
             print(error)
             completionHandler(.failure(.failedToCreate))
+        }
+    }
+    
+    func deleteTodo(data: Todo, completionHandler: @escaping (Result<Void, RealmError>) -> Void) {
+        
+        do {
+            try realm.write {
+                if let object = realm.object(ofType: Todo.self, forPrimaryKey: data.id) {
+                    self.realm.delete(object)
+                    print("DEBUG: Realm Delete Succeed")
+                    completionHandler(.success(()))
+                }
+            }
+        } catch {
+            print(error)
+            completionHandler(.failure(.failedToDelete))
         }
     }
 }

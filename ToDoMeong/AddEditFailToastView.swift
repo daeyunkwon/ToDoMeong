@@ -11,6 +11,7 @@ struct AddEditFailToastView: View {
     enum ToastType {
         case failedToAdd
         case failedToEdit
+        case failedToDelete
     }
     var type: ToastType
     
@@ -49,6 +50,8 @@ struct AddEditFailToastView: View {
             return "새로운 할 일 추가가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
         case .failedToEdit:
             return "수정이 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+        case .failedToDelete:
+            return "삭제가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
         }
     }
 }

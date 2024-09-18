@@ -27,8 +27,6 @@ struct MainTabView: View {
         .ignoresSafeArea(.keyboard)
         .onAppear() {
             UITabBar.appearance().isHidden = true
-            
-            
         }
     }
 }

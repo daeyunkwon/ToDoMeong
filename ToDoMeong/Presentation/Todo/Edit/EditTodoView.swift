@@ -105,8 +105,7 @@ struct EditTodoView: View {
     
     private var deleteButtonView: some View {
         Button(action: {
-            //viewModel.input.addButtonTapped.send(())
-            
+            viewModel.action(.deleteButtonTapped)
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
@@ -123,5 +122,7 @@ struct EditTodoView: View {
 }
 
 #Preview {
-    EditTodoView(viewModel: EditTodoViewModel(todoItem: Todo(content: "dummy"), isPresented: .constant(true)))
+    EditTodoView(viewModel: EditTodoViewModel(todoItem: Todo(content: "dummy"), isPresented: .constant(true), onDelete: {
+        
+    }))
 }

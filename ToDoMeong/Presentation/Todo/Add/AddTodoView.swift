@@ -10,6 +10,8 @@ import RealmSwift
 
 struct AddTodoView: View {
     
+    //MARK: - Properties
+    
     @Binding var isShowing: Bool
     @Binding var isAddNewTodo: Bool
     @Binding var isFailedToAdd: Bool
@@ -18,10 +20,11 @@ struct AddTodoView: View {
     
     @StateObject var viewModel = AddTodoViewModel()
 
+    //MARK: - Body
     
     var body: some View {
         VStack {
-            Text("새로운 할 일 추가하기")
+            Text("새로운 할 일 추가")
                 .font(.headline)
             
             ZStack(alignment: .trailing) {
@@ -30,7 +33,6 @@ struct AddTodoView: View {
                 }, set: { newValue in
                     viewModel.input.text.send(newValue)
                 }))
-                    
                 .font(.system(size: 14))
                 .padding()
                 .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
@@ -100,8 +102,9 @@ struct AddTodoView: View {
                     isFailedToAdd = true
                 }
         })
-        
     }
+    
+    //MARK: - Methods
     
     private func isAddButtonDisabled() -> Bool {
         if !viewModel.output.text.trimmingCharacters(in: .whitespaces).isEmpty {
@@ -110,8 +113,6 @@ struct AddTodoView: View {
             return true
         }
     }
-    
-    
 }
 
 #Preview {

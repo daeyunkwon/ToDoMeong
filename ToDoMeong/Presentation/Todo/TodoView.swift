@@ -18,60 +18,12 @@ struct TodoView: View {
         NavigationStack {
             VStack(alignment: .leading) {
                 
-                UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
-                    .fill(.brandGreen)
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 40)
-                    .padding(.horizontal, 7)
-                    .overlay {
-                        Text(Date().dateString)
-                            .font(Constant.AppFont.jalnan13)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 15)
-                            .background(.clear)
-                    }
-                    .clipShape(UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 0, style: .continuous))
-                    .padding(.vertical, -4)
-                    .padding(.horizontal, 5)
-                    .offset(y: 3)
-                    .shadow(radius: 1.5)
+                self.capsuleDateView()
                 
-                ScrollView {
-                    Spacer()
-                    ForEach(viewModel.output.todoList, id: \.self) { item in
-                        TodoRowView(todo: item)
-                    }
-                }
-                .frame(maxWidth: .infinity)
-                .safeAreaInset(edge: .bottom, content: {
-                    Color.clear.frame(height: 80)
-                })
-                .background(Color(uiColor: .systemGray6))
-                .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
-                
-                .overlay {
-                    if viewModel.output.todoList.isEmpty {
-                        DogMessageBubbleView(message: "오늘은 어떤 일을 해야 하나요?\n새로운 할 일을 추가해 보세요🐾")
-                    }
-                }
+                self.todoScrollView()
                 
                 .overlay(alignment: .bottomTrailing) {
-                    Button(action: {
-                        viewModel.output.showAddTodoView = true
-                    }, label: {
-                        Image(systemName: "plus")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 24, height: 24)
-                            .fontWeight(.bold)
-                            .foregroundStyle(.white)
-                            .clipShape(Circle())
-                            .padding()
-                            .background(Color.brandGreen)
-                            .frame(width: 54, height: 54)
-                            .clipShape(Circle())
-                            .padding()
-                    })
+                    self.plusCircleButtonView()
                     .offset(x: -10, y: -50)
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 2)
@@ -117,9 +69,9 @@ struct TodoView: View {
                 .position(.top)
                 .appearFrom(.topSlide)
                 .closeOnTap(true)
-                .closeOnTapOutside(true)
+                .closeOnTapOutside(false)
                 .autohideIn(2)
-                .isOpaque(true)
+                .isOpaque(false)
         }
         
         //새로운 할 일 추가 실패 안내 팝업
@@ -133,7 +85,21 @@ struct TodoView: View {
                 .closeOnTap(true)
                 .closeOnTapOutside(true)
                 .autohideIn(2)
-                .isOpaque(true)
+                .isOpaque(false)
+        }
+        
+        //할 일 삭제 실패 안내 팝업
+        .popup(isPresented: $viewModel.output.showFailedToDeleteToast) {
+            AddEditFailToastView(type: .failedToDelete)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
+                .isOpaque(false)
         }
         
         .onChange(value: viewModel.output.showAddTodoView, action: { isPresented in
@@ -160,13 +126,76 @@ struct TodoView: View {
             }
         }
         
-        
         .onAppear {
             viewModel.action(.onAppear)
         }
     }
     
+    private func capsuleDateView() -> some View {
+        UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
+            .fill(.brandGreen)
+            .frame(maxWidth: .infinity)
+            .frame(height: 40)
+            .padding(.horizontal, 7)
+            .overlay {
+                Text(Date().dateString)
+                    .font(Constant.AppFont.jalnan13)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 15)
+                    .background(.clear)
+            }
+            .clipShape(UnevenRoundedRectangle(topLeadingRadius: 0, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 0, style: .continuous))
+            .padding(.vertical, -4)
+            .padding(.horizontal, 5)
+            .offset(y: 3)
+            .shadow(radius: 1.5)
+    }
     
+    private func todoScrollView() -> some View {
+        ScrollView {
+            Spacer()
+            ForEach(viewModel.output.todoList, id: \.id) { item in
+                if !item.isInvalidated {
+                    TodoRowView(todo: item, onDelete: {
+                        if !item.isInvalidated {
+                            viewModel.action(.delete(target: item))
+                        }
+                    })
+                }
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .safeAreaInset(edge: .bottom, content: {
+            Color.clear.frame(height: 80)
+        })
+        .background(Color(uiColor: .systemGray6))
+        .clipShape(UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 20, style: .continuous))
+        
+        .overlay {
+            if viewModel.output.todoList.isEmpty {
+                DogMessageBubbleView(message: "오늘은 어떤 일을 해야 하나요?\n새로운 할 일을 추가해 보세요🐾")
+            }
+        }
+    }
+    
+    private func plusCircleButtonView() -> some View {
+        Button(action: {
+            viewModel.output.showAddTodoView = true
+        }, label: {
+            Image(systemName: "plus")
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 24, height: 24)
+                .fontWeight(.bold)
+                .foregroundStyle(.white)
+                .clipShape(Circle())
+                .padding()
+                .background(Color.brandGreen)
+                .frame(width: 54, height: 54)
+                .clipShape(Circle())
+                .padding()
+        })
+    }
 }
 
 #Preview {

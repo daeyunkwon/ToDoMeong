@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import RealmSwift
 
 final class TodoViewModel: ViewModelType {
     
@@ -17,7 +18,8 @@ final class TodoViewModel: ViewModelType {
     @Published var output = Output()
     
     struct Input {
-        var viewOnAppear = PassthroughSubject<Void, Never>()
+        let viewOnAppear = PassthroughSubject<Void, Never>()
+        let delete = PassthroughSubject<Todo, Never>()
     }
     
     struct Output {
@@ -27,6 +29,7 @@ final class TodoViewModel: ViewModelType {
         var isAddNewTodo = false
         var showFailedToAddToast = false
         var isFailedAddTodo = false
+        var showFailedToDeleteToast = false
     }
     
     init() {
@@ -36,13 +39,24 @@ final class TodoViewModel: ViewModelType {
     func transform() {
         
         input.viewOnAppear.sink { [weak self] _ in
-            self?.fetchTodos()
+            self?.output.todoList = self?.repository.fetchTodayTodo() ?? []
         }
         .store(in: &cancellables)
-    }
-    
-    private func fetchTodos() {
-        output.todoList = repository.fetchTodayTodo()
+        
+        input.delete
+            .sink { [weak self] todo in
+                
+                self?.repository.deleteTodo(data: todo) { result in
+                    switch result {
+                    case .success(_):
+                        self?.input.viewOnAppear.send(())
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -51,9 +65,15 @@ final class TodoViewModel: ViewModelType {
 extension TodoViewModel {
     enum Action {
         case onAppear
+        case delete(target: Todo)
     }
     
     func action(_ action: Action) {
-        input.viewOnAppear.send(())
+        switch action {
+        case .onAppear:
+            input.viewOnAppear.send(())
+        case .delete(let todo):
+            input.delete.send((todo))
+        }
     }
 }
