@@ -31,6 +31,8 @@ final class TodoViewModel: ViewModelType {
         var showFailedToAddToast = false
         var isFailedAddTodo = false
         var showFailedToDeleteToast = false
+        var showUpdateSucceedToast = false
+        var showUpdateFailedToast = false
     }
     
     init() {
@@ -73,8 +75,10 @@ final class TodoViewModel: ViewModelType {
                         switch result {
                         case .success(_):
                             self.input.viewOnAppear.send(())
+                            self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
+                            self.output.showUpdateFailedToast = true
                         }
                     }
                 } else {
@@ -85,8 +89,10 @@ final class TodoViewModel: ViewModelType {
                         switch result {
                         case .success(_):
                             self.input.viewOnAppear.send(())
+                            self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
+                            self.output.showUpdateFailedToast = true
                         }
                     }
                 }

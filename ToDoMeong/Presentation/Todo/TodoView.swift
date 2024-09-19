@@ -102,6 +102,34 @@ struct TodoView: View {
                 .isOpaque(false)
         }
         
+        //할 일 수정 성공 안내 팝업
+        .popup(isPresented: $viewModel.output.showUpdateSucceedToast) {
+            AddEditCompleteToastView(type: .editTodo)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
+                .isOpaque(false)
+        }
+        
+        //할 일 수정 실패 안내 팝업
+        .popup(isPresented: $viewModel.output.showUpdateFailedToast) {
+            AddEditFailToastView(type: .failedToEdit)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(true)
+                .autohideIn(2)
+                .isOpaque(false)
+        }
+        
         .onChange(value: viewModel.output.showAddTodoView, action: { isPresented in
             if !isPresented {
                 UIApplication.shared.dismissKeyboard()

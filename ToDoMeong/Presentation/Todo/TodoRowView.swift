@@ -112,10 +112,5 @@ struct TodoRowView: View {
                 .presentationDetents([.large])
                 .presentationDragIndicator(.visible)
         })
-        
-        .onDisappear {
-            // 이 뷰가 사라질 때 todo 참조를 해제
-            todo.realm?.invalidate()
-        }
     }
 }
