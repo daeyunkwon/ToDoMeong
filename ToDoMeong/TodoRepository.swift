@@ -31,9 +31,9 @@ final class TodoRepository {
     
     
     func fetchTodayTodo() -> [Todo] {
-        let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.key.createDate.rawValue, ascending: true)
+        let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true)
         let todayTodoList = result.filter { todo in
-            Calendar.current.isDateInToday(todo.createDate)
+            return Calendar.current.isDateInToday(todo.createDate)
         }
         return Array(todayTodoList)
     }
@@ -48,6 +48,27 @@ final class TodoRepository {
         } catch {
             print(error)
             completionHandler(.failure(.failedToCreate))
+        }
+    }
+    
+    func updateTodo(target: Todo, content: String, photo: String?, completion: @escaping (Result<Void, RealmError>) -> Void) {
+        
+        do {
+            try realm.write {
+                let value = [
+                    Todo.Key.id.rawValue: target.id,
+                    Todo.Key.content.rawValue: content,
+                    Todo.Key.photo.rawValue: photo as Any
+                
+                ]
+                realm.create(Todo.self, value: value, update: .modified)
+                print("DEBUG: Realm Update Succeed")
+                completion(.success(()))
+            }
+            
+        } catch {
+            print(error)
+            completion(.failure(.failedToUpdate))
         }
     }
     

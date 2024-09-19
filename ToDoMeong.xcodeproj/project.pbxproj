@@ -39,6 +39,8 @@
 		44ED3B1D2C98876E00E3E9CF /* AddTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B1C2C98876E00E3E9CF /* AddTodoViewModel.swift */; };
 		44ED3B202C99159600E3E9CF /* EditTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B1F2C99159600E3E9CF /* EditTodoView.swift */; };
 		44ED3B222C9920A800E3E9CF /* EditTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B212C9920A800E3E9CF /* EditTodoViewModel.swift */; };
+		44ED3B242C9C16B300E3E9CF /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B232C9C16B300E3E9CF /* PhotoPicker.swift */; };
+		44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B252C9C225400E3E9CF /* ImageFileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +89,8 @@
 		44ED3B1C2C98876E00E3E9CF /* AddTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewModel.swift; sourceTree = "<group>"; };
 		44ED3B1F2C99159600E3E9CF /* EditTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoView.swift; sourceTree = "<group>"; };
 		44ED3B212C9920A800E3E9CF /* EditTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoViewModel.swift; sourceTree = "<group>"; };
+		44ED3B232C9C16B300E3E9CF /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
+		44ED3B252C9C225400E3E9CF /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 				44ED3AE82C94334300E3E9CF /* Extensions */,
 				44ED3ADB2C92E51B00E3E9CF /* Constant.swift */,
 				44ED3AF22C94B27700E3E9CF /* HapticManager.swift */,
+				44ED3B252C9C225400E3E9CF /* ImageFileManager.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 			children = (
 				44ED3B212C9920A800E3E9CF /* EditTodoViewModel.swift */,
 				44ED3B1F2C99159600E3E9CF /* EditTodoView.swift */,
+				44ED3B232C9C16B300E3E9CF /* PhotoPicker.swift */,
 			);
 			path = Edit;
 			sourceTree = "<group>";
@@ -374,12 +380,14 @@
 				44ED3B1D2C98876E00E3E9CF /* AddTodoViewModel.swift in Sources */,
 				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
 				44ED3AF82C95D40C00E3E9CF /* AddTodoView.swift in Sources */,
+				44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44ED3B222C9920A800E3E9CF /* EditTodoViewModel.swift in Sources */,
 				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
 				44ED3B172C986D7000E3E9CF /* TodoViewModel.swift in Sources */,
+				44ED3B242C9C16B300E3E9CF /* PhotoPicker.swift in Sources */,
 				44ED3B0D2C9812C000E3E9CF /* DogMessageBubbleView.swift in Sources */,
 				44ED3B102C9823E400E3E9CF /* OnChangeWrapper.swift in Sources */,
 				44ED3AFF2C973E2B00E3E9CF /* UIApplication+Extension.swift in Sources */,

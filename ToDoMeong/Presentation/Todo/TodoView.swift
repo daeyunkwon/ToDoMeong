@@ -157,9 +157,10 @@ struct TodoView: View {
             ForEach(viewModel.output.todoList, id: \.id) { item in
                 if !item.isInvalidated {
                     TodoRowView(todo: item, onDelete: {
-                        if !item.isInvalidated {
-                            viewModel.action(.delete(target: item))
-                        }
+                        viewModel.action(.delete(target: item))
+                        
+                    }, onEdit: { content, imageData in
+                        viewModel.action(.edit(target: item, content: content, imageData: imageData))
                     })
                 }
             }

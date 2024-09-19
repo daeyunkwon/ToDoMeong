@@ -35,13 +35,15 @@ final class ImageFileManager {
         }
     }
     
-    func saveImageToDocument(image: UIImage, filename: String) {
+    func saveImageToDocument(imageData: Data?, filename: String) {
         guard let documentDirectory = FileManager.default.urls(
             for: .documentDirectory,
             in: .userDomainMask).first else { return }
         
         let fileURL = documentDirectory.appendingPathComponent("\(filename).jpg")
         
+        guard let data = imageData else { return }
+        guard let image = UIImage(data: data) else { return }
         guard let data = image.jpegData(compressionQuality: 0.5) else { return }
         
         do {

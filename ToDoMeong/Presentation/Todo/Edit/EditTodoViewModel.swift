@@ -40,7 +40,13 @@ final class EditTodoViewModel: ViewModelType {
         self.onEdit = onEdit
         
         output.text = todoItem.content
-        output.photo = todoItem.photo
+        
+        if todoItem.photo != nil {
+            if let uiImage = ImageFileManager.shared.loadImageToDocument(filename: todoItem.id.stringValue) {
+                output.selectedImageData = uiImage.pngData()
+            }
+        }
+        
         
         transform()
     }
@@ -62,7 +68,7 @@ final class EditTodoViewModel: ViewModelType {
         input.editButtonTapped
             .sink { [weak self] _ in
                 guard let self else { return }
-                //self.onEdit(self.output.text, <#String?#>)
+                self.onEdit(output.text, output.selectedImageData)
             }
             .store(in: &cancellables)
         

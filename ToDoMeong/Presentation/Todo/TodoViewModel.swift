@@ -20,6 +20,7 @@ final class TodoViewModel: ViewModelType {
     struct Input {
         let viewOnAppear = PassthroughSubject<Void, Never>()
         let delete = PassthroughSubject<Todo, Never>()
+        let edit = PassthroughSubject<(Todo, String, Data?), Never>()
     }
     
     struct Output {
@@ -57,6 +58,40 @@ final class TodoViewModel: ViewModelType {
                 }
             }
             .store(in: &cancellables)
+        
+        input.edit
+            .sink { [weak self] target, content, imageData in
+                guard let self else { return }
+                
+                if imageData == nil {
+                    //기존 이미지 제거하기
+                    if target.photo != nil {
+                        ImageFileManager.shared.removeImageFromDocument(filename: target.id.stringValue)
+                    }
+                    
+                    repository.updateTodo(target: target, content: content, photo: nil) { result in
+                        switch result {
+                        case .success(_):
+                            self.input.viewOnAppear.send(())
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                } else {
+                    //새로운 이미지로 저장하기
+                    ImageFileManager.shared.saveImageToDocument(imageData: imageData, filename: target.id.stringValue)
+                    
+                    repository.updateTodo(target: target, content: content, photo: target.id.stringValue) { result in
+                        switch result {
+                        case .success(_):
+                            self.input.viewOnAppear.send(())
+                        case .failure(let error):
+                            print(error)
+                        }
+                    }
+                }
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -66,6 +101,7 @@ extension TodoViewModel {
     enum Action {
         case onAppear
         case delete(target: Todo)
+        case edit(target: Todo, content: String, imageData: Data?)
     }
     
     func action(_ action: Action) {
@@ -74,6 +110,8 @@ extension TodoViewModel {
             input.viewOnAppear.send(())
         case .delete(let todo):
             input.delete.send((todo))
+        case .edit(let target, let content, let imageData):
+            input.edit.send((target, content, imageData))
         }
     }
 }

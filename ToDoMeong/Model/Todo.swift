@@ -23,7 +23,8 @@ final class Todo: Object, ObjectKeyIdentifiable {
         self.done = false
     }
     
-    enum key: String {
+    enum Key: String {
+        case id
         case content
         case done
         case createDate

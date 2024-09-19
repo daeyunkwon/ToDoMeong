@@ -14,6 +14,7 @@ struct TodoRowView: View {
     @ObservedRealmObject var todo: Todo
     @State private var showEditView: Bool = false
     var onDelete: () -> Void
+    var onEdit: (String, Data?) -> Void
     
     var body: some View {
         
@@ -46,10 +47,17 @@ struct TodoRowView: View {
                 .tint(Color(uiColor: UIColor.label))
                     
                 //이미지 영역
-                Button("Test") {
-                    print(3333)
+                Button {
+                    if todo.photo != nil {
+                        print(11111)
+                    }
+                } label: {
+                    Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: todo.id.stringValue) ?? UIImage())
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(.rect(cornerRadius: 10))
                 }
-                .foregroundStyle(.red)
                 Spacer()
                 Spacer()
             }
@@ -65,14 +73,21 @@ struct TodoRowView: View {
         }
         
         .popup(isPresented: $showEditView) {
-            EditTodoView(viewModel: EditTodoViewModel(todoItem: self.todo, isPresented: $showEditView, onDelete: {
+            EditTodoView(viewModel: EditTodoViewModel(todoItem: self.todo, onDelete: {
                 showEditView = false
                 DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                     if !todo.isInvalidated {
                         self.onDelete()
                     }
                 }
-            }))
+            }, onEdit: { content, imageData in
+                showEditView = false
+                DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+                    if !todo.isInvalidated {
+                        self.onEdit(content, imageData)
+                    }
+                }
+            }), isPresented: $showEditView)
         } customize: {
             $0
                 .type(.toast)
