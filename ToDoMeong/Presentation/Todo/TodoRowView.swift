@@ -13,6 +13,7 @@ struct TodoRowView: View {
     
     @ObservedRealmObject var todo: Todo
     @State private var showEditView: Bool = false
+    @State private var showDetailPhotoView: Bool = false
     var onDelete: () -> Void
     var onEdit: (String, Data?) -> Void
     
@@ -49,7 +50,7 @@ struct TodoRowView: View {
                 //이미지 영역
                 Button {
                     if todo.photo != nil {
-                        print(11111)
+                        showDetailPhotoView.toggle()
                     }
                 } label: {
                     Image(uiImage: ImageFileManager.shared.loadImageToDocument(filename: todo.id.stringValue) ?? UIImage())
@@ -105,6 +106,12 @@ struct TodoRowView: View {
                 UIApplication.shared.dismissKeyboard()
             }
         }
+        
+        .sheet(isPresented: $showDetailPhotoView, content: {
+            DetailPhotoView(todoID: todo.id.stringValue)
+                .presentationDetents([.large])
+                .presentationDragIndicator(.visible)
+        })
         
         .onDisappear {
             // 이 뷰가 사라질 때 todo 참조를 해제

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
 		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				44ED3B162C986D7000E3E9CF /* TodoViewModel.swift */,
 				44ED3AC82C92E3F200E3E9CF /* TodoView.swift */,
 				44ED3AEF2C943EA100E3E9CF /* TodoRowView.swift */,
+				44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */,
 				44ED3AF62C95D3F400E3E9CF /* Add */,
 				44ED3B1E2C99156800E3E9CF /* Edit */,
 			);
@@ -373,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */,
 				44ED3B1B2C987FCB00E3E9CF /* AddEditFailToastView.swift in Sources */,
 				44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */,
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
