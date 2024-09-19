@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
+		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
+		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -60,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
+		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
 		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44ED3B052C97F81B00E3E9CF /* RealmSwift in Frameworks */,
+				448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */,
 				44ED3AFB2C97269F00E3E9CF /* PopupView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44895FFD2C9C731100410DA7 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
 		44ED3ABA2C92E3F200E3E9CF = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 			children = (
 				44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */,
 				44ED3AF12C94ADFE00E3E9CF /* Todo */,
+				44895FFD2C9C731100410DA7 /* Calendar */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -312,6 +325,7 @@
 			packageProductDependencies = (
 				44ED3AFA2C97269F00E3E9CF /* PopupView */,
 				44ED3B042C97F81B00E3E9CF /* RealmSwift */,
+				448960012C9C85AB00410DA7 /* FSCalendar */,
 			);
 			productName = ToDoMeong;
 			productReference = 44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */;
@@ -344,6 +358,7 @@
 			packageReferences = (
 				44ED3AF92C97269F00E3E9CF /* XCRemoteSwiftPackageReference "PopupView" */,
 				44ED3B032C97F81B00E3E9CF /* XCRemoteSwiftPackageReference "realm-swift" */,
+				448960002C9C85AB00410DA7 /* XCRemoteSwiftPackageReference "FSCalendar" */,
 			);
 			productRefGroup = 44ED3AC42C92E3F200E3E9CF /* Products */;
 			projectDirPath = "";
@@ -382,6 +397,7 @@
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
 				44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */,
 				44ED3B1D2C98876E00E3E9CF /* AddTodoViewModel.swift in Sources */,
+				44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */,
 				44ED3AF02C943EA100E3E9CF /* TodoRowView.swift in Sources */,
 				44ED3AF82C95D40C00E3E9CF /* AddTodoView.swift in Sources */,
 				44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */,
@@ -620,6 +636,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		448960002C9C85AB00410DA7 /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
 		44ED3AF92C97269F00E3E9CF /* XCRemoteSwiftPackageReference "PopupView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/exyte/PopupView.git";
@@ -639,6 +663,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		448960012C9C85AB00410DA7 /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 448960002C9C85AB00410DA7 /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
 		44ED3AFA2C97269F00E3E9CF /* PopupView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 44ED3AF92C97269F00E3E9CF /* XCRemoteSwiftPackageReference "PopupView" */;

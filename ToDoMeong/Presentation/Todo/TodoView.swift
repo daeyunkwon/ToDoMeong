@@ -223,6 +223,7 @@ struct TodoView: View {
                 .frame(width: 54, height: 54)
                 .clipShape(Circle())
                 .padding()
+                .padding(.bottom, 15)
         })
     }
 }
