@@ -5,15 +5,16 @@
 //  Created by 권대윤 on 9/17/24.
 //
 
-import SwiftUI
+import Foundation
 import Combine
 import RealmSwift
 
 final class EditTodoViewModel: ViewModelType {
     
     private var todoItem: Todo
-    private var isPresented: Binding<Bool>
+    
     private var onDelete: () -> Void
+    private var onEdit: (String, Data?) -> Void
     
     var cancellables = Set<AnyCancellable>()
     var input = Input()
@@ -21,21 +22,25 @@ final class EditTodoViewModel: ViewModelType {
     
     struct Input {
         let text = PassthroughSubject<String, Never>()
-        let dismissEditView = PassthroughSubject<Void, Never>()
         let deleteButtonTapped = PassthroughSubject<Void, Never>()
+        let editButtonTapped = PassthroughSubject<Void, Never>()
+        let selectedImage = PassthroughSubject<Data, Never>()
+        let removeSelectedImage = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
         var text = ""
-        lazy var todoItem: Todo = todoItem
+        var photo: String?
+        var selectedImageData: Data?
     }
     
-    init(
-        todoItem: Todo, isPresented: Binding<Bool>, onDelete: @escaping () -> Void) {
+    init(todoItem: Todo, onDelete: @escaping () -> Void, onEdit: @escaping (String, Data?) -> Void) {
         self.todoItem = todoItem
-        self.isPresented = isPresented
         self.onDelete = onDelete
+        self.onEdit = onEdit
+        
         output.text = todoItem.content
+        output.photo = todoItem.photo
         
         transform()
     }
@@ -48,15 +53,28 @@ final class EditTodoViewModel: ViewModelType {
             }
             .store(in: &cancellables)
         
-        input.dismissEditView
-            .sink { [weak self] _ in
-                self?.isPresented.wrappedValue = false
-            }
-            .store(in: &cancellables)
-        
         input.deleteButtonTapped
             .sink { [weak self] _ in
                 self?.onDelete()
+            }
+            .store(in: &cancellables)
+        
+        input.editButtonTapped
+            .sink { [weak self] _ in
+                guard let self else { return }
+                //self.onEdit(self.output.text, <#String?#>)
+            }
+            .store(in: &cancellables)
+        
+        input.selectedImage
+            .sink { [weak self] data in
+                self?.output.selectedImageData = data
+            }
+            .store(in: &cancellables)
+        
+        input.removeSelectedImage
+            .sink { [weak self] _ in
+                self?.output.selectedImageData = nil
             }
             .store(in: &cancellables)
     }
@@ -67,12 +85,24 @@ final class EditTodoViewModel: ViewModelType {
 extension EditTodoViewModel {
     enum Action {
         case deleteButtonTapped
+        case editButtonTapped
+        case selectedImage(imageData: Data)
+        case removeSelectedImage
     }
     
     func action(_ action: Action) {
         switch action {
         case .deleteButtonTapped:
             input.deleteButtonTapped.send(())
+        
+        case .editButtonTapped:
+            input.editButtonTapped.send(())
+        
+        case .selectedImage(let data):
+            input.selectedImage.send(data)
+            
+        case .removeSelectedImage:
+            input.removeSelectedImage.send(())
         }
     }
 }

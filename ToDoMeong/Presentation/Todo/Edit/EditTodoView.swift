@@ -6,10 +6,15 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct EditTodoView: View {
     
     @StateObject var viewModel: EditTodoViewModel
+    
+    @Binding var isPresented: Bool
+    @State var showImagePicker: Bool = false
+    
     
     var body: some View {
         VStack {
@@ -35,6 +40,13 @@ struct EditTodoView: View {
                 .clipShape(.rect(topLeadingRadius: 0, bottomLeadingRadius: 0, bottomTrailingRadius: 0, topTrailingRadius: 0, style: .continuous))
                 .offset(y: 50)
         }
+        
+        .sheet(isPresented: $showImagePicker, content: {
+            let config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
+            PhotoPicker(configuration: config, isPresented: $showImagePicker) { selectedImageData in
+                viewModel.action(.selectedImage(imageData: selectedImageData))
+            }
+        })
     }
     
     @ViewBuilder private var textFieldView: some View {
@@ -68,18 +80,26 @@ struct EditTodoView: View {
     
     private var photoButtonView: some View {
         Button(action: {
-            
+            if viewModel.output.selectedImageData == nil {
+                self.showImagePicker.toggle()
+            } else {
+                viewModel.action(.removeSelectedImage)
+            }
         }, label: {
-            Image("add_image", bundle: nil)
+            Image(viewModel.output.selectedImageData == nil ? "add_image" : "slash_image", bundle: nil)
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 22, height: 22)
                 .tint(.skyblue)
-            Text("사진 추가하기")
+            Text(viewModel.output.selectedImageData == nil ? "사진 추가하기" : "사진 제거하기")
                 .tint(Color(uiColor: .label))
                 .font(.system(size: 14))
             Spacer()
+            Image(uiImage: UIImage(data: viewModel.output.selectedImageData ?? Data()) ?? UIImage())
+                .resizable()
+                .frame(width: 40, height: 40)
+                .padding(.trailing, 25)
         })
         .padding(.leading, 25)
         .padding(.bottom, 15)
@@ -87,7 +107,7 @@ struct EditTodoView: View {
     
     private var saveButtonView: some View {
         Button(action: {
-            //viewModel.input.addButtonTapped.send(())
+            viewModel.action(.editButtonTapped)
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)
@@ -122,7 +142,9 @@ struct EditTodoView: View {
 }
 
 #Preview {
-    EditTodoView(viewModel: EditTodoViewModel(todoItem: Todo(content: "dummy"), isPresented: .constant(true), onDelete: {
+    EditTodoView(viewModel: EditTodoViewModel(todoItem: Todo(content: "dummy"), onDelete: {
         
-    }))
+    }, onEdit: {_,_  in
+        
+    }), isPresented: .constant(true))
 }
