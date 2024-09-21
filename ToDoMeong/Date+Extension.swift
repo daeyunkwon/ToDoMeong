@@ -9,7 +9,7 @@ import Foundation
 
 extension Date {
     
-    var dateString: String {
+    var dayOfTheWeekDateString: String {
         let formatter = DateFormatter()
         
         let currentLocale = Locale.current
@@ -17,9 +17,31 @@ extension Date {
         if currentLocale.region == "KR" {
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.dateFormat = "M월 d일 EEEE"
+        } else if currentLocale.region == "JP" {
+            formatter.locale = Locale(identifier: "ja_JP")
+            formatter.dateFormat = "M月d日 EEEE"
         } else {
             formatter.locale = Locale(identifier: "en_US")
             formatter.dateFormat = "EEEE, MMM d"
+        }
+        
+        return formatter.string(from: self)
+    }
+    
+    var yearMonthDateString: String {
+        let formatter = DateFormatter()
+        
+        let currentLocale = Locale.current
+        
+        if currentLocale.region == "KR" {
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "yyyy년 M월"
+        } else if currentLocale.region == "JP" {
+            formatter.locale = Locale(identifier: "ja_JP")
+            formatter.dateFormat = "yyyy年 M月"
+        } else {
+            formatter.locale = Locale(identifier: "en_US")
+            formatter.dateFormat = "yyyy MMM"
         }
         
         return formatter.string(from: self)

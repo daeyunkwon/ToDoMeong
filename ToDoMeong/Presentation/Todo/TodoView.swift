@@ -166,7 +166,7 @@ struct TodoView: View {
             .frame(height: 40)
             .padding(.horizontal, 7)
             .overlay {
-                Text(Date().dateString)
+                Text(Date().dayOfTheWeekDateString)
                     .font(Constant.AppFont.jalnan13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 15)
