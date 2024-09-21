@@ -10,6 +10,7 @@
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
+		448960042C9C862000410DA7 /* FSCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960032C9C862000410DA7 /* FSCalendarView.swift */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -63,6 +64,7 @@
 /* Begin PBXFileReference section */
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
+		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
 		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */,
+				448960032C9C862000410DA7 /* FSCalendarView.swift */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
+				448960042C9C862000410DA7 /* FSCalendarView.swift in Sources */,
 				44ED3B222C9920A800E3E9CF /* EditTodoViewModel.swift in Sources */,
 				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
 				44ED3B172C986D7000E3E9CF /* TodoViewModel.swift in Sources */,

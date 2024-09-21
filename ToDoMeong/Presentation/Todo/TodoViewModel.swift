@@ -106,7 +106,7 @@ final class TodoViewModel: ViewModelType {
                 
                 repository.updateTodoDone(target: targetTodo) { result in
                     switch result {
-                    case .success(let success):
+                    case .success(_):
                         self.input.viewOnAppear.send(())
                     case .failure(let error):
                         print(error)

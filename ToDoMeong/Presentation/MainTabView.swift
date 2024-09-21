@@ -16,7 +16,7 @@ struct MainTabView: View {
         TabView(selection: $tabSelection,
                 content:  {
             TodoView().tag(0)
-            Text("Tab Content 2").tag(1)
+            CalendarTodoView().tag(1)
             Text("Tab Content 3").tag(2)
             Text("Tab Content 4").tag(3)
         })
