@@ -11,11 +11,13 @@ import RealmSwift
 
 struct TodoRowView: View {
     
-    @ObservedRealmObject var todo: Todo
+    @Binding var todo: Todo
     @State private var showEditView: Bool = false
     @State private var showDetailPhotoView: Bool = false
-    var onDelete: () -> Void
-    var onEdit: (String, Data?) -> Void
+    
+    var onDone: () -> Void //완료 이벤트 트리거
+    var onDelete: () -> Void //삭제 이벤트 트리거
+    var onEdit: (String, Data?) -> Void //수정 이벤트 트리거
     
     var body: some View {
         
@@ -25,7 +27,7 @@ struct TodoRowView: View {
                 
                 //체크박스 영역
                 Button(action: {
-                    $todo.done.wrappedValue.toggle()
+                    onDone()
                     HapticManager.shared.impact(style: .light)
                 }, label: {
                     Image(todo.done ? "checkbox_completion" : "checkbox", bundle: nil)
