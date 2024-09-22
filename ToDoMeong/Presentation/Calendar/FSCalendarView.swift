@@ -78,7 +78,9 @@ struct FSCalendarView: UIViewRepresentable {
         }
         
         func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-            parent.currentPageDate = calendar.currentPage
+            DispatchQueue.main.async {
+                self.parent.currentPageDate = calendar.currentPage
+            }
         }
         
         func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
@@ -173,8 +175,11 @@ struct FSCalendarView: UIViewRepresentable {
         if moveToday {
             uiView.setCurrentPage(Date(), animated: true) //오늘 버튼 클릭
             uiView.select(Date())
-            selectedDate = Date()
-            moveToday = false
+            DispatchQueue.main.async {
+                self.selectedDate = Date()
+                self.moveToday = false
+            }
+            
         }
         
         if isImageUpdate {

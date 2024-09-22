@@ -86,7 +86,7 @@ struct EditTodoView: View {
                 viewModel.action(.removeSelectedImage)
             }
         }, label: {
-            Image(viewModel.output.selectedImageData == nil ? "add_image" : "slash_image", bundle: nil)
+            Image(viewModel.output.selectedImageData == nil ? "add_image_icon" : "slash_image", bundle: nil)
                 .renderingMode(.template)
                 .resizable()
                 .scaledToFit()

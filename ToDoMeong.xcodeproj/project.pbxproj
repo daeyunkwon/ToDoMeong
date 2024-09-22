@@ -11,6 +11,7 @@
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
 		448960042C9C862000410DA7 /* FSCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960032C9C862000410DA7 /* FSCalendarView.swift */; };
+		448960062CA00A0500410DA7 /* CalendarTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960052CA00A0500410DA7 /* CalendarTodoViewModel.swift */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
+		448960052CA00A0500410DA7 /* CalendarTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoViewModel.swift; sourceTree = "<group>"; };
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
 		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		44895FFD2C9C731100410DA7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
+				448960052CA00A0500410DA7 /* CalendarTodoViewModel.swift */,
 				44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */,
 				448960032C9C862000410DA7 /* FSCalendarView.swift */,
 			);
@@ -396,6 +399,7 @@
 			files = (
 				44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */,
 				44ED3B1B2C987FCB00E3E9CF /* AddEditFailToastView.swift in Sources */,
+				448960062CA00A0500410DA7 /* CalendarTodoViewModel.swift in Sources */,
 				44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */,
 				44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */,
 				44ED3AF32C94B27700E3E9CF /* HapticManager.swift in Sources */,

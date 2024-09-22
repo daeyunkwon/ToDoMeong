@@ -49,6 +49,10 @@ final class TodoRepository {
         return Array(result)
     }
     
+    func fetchAllTodo() -> [Todo] {
+        return Array(realm.objects(Todo.self))
+    }
+    
     func createTodo(data: Todo, completionHandler: @escaping (Result<Todo, RealmError>) -> Void) {
         do {
             try realm.write {

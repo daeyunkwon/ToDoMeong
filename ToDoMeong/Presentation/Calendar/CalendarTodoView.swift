@@ -10,23 +10,19 @@ import RealmSwift
 
 struct CalendarTodoView: View {
     
-    @State private var selectedDate: Date = Date()
-    @State private var currentPageDate: Date = Date()
-    @State private var moveToday = false
-    @State var todoList: [Todo] = []
-    @State private var isImageUpdate = false
+    @StateObject private var viewModel = CalendarTodoViewModel()
 
     
     var body: some View {
         
         NavigationStack {
             
-            Text(currentPageDate.yearMonthDateString)
+            Text(viewModel.output.currentPageDate.yearMonthDateString)
                 .bold()
                 .frame(maxWidth: .infinity)
                 .overlay {
                     Button(action: {
-                        moveToday = true
+                        viewModel.action(.todayButtonTapped)
                     }, label: {
                         Text("오늘")
                             .font(.system(size: 12, weight: .medium))
@@ -41,17 +37,25 @@ struct CalendarTodoView: View {
                     .padding(.trailing, 15)
                 }
             
-            FSCalendarView(selectedDate: $selectedDate, currentPageDate: $currentPageDate, moveToday: $moveToday, isImageUpdate: $isImageUpdate)
+            FSCalendarView(selectedDate: Binding(get: {
+                viewModel.output.selectedDate
+            }, set: { newDate in
+                viewModel.action(.selectedDate(date: newDate))
+            }), currentPageDate: Binding(get: {
+                viewModel.output.currentPageDate
+            }, set: { newPageDate in
+                viewModel.action(.updateCurrentPageDate(date: newPageDate))
+            }), moveToday: $viewModel.output.moveToday, isImageUpdate: $viewModel.output.isImageUpdate)
                 .frame(height: 300)
             
             ScrollView {
                 Text("")
-                Text(selectedDate.dayOfTheWeekDateString)
+                Text(viewModel.output.selectedDate.dayOfTheWeekDateString)
                     .font(.system(size: 13, weight: .medium))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 15)
                     .background(Color(uiColor: .systemGray6))
-                ForEach($todoList, id: \.id) { $item in
+                ForEach($viewModel.output.selectedDateTodoList, id: \.id) { $item in
                     
                     TodoRowView(todo: $item) {
                         
@@ -72,25 +76,6 @@ struct CalendarTodoView: View {
                         .font(Constant.AppFont.jalnanTopLeading)
                 }
             }
-        }
-        
-//        .onChange(value: selectedDate) { value in
-//            let repo = TodoRepository()
-//            self.todoList = repo.fetchTodo(date: self.selectedDate)
-//            print(selectedDate)
-//            print(todoList)
-//        }
-        
-        .onChange(value: todoList, action: { _ in
-            isImageUpdate = true
-        })
-        
-        
-        .onAppear {
-            let repo = TodoRepository()
-            self.todoList = repo.fetchTodo(date: self.selectedDate)
-            print(todoList)
-            print("갱신")
         }
         
         
