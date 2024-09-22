@@ -12,6 +12,7 @@ struct AddEditFailToastView: View {
         case failedToAdd
         case failedToEdit
         case failedToDelete
+        case failedToLoad
     }
     var type: ToastType
     
@@ -52,6 +53,8 @@ struct AddEditFailToastView: View {
             return "수정이 실패되었습니다.\n잠시 후 다시 시도해 주세요."
         case .failedToDelete:
             return "삭제가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+        case .failedToLoad:
+            return "저장된 할 일 목록 불러오기가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
         }
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import RealmSwift
+import PopupView
 
 struct CalendarTodoView: View {
     
@@ -55,14 +55,14 @@ struct CalendarTodoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 15)
                     .background(Color(uiColor: .systemGray6))
+                
                 ForEach($viewModel.output.selectedDateTodoList, id: \.id) { $item in
-                    
                     TodoRowView(todo: $item) {
-                        
+                        viewModel.action(.onDone(target: item))
                     } onDelete: {
-                        
+                        viewModel.action(.onDelete(target: item))
                     } onEdit: { content, imageData in
-                        
+                        viewModel.action(.onEdit(target: item, content: content, imageData: imageData))
                     }
                 }
                 Text("")
@@ -79,11 +79,40 @@ struct CalendarTodoView: View {
         }
         
         
+        .popup(isPresented: $viewModel.output.showSucceedToast.0, view: {
+            switch viewModel.output.showSucceedToast.1 {
+            case .addNewTodo: AddEditCompleteToastView(type: .addNewTodo)
+            case .editTodo: AddEditCompleteToastView(type: .editTodo)
+            }
+        }, customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(false)
+                .autohideIn(2)
+                .isOpaque(false)
+        })
         
-        
+        .popup(isPresented: $viewModel.output.showFailedToast.0, view: {
+            switch viewModel.output.showFailedToast.1 {
+            case .failedToAdd: AddEditFailToastView(type: .failedToAdd)
+            case .failedToDelete: AddEditFailToastView(type: .failedToDelete)
+            case .failedToEdit: AddEditFailToastView(type: .failedToEdit)
+            case .failedToLoad: AddEditFailToastView(type: .failedToLoad)
+            }
+        }, customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .appearFrom(.topSlide)
+                .closeOnTap(true)
+                .closeOnTapOutside(false)
+                .autohideIn(2)
+                .isOpaque(false)
+        })
     }
-    
-    
 }
 
 #Preview {

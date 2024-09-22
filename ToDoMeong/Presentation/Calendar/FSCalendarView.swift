@@ -7,7 +7,6 @@
 
 import SwiftUI
 import FSCalendar
-import RealmSwift
 
 struct FSCalendarView: UIViewRepresentable {
     
@@ -22,30 +21,24 @@ struct FSCalendarView: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             let currentLocale = Locale.current
             let timeZone: TimeZone
-            let dateFormatter = DateFormatter()
+            
             
             switch currentLocale.region {
             case "KR": // 한국
                 timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
-                dateFormatter.locale = Locale(identifier: "ko_KR")
+                
             case "JP": // 일본
                 timeZone = TimeZone(identifier: "Asia/Tokyo") ?? TimeZone.current
-                dateFormatter.locale = Locale(identifier: "ja_JP")
+                
             case "US", "GB", "AU": // 영어권 (미국, 영국, 호주 등)
                 timeZone = TimeZone(identifier: "America/New_York") ?? TimeZone.current
-                dateFormatter.locale = Locale(identifier: "en_US")
+                
             default:
                 timeZone = TimeZone.current
-                dateFormatter.locale = Locale.current
             }
             
             // 선택된 날짜를 해당 국가 시간대로 변환
             let selectedDateInTimeZone = Calendar.current.date(byAdding: .hour, value: timeZone.secondsFromGMT(for: date) / 3600, to: date) ?? date
-            
-            dateFormatter.dateStyle = .medium
-            dateFormatter.timeZone = timeZone
-            
-            print("Selected date (\(currentLocale.identifier) time): \(dateFormatter.string(from: selectedDateInTimeZone))")
             
             parent.selectedDate = selectedDateInTimeZone
             
@@ -183,8 +176,10 @@ struct FSCalendarView: UIViewRepresentable {
         }
         
         if isImageUpdate {
-            uiView.reloadData()
-            isImageUpdate = false
+            DispatchQueue.main.async {
+                uiView.reloadData()
+                isImageUpdate = false
+            }
         }
     }
 }
