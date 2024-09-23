@@ -77,10 +77,16 @@ struct CalendarTodoView: View {
                         viewModel.action(.onEdit(target: item, content: content, imageData: imageData))
                     }
                 }
+                
                 Text("")
                     .frame(height: 100)
             }
             .background(Color(uiColor: .systemGray6))
+            .overlay {
+                if viewModel.output.selectedDateTodoList.isEmpty {
+                    DogMessageBubbleView(message: "선택한 날에는 할 일이 없어요.\n새로운 할 일을 추가해 보세요🐾")
+                }
+            }
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
