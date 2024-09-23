@@ -84,7 +84,7 @@ struct FSCalendarView: UIViewRepresentable {
             let todos = repo.fetchTodo(date: date)
             
             if !todos.isEmpty {
-                return resizeImage(image: UIImage(named: "pawprint") ?? UIImage(), targetSize: CGSize(width: 13, height: 13))?.withTintColor(.label)
+                return resizeImage(image: UIImage(named: "pawprint") ?? UIImage(), targetSize: CGSize(width: 10, height: 10))?.withTintColor(.label)
             } else {
                 return nil
             }
@@ -165,7 +165,7 @@ struct FSCalendarView: UIViewRepresentable {
         calendar.appearance.caseOptions = .weekdayUsesSingleUpperCase
         calendar.appearance.weekdayTextColor = .label
         calendar.appearance.titleFont = .boldSystemFont(ofSize: 12)
-        calendar.appearance.imageOffset = CGPoint(x: 0, y: 5)
+        calendar.appearance.imageOffset = CGPoint(x: 0, y: 1)
         calendar.appearance.borderRadius = 0.5
         calendar.appearance.calendar.calendarWeekdayView.weekdayLabels[0].textColor = UIColor.red
         
