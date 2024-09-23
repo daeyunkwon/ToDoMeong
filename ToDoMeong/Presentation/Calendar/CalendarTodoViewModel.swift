@@ -40,6 +40,8 @@ final class CalendarTodoViewModel: ViewModelType {
         let onDone = PassthroughSubject<Todo, Never>()
         let onDelete = PassthroughSubject<Todo, Never>()
         let onEdit = PassthroughSubject<(Todo, String, Data?), Never>()
+        let moveToPreviousMonthButtonTapped = PassthroughSubject<Void, Never>()
+        let moveToNextMonthButtonTapped = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -50,6 +52,8 @@ final class CalendarTodoViewModel: ViewModelType {
         var isImageUpdate = false
         var showFailedToast: (Bool, ErrorToastType) = (false, ErrorToastType.failedToAdd)
         var showSucceedToast: (Bool, CompletionToastType) = (false, CompletionToastType.addNewTodo)
+        var moveToPreviousMonth = false
+        var moveToNextMonth = false
     }
     
     init() {
@@ -154,6 +158,18 @@ final class CalendarTodoViewModel: ViewModelType {
             }
             .store(in: &cancellables)
         
+        input.moveToPreviousMonthButtonTapped
+            .sink { [weak self] _ in
+                self?.output.moveToPreviousMonth = true
+            }
+            .store(in: &cancellables)
+        
+        input.moveToNextMonthButtonTapped
+            .sink { [weak self] _ in
+                self?.output.moveToNextMonth = true
+            }
+            .store(in: &cancellables)
+        
     }
     
     private func observeTodos() {
@@ -197,6 +213,8 @@ extension CalendarTodoViewModel {
         case onDone(target: Todo)
         case onDelete(target: Todo)
         case onEdit(target: Todo, content: String, imageData: Data?)
+        case movePreviousMonth
+        case moveNextMonth
     }
     
     func action(_ action: Action) {
@@ -213,6 +231,10 @@ extension CalendarTodoViewModel {
             input.onDelete.send(target)
         case .onEdit(let target, let content, let imageData):
             input.onEdit.send((target, content, imageData))
+        case .movePreviousMonth:
+            input.moveToPreviousMonthButtonTapped.send(())
+        case .moveNextMonth:
+            input.moveToNextMonthButtonTapped.send(())
         }
     }
 }

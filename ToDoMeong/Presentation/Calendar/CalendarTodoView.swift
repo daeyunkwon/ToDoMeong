@@ -22,6 +22,18 @@ struct CalendarTodoView: View {
                 .frame(maxWidth: .infinity)
                 .overlay {
                     Button(action: {
+                        viewModel.action(.movePreviousMonth)
+                    }, label: {
+                        self.triangleImage(rotation: -90)
+                    })
+                    .offset(x: -70)
+                    Button(action: {
+                        viewModel.action(.moveNextMonth)
+                    }, label: {
+                        self.triangleImage(rotation: 90)
+                    })
+                    .offset(x: 73)
+                    Button(action: {
                         viewModel.action(.todayButtonTapped)
                     }, label: {
                         Text("오늘")
@@ -45,7 +57,7 @@ struct CalendarTodoView: View {
                 viewModel.output.currentPageDate
             }, set: { newPageDate in
                 viewModel.action(.updateCurrentPageDate(date: newPageDate))
-            }), moveToday: $viewModel.output.moveToday, isImageUpdate: $viewModel.output.isImageUpdate)
+            }), moveToday: $viewModel.output.moveToday, isImageUpdate: $viewModel.output.isImageUpdate, movePreviousMonth: $viewModel.output.moveToPreviousMonth, moveNextMonth: $viewModel.output.moveToNextMonth)
                 .frame(height: 300)
             
             ScrollView {
@@ -77,7 +89,6 @@ struct CalendarTodoView: View {
                 }
             }
         }
-        
         
         .popup(isPresented: $viewModel.output.showSucceedToast.0, view: {
             switch viewModel.output.showSucceedToast.1 {
@@ -112,6 +123,15 @@ struct CalendarTodoView: View {
                 .autohideIn(2)
                 .isOpaque(false)
         })
+    }
+    
+    private func triangleImage(rotation: Double) -> some View {
+        Image(systemName: "triangle.fill")
+            .resizable()
+            .scaledToFit()
+            .frame(width: 15, height: 15)
+            .rotationEffect(.degrees(rotation))
+            .tint(.brandGreen)
     }
 }
 

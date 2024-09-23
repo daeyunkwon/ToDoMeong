@@ -12,11 +12,14 @@ struct FSCalendarView: UIViewRepresentable {
     
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
         var parent: FSCalendarView
-
+        
+        var stopFlagToPreviousMonth = false
+        var stopFlagToNextMonth = false
+        
         init(_ parent: FSCalendarView) {
             self.parent = parent
         }
-
+        
         // FSCalendar의 이벤트를 처리할 수 있는 delegate 메서드
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             let currentLocale = Locale.current
@@ -44,7 +47,7 @@ struct FSCalendarView: UIViewRepresentable {
             
             print(Calendar.current.isDateInToday(parent.selectedDate))
         }
-
+        
         
         func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
             if Calendar.current.isDateInToday(date) {
@@ -91,31 +94,41 @@ struct FSCalendarView: UIViewRepresentable {
             let size = image.size
             let widthRatio  = targetSize.width  / size.width
             let heightRatio = targetSize.height / size.height
-
+            
             // Determine the scale factor that preserves aspect ratio
             let scaleFactor = min(widthRatio, heightRatio)
-
+            
             // Compute the new image size that preserves aspect ratio
             let scaledSize = CGSize(width: size.width * scaleFactor, height: size.height * scaleFactor)
-
+            
             // Draw the scaled image
             UIGraphicsBeginImageContextWithOptions(scaledSize, false, 0.0)
             image.draw(in: CGRect(origin: .zero, size: scaledSize))
-
+            
             let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
-
+            
             return scaledImage?.withRenderingMode(.automatic)
         }
         
         
         
     }
-
+    
     @Binding var selectedDate: Date
     @Binding var currentPageDate: Date
     @Binding var moveToday: Bool
     @Binding var isImageUpdate: Bool
+    @Binding var movePreviousMonth: Bool
+    @Binding var moveNextMonth: Bool
+    
+    private enum UpdateType {
+        case moveToday
+        case isImageUpdate
+        case movePreviousMonth
+        case moveNextMonth
+        case none
+    }
     
 
     func makeCoordinator() -> Coordinator {
@@ -164,8 +177,22 @@ struct FSCalendarView: UIViewRepresentable {
 
     func updateUIView(_ uiView: FSCalendar, context: Context) {
         
-        //오늘 버튼 액션
+        var type: UpdateType
+        
         if moveToday {
+            type = .moveToday
+        } else if movePreviousMonth {
+            type = .movePreviousMonth
+        } else if moveNextMonth {
+            type = .moveNextMonth
+        } else if isImageUpdate {
+            type = .isImageUpdate
+        } else {
+            type = .none
+        }
+        
+        switch type {
+        case .moveToday:
             uiView.setCurrentPage(Date(), animated: true) //오늘 버튼 클릭
             uiView.select(Date())
             DispatchQueue.main.async {
@@ -173,13 +200,38 @@ struct FSCalendarView: UIViewRepresentable {
                 self.moveToday = false
             }
             
-        }
-        
-        if isImageUpdate {
+        case .isImageUpdate:
             DispatchQueue.main.async {
                 uiView.reloadData()
                 isImageUpdate = false
             }
+        
+        case .movePreviousMonth:
+            if !context.coordinator.stopFlagToPreviousMonth {
+                context.coordinator.stopFlagToPreviousMonth = true
+                let currentDate = uiView.currentPage
+                let oneMonthAge = Calendar.current.date(byAdding: .month, value: -1, to: currentDate) ?? Date()
+                uiView.setCurrentPage(oneMonthAge, animated: true)
+                DispatchQueue.main.async {
+                    self.movePreviousMonth = false
+                    context.coordinator.stopFlagToPreviousMonth = false
+                }
+            }
+            
+        case .moveNextMonth:
+            if !context.coordinator.stopFlagToNextMonth {
+                context.coordinator.stopFlagToNextMonth = true
+                let currentDate = uiView.currentPage
+                let oneMonthLater = Calendar.current.date(byAdding: .month, value: 1, to: currentDate) ?? Date()
+                uiView.setCurrentPage(oneMonthLater, animated: true)
+                DispatchQueue.main.async {
+                    self.moveNextMonth = false
+                    context.coordinator.stopFlagToNextMonth = false
+                }
+            }
+            
+        case .none:
+            break
         }
     }
 }
