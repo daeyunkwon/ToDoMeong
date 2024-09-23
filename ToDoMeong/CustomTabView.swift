@@ -15,7 +15,7 @@ struct CustomTabView: View {
     private let tabBarItems: [(image: String, title: String)] = [
         ("checklist", "할 일"),
         ("calendar", "캘린더"),
-        ("chart.pie", "차트"),
+        //("chart.pie", "차트"),
         ("gearshape", "설정")
     ]
     
@@ -32,7 +32,7 @@ struct CustomTabView: View {
                 
             
             HStack {
-                ForEach(0..<4) { index in
+                ForEach(0..<3) { index in
                     Button(action: {
                         HapticManager.shared.impact(intensity: 0.5)
                         withAnimation(.easeInOut(duration: 0.2)) {
