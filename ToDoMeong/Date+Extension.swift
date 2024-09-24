@@ -9,28 +9,48 @@ import Foundation
 
 extension Date {
     
-    var dayOfTheWeekDateString: String {
-        let formatter = DateFormatter()
-        
+    var localDate: Date {
+        let timeZone: TimeZone
         let currentLocale = Locale.current
         
         if currentLocale.region == "KR" {
+            timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
+        } else if currentLocale.region == "JP" {
+            timeZone = TimeZone(identifier: "Asia/Tokyo") ?? TimeZone.current
+        } else {
+            timeZone = TimeZone(identifier: "America/New_York") ?? TimeZone.current
+        }
+        
+        let secondsFromGMT = timeZone.secondsFromGMT(for: self)
+        return self.addingTimeInterval(TimeInterval(secondsFromGMT))
+    }
+    
+    var dayOfTheWeekDateString: String {
+        let formatter = DateFormatter()
+        let currentLocale = Locale.current
+        let timeZone: TimeZone
+        
+        if currentLocale.region == "KR" {
+            timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.dateFormat = "M월 d일 EEEE"
         } else if currentLocale.region == "JP" {
+            timeZone = TimeZone(identifier: "Asia/Tokyo") ?? TimeZone.current
             formatter.locale = Locale(identifier: "ja_JP")
             formatter.dateFormat = "M月d日 EEEE"
         } else {
+            timeZone = TimeZone(identifier: "America/New_York") ?? TimeZone.current
             formatter.locale = Locale(identifier: "en_US")
             formatter.dateFormat = "EEEE, MMM d"
         }
+        
+        formatter.timeZone = timeZone
         
         return formatter.string(from: self)
     }
     
     var yearMonthDateString: String {
         let formatter = DateFormatter()
-        
         let currentLocale = Locale.current
         
         if currentLocale.region == "KR" {
