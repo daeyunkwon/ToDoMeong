@@ -12,6 +12,9 @@
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
 		448960042C9C862000410DA7 /* FSCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960032C9C862000410DA7 /* FSCalendarView.swift */; };
 		448960062CA00A0500410DA7 /* CalendarTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960052CA00A0500410DA7 /* CalendarTodoViewModel.swift */; };
+		448960242CA1B7E700410DA7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960232CA1B7E700410DA7 /* SettingView.swift */; };
+		448960282CA2EACF00410DA7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 448960272CA2EACF00410DA7 /* Localizable.xcstrings */; };
+		4489602A2CA2EB7100410DA7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960292CA2EB7100410DA7 /* String+Extension.swift */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -67,6 +70,9 @@
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
 		448960052CA00A0500410DA7 /* CalendarTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoViewModel.swift; sourceTree = "<group>"; };
+		448960232CA1B7E700410DA7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		448960272CA2EACF00410DA7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		448960292CA2EB7100410DA7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoMeong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongApp.swift; sourceTree = "<group>"; };
 		44ED3AC82C92E3F200E3E9CF /* TodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoView.swift; sourceTree = "<group>"; };
@@ -126,6 +132,14 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
+		448960222CA1B7CC00410DA7 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				448960232CA1B7E700410DA7 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
 		44ED3ABA2C92E3F200E3E9CF = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +166,7 @@
 				44ED3B022C97F7AD00E3E9CF /* Model */,
 				44ED3AD52C92E40400E3E9CF /* Presentation */,
 				44ED3AD42C92E3FA00E3E9CF /* Resource */,
+				448960272CA2EACF00410DA7 /* Localizable.xcstrings */,
 			);
 			path = ToDoMeong;
 			sourceTree = "<group>";
@@ -181,6 +196,7 @@
 				44ED3ADD2C92EA7C00E3E9CF /* MainTabView.swift */,
 				44ED3AF12C94ADFE00E3E9CF /* Todo */,
 				44895FFD2C9C731100410DA7 /* Calendar */,
+				448960222CA1B7CC00410DA7 /* Setting */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -235,6 +251,7 @@
 			children = (
 				44ED3AE92C94336000E3E9CF /* Date+Extension.swift */,
 				44ED3AFE2C973E2B00E3E9CF /* UIApplication+Extension.swift */,
+				448960292CA2EB7100410DA7 /* String+Extension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -359,6 +376,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
+				ja,
 			);
 			mainGroup = 44ED3ABA2C92E3F200E3E9CF;
 			packageReferences = (
@@ -382,6 +401,7 @@
 			files = (
 				44ED3AE22C92EF1900E3E9CF /* Jalnan2.otf in Resources */,
 				44ED3ACE2C92E3F300E3E9CF /* Preview Assets.xcassets in Resources */,
+				448960282CA2EACF00410DA7 /* Localizable.xcstrings in Resources */,
 				44ED3AD82C92E45600E3E9CF /* .gitignore in Resources */,
 				44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */,
 				44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */,
@@ -424,6 +444,8 @@
 				44ED3B0B2C98039800E3E9CF /* Todo.swift in Sources */,
 				44ED3AEA2C94336000E3E9CF /* Date+Extension.swift in Sources */,
 				44ED3B192C9874D900E3E9CF /* TodoRepository.swift in Sources */,
+				448960242CA1B7E700410DA7 /* SettingView.swift in Sources */,
+				4489602A2CA2EB7100410DA7 /* String+Extension.swift in Sources */,
 				44ED3B202C99159600E3E9CF /* EditTodoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

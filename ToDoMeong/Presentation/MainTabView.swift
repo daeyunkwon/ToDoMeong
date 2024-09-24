@@ -18,7 +18,7 @@ struct MainTabView: View {
             TodoView().tag(0)
             CalendarTodoView().tag(1)
 //            Text("Tab Content 3").tag(2)
-            Text("Tab Content 4").tag(2)
+            SettingView().tag(2)
         })
         .overlay(alignment: .bottom) {
             CustomTabView(tabSelection: $tabSelection)
