@@ -50,7 +50,7 @@ struct EditTodoView: View {
     }
     
     @ViewBuilder private var textFieldView: some View {
-        TextField("내용을 입력해 주세요", text: Binding(get: {
+        TextField("textFieldPlaceholder".localized(), text: Binding(get: {
             viewModel.output.text
         }, set: { newValue in
             viewModel.input.text.send(newValue)
@@ -92,7 +92,7 @@ struct EditTodoView: View {
                 .scaledToFit()
                 .frame(width: 22, height: 22)
                 .tint(.skyblue)
-            Text(viewModel.output.selectedImageData == nil ? "사진 추가하기" : "사진 제거하기")
+            Text(viewModel.output.selectedImageData == nil ? "addPhoto".localized() : "removePhoto".localized())
                 .tint(Color(uiColor: .label))
                 .font(.system(size: 14))
             Spacer()
@@ -113,7 +113,7 @@ struct EditTodoView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .frame(height: 50)
                     .foregroundStyle(.skyblue)
-                Text("저장")
+                Text("save".localized())
                     .font(Constant.AppFont.tmoneyRoundWindExtraBold15)
                     .foregroundStyle(.white)
             }
@@ -131,7 +131,7 @@ struct EditTodoView: View {
                 RoundedRectangle(cornerRadius: 15)
                     .frame(height: 50)
                     .foregroundStyle(.customPink)
-                Text("삭제")
+                Text("delete".localized())
                     .font(Constant.AppFont.tmoneyRoundWindExtraBold15)
                     .foregroundStyle(.white)
             }

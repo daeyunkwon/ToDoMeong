@@ -12,7 +12,7 @@ struct DetailPhotoView: View {
     let todoID: String
     
     var body: some View {
-        Text("사진 상세보기")
+        Text("photoDetail".localized())
             .font(.system(size: 15))
             .bold()
             .padding(.top, 20)

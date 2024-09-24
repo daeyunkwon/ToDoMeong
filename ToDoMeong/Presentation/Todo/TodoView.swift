@@ -39,7 +39,7 @@ struct TodoView: View {
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("오늘 할 일")
+                    Text("todayTodo".localized())
                         .font(Constant.AppFont.jalnanTopLeading)
                         .padding(.top, 15)
                 }
@@ -206,7 +206,7 @@ struct TodoView: View {
         
         .overlay {
             if viewModel.output.todoList.isEmpty {
-                DogMessageBubbleView(message: "오늘은 어떤 일을 해야 하나요?\n새로운 할 일을 추가해 보세요🐾")
+                DogMessageBubbleView(message: "emptyTodoMessageForToday".localized())
             }
         }
     }

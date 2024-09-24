@@ -13,7 +13,7 @@ struct CustomTabView: View {
     @Namespace private var animationNamespace
     
     private let tabBarItems: [(image: String, title: String)] = [
-        ("checklist", "할 일"),
+        ("checklist", "todo".localized()),
         ("calendar", "calendarTitle".localized()),
         //("chart.pie", "차트"),
         ("gearshape", "설정")

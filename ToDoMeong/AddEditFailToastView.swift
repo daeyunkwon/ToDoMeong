@@ -42,19 +42,19 @@ struct AddEditFailToastView: View {
     }
     
     private var title: String {
-        return "문제 발생"
+        return "issueOccurred".localized()
     }
     
     private var message: String {
         switch type {
         case .failedToAdd:
-            return "새로운 할 일 추가가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+            return "failedToAddMessage".localized()
         case .failedToEdit:
-            return "수정이 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+            return "failedToEditMessage".localized()
         case .failedToDelete:
-            return "삭제가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+            return "failedToDeleteMessage".localized()
         case .failedToLoad:
-            return "저장된 할 일 목록 불러오기가 실패되었습니다.\n잠시 후 다시 시도해 주세요."
+            return "failedToLoadMessage".localized()
         }
     }
 }

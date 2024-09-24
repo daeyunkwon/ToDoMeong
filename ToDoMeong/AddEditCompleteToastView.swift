@@ -41,18 +41,18 @@ struct AddEditCompleteToastView: View {
     private var title: String {
         switch type {
         case .addNewTodo:
-            return "새로운 할 일 추가"
+            return "addNewTodo".localized()
         case .editTodo:
-            return "기존 할 일 수정"
+            return "editExistingTodo".localized()
         }
     }
     
     private var message: String {
         switch type {
         case .addNewTodo:
-            return "새로운 도전이 생겼어요! 🐾 "
+            return "addNewTodoMessage".localized()
         case .editTodo:
-            return "업데이트 완료! 수정한 대로 달려볼까요? 🚀"
+            return "editTodoMessage".localized()
         }
     }
 }
