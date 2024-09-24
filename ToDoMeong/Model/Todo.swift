@@ -19,7 +19,7 @@ final class Todo: Object, ObjectKeyIdentifiable {
     convenience init(content: String) {
         self.init()
         self.content = content
-        self.createDate = Date().localDate
+        self.createDate = Date()
         self.done = false
     }
     

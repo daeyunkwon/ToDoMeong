@@ -36,7 +36,7 @@ struct CalendarTodoView: View {
                     Button(action: {
                         viewModel.action(.todayButtonTapped)
                     }, label: {
-                        Text("오늘")
+                        Text("today".localized())
                             .font(.system(size: 12, weight: .medium))
                             .padding(5)
                             .overlay {
@@ -62,11 +62,21 @@ struct CalendarTodoView: View {
             
             ScrollView {
                 Text("")
-                Text(viewModel.output.selectedDate.dayOfTheWeekDateString)
-                    .font(.system(size: 13, weight: .medium))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading, 15)
-                    .background(Color(uiColor: .systemGray6))
+                HStack {
+                    Text(viewModel.output.selectedDate.dayOfTheWeekDateString)
+                        .font(.system(size: 13, weight: .medium))
+                        .padding(.leading, 15)
+                    Spacer()
+                    Button(action: {
+                        viewModel.action(.addTodoButtonTapped)
+                    }, label: {
+                        Text("addTodo".localized())
+                            .font(Constant.AppFont.jalnan13)
+                            .tint(.brandGreen)
+                            .padding(.trailing, 15)
+                    })
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
                 
                 ForEach($viewModel.output.selectedDateTodoList, id: \.id) { $item in
                     TodoRowView(todo: $item) {
@@ -81,17 +91,19 @@ struct CalendarTodoView: View {
                 Text("")
                     .frame(height: 100)
             }
+            .frame(maxWidth: .infinity)
             .background(Color(uiColor: .systemGray6))
             .overlay {
                 if viewModel.output.selectedDateTodoList.isEmpty {
-                    DogMessageBubbleView(message: "선택한 날에는 할 일이 없어요.\n새로운 할 일을 추가해 보세요🐾")
+                    DogMessageBubbleView(message: "noTaskMessageForCalendar".localized())
                 }
             }
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("캘린더")
+                    Text("calendarTitle".localized())
                         .font(Constant.AppFont.jalnanTopLeading)
+                        .padding(.top, 15)
                 }
             }
         }
@@ -129,6 +141,37 @@ struct CalendarTodoView: View {
                 .autohideIn(2)
                 .isOpaque(false)
         })
+        
+        .popup(isPresented: $viewModel.output.showAddTodoView) {
+            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: Binding(get: {
+                viewModel.output.isAddNewTodo
+            }, set: { _ in
+                viewModel.action(.showSucceedToast(.addNewTodo))
+            }), isFailedToAdd: Binding(get: {
+                viewModel.output.isFailedAddTodo
+            }, set: { _ in
+                viewModel.action(.showFailedToast(.failedToAdd))
+            }), todoList: $viewModel.output.selectedDateTodoList, viewModel: AddTodoViewModel(selectedDate: viewModel.output.selectedDate))
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.bottom)
+                .closeOnTap(false)
+                .closeOnTapOutside(true)
+                .dragToDismiss(true)
+                .backgroundColor(.black.opacity(0.4))
+                .useKeyboardSafeArea(true)
+                .isOpaque(true)
+        }
+        
+        .onChange(value: viewModel.output.selectedDate) { _ in
+            print(viewModel.output.selectedDate)
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy MM dd hh:mm:ss"
+            let test = dateFormatter.string(from: viewModel.output.selectedDate)
+            print("이거: ", test)
+        }
     }
     
     private func triangleImage(rotation: Double) -> some View {

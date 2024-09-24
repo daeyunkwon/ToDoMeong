@@ -41,13 +41,14 @@ struct TodoView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("오늘 할 일")
                         .font(Constant.AppFont.jalnanTopLeading)
+                        .padding(.top, 15)
                 }
             }
         }
         
         //새로운 할 일 추가 화면 팝업
         .popup(isPresented: $viewModel.output.showAddTodoView) {
-            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: $viewModel.output.isAddNewTodo, isFailedToAdd: $viewModel.output.isFailedAddTodo, todoList: $viewModel.output.todoList)
+            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: $viewModel.output.isAddNewTodo, isFailedToAdd: $viewModel.output.isFailedAddTodo, todoList: $viewModel.output.todoList, viewModel: AddTodoViewModel(selectedDate: nil))
         } customize: {
             $0
                 .type(.toast)
@@ -177,6 +178,7 @@ struct TodoView: View {
             .padding(.horizontal, 5)
             .offset(y: 3)
             .shadow(radius: 1.5)
+            .padding(.top, 7)
     }
     
     private func todoScrollView() -> some View {

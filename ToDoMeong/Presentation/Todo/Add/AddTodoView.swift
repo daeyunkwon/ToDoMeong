@@ -18,7 +18,7 @@ struct AddTodoView: View {
     
     @Binding var todoList: [Todo]
     
-    @StateObject var viewModel = AddTodoViewModel()
+    @StateObject var viewModel: AddTodoViewModel
 
     //MARK: - Body
     
@@ -116,5 +116,5 @@ struct AddTodoView: View {
 }
 
 #Preview {
-    AddTodoView(isShowing: .constant(true), isAddNewTodo: .constant(false), isFailedToAdd: .constant(false), todoList: .constant([]))
+    AddTodoView(isShowing: .constant(true), isAddNewTodo: .constant(false), isFailedToAdd: .constant(false), todoList: .constant([]), viewModel: AddTodoViewModel(selectedDate: nil))
 }

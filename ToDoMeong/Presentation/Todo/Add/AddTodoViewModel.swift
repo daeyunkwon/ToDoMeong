@@ -11,6 +11,7 @@ import Combine
 final class AddTodoViewModel: ViewModelType {
     
     private let repository = TodoRepository()
+    private let selectedDate: Date?
     
     var cancellables = Set<AnyCancellable>()
     var input = Input()
@@ -26,7 +27,8 @@ final class AddTodoViewModel: ViewModelType {
         var addTodoResult = PassthroughSubject<Result<Todo, TodoRepository.RealmError>, Never>()
     }
     
-    init() {
+    init(selectedDate: Date?) {
+        self.selectedDate = selectedDate
         transform()
     }
     
@@ -42,6 +44,20 @@ final class AddTodoViewModel: ViewModelType {
                 guard let self else { return }
                 
                 let newTodo = Todo(content: self.output.text)
+                
+                //캘린더에서 날짜 지정하여 할일 추가한 경우
+                if let selectedDate = self.selectedDate, !Calendar.current.isDateInToday(selectedDate){
+                    let selectedDateTodoList = repository.fetchTodo(date: selectedDate)
+                    
+                    if selectedDateTodoList.isEmpty {
+                        newTodo.createDate = selectedDate
+                    } else {
+                        guard var lastDate = selectedDateTodoList.last?.createDate.timeIntervalSince1970 else { return }
+                        lastDate += 0.01
+                        let dateForSave = Date(timeIntervalSince1970: lastDate)
+                        newTodo.createDate = dateForSave
+                    }
+                }
                 
                 self.repository.createTodo(data: newTodo) { result in
                     switch result {

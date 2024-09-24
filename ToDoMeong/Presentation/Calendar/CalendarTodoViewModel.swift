@@ -42,6 +42,9 @@ final class CalendarTodoViewModel: ViewModelType {
         let onEdit = PassthroughSubject<(Todo, String, Data?), Never>()
         let moveToPreviousMonthButtonTapped = PassthroughSubject<Void, Never>()
         let moveToNextMonthButtonTapped = PassthroughSubject<Void, Never>()
+        let addTodoButtonTapped = PassthroughSubject<Void, Never>()
+        let showSucceedToast = PassthroughSubject<CompletionToastType, Never>()
+        let showFailedToast = PassthroughSubject<ErrorToastType, Never>()
     }
     
     struct Output {
@@ -54,6 +57,9 @@ final class CalendarTodoViewModel: ViewModelType {
         var showSucceedToast: (Bool, CompletionToastType) = (false, CompletionToastType.addNewTodo)
         var moveToPreviousMonth = false
         var moveToNextMonth = false
+        var showAddTodoView = false
+        var isAddNewTodo = false
+        var isFailedAddTodo = false
     }
     
     init() {
@@ -76,7 +82,9 @@ final class CalendarTodoViewModel: ViewModelType {
                         return false
                     }
                 })
+                print("@@@@@@ ", selectedDate)
                 self.selectedDate = selectedDate
+                output.selectedDate = self.selectedDate
             }
             .store(in: &cancellables)
         
@@ -101,7 +109,7 @@ final class CalendarTodoViewModel: ViewModelType {
                         break
                     case .failure(let error):
                         print(error)
-                        self.output.showFailedToast = (true, .failedToEdit)
+                        self.input.showFailedToast.send(.failedToEdit)
                     }
                 }
             }
@@ -116,7 +124,7 @@ final class CalendarTodoViewModel: ViewModelType {
                         break
                     case .failure(let error):
                         print(error)
-                        self.output.showFailedToast = (true, .failedToDelete)
+                        self.input.showFailedToast.send(.failedToDelete)
                     }
                 }
             }
@@ -135,10 +143,10 @@ final class CalendarTodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: nil) { result in
                         switch result {
                         case .success(_):
-                            self.output.showSucceedToast = (true, .editTodo)
+                            self.input.showSucceedToast.send(.editTodo)
                         case .failure(let error):
                             print(error)
-                            self.output.showFailedToast = (true, .failedToEdit)
+                            self.input.showFailedToast.send(.failedToEdit)
                         }
                     }
                 } else {
@@ -148,10 +156,10 @@ final class CalendarTodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: target.id.stringValue) { result in
                         switch result {
                         case .success(_):
-                            self.output.showSucceedToast = (true, .editTodo)
+                            self.input.showSucceedToast.send(.editTodo)
                         case .failure(let error):
                             print(error)
-                            self.output.showFailedToast = (true, .failedToEdit)
+                            self.input.showFailedToast.send(.failedToEdit)
                         }
                     }
                 }
@@ -170,6 +178,23 @@ final class CalendarTodoViewModel: ViewModelType {
             }
             .store(in: &cancellables)
         
+        input.addTodoButtonTapped
+            .sink { [weak self] _ in
+                self?.output.showAddTodoView = true
+            }
+            .store(in: &cancellables)
+        
+        input.showSucceedToast
+            .sink { [weak self] type in
+                self?.output.showSucceedToast = (true, type)
+            }
+            .store(in: &cancellables)
+        
+        input.showFailedToast
+            .sink { [weak self] type in
+                self?.output.showFailedToast = (true, type)
+            }
+            .store(in: &cancellables)
     }
     
     private func observeTodos() {
@@ -193,7 +218,7 @@ final class CalendarTodoViewModel: ViewModelType {
             
             case .error(let error):
                 print(error.localizedDescription)
-                self.output.showFailedToast = (true, .failedToLoad)
+                self.input.showFailedToast.send(.failedToLoad)
             }
         }
     }
@@ -215,6 +240,9 @@ extension CalendarTodoViewModel {
         case onEdit(target: Todo, content: String, imageData: Data?)
         case movePreviousMonth
         case moveNextMonth
+        case addTodoButtonTapped
+        case showSucceedToast(CompletionToastType)
+        case showFailedToast(ErrorToastType)
     }
     
     func action(_ action: Action) {
@@ -235,6 +263,12 @@ extension CalendarTodoViewModel {
             input.moveToPreviousMonthButtonTapped.send(())
         case .moveNextMonth:
             input.moveToNextMonthButtonTapped.send(())
+        case .addTodoButtonTapped:
+            input.addTodoButtonTapped.send(())
+        case .showSucceedToast(let type):
+            input.showSucceedToast.send(type)
+        case .showFailedToast(let type):
+            input.showFailedToast.send(type)
         }
     }
 }
