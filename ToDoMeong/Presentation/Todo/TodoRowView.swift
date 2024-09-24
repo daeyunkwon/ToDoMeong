@@ -19,15 +19,6 @@ struct TodoRowView: View {
     var onDelete: () -> Void //삭제 이벤트 트리거
     var onEdit: (String, Data?) -> Void //수정 이벤트 트리거
     
-    init(todo: Binding<Todo>, onDone: @escaping () -> Void, onDelete: @escaping () -> Void, onEdit: @escaping (String, Data?) -> Void) {
-        self._todo = todo // @Binding은 _를 붙여서 초기화
-        self.onDone = onDone
-        self.onDelete = onDelete
-        self.onEdit = onEdit
-        
-        print("로우 뷰 인잇")
-    }
-    
     var body: some View {
         
         VStack {

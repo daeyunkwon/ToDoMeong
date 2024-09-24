@@ -163,15 +163,6 @@ struct CalendarTodoView: View {
                 .useKeyboardSafeArea(true)
                 .isOpaque(true)
         }
-        
-        .onChange(value: viewModel.output.selectedDate) { _ in
-            print(viewModel.output.selectedDate)
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy MM dd hh:mm:ss"
-            let test = dateFormatter.string(from: viewModel.output.selectedDate)
-            print("이거: ", test)
-        }
     }
     
     private func triangleImage(rotation: Double) -> some View {

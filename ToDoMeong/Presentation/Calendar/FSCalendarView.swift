@@ -24,87 +24,11 @@ struct FSCalendarView: UIViewRepresentable {
         func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
             
             parent.selectedDate = date
-            
-//            let timeZone = TimeZone.current
-//            let selectedDateInTimeZone = Calendar.current.date(byAdding: .second, value: timeZone.secondsFromGMT(for: date), to: date) ?? date
-//            
-//            parent.selectedDate = selectedDateInTimeZone
-//            print("Selected Date: \(selectedDateInTimeZone)")
-            
-//            let currentLocale = Locale.current
-//            let timeZone: TimeZone
-//            
-//            
-//            switch currentLocale.region {
-//            case "KR": // 한국
-//                timeZone = TimeZone(identifier: "Asia/Seoul") ?? TimeZone.current
-//                
-//            case "JP": // 일본
-//                timeZone = TimeZone(identifier: "Asia/Tokyo") ?? TimeZone.current
-//                
-//            case "US", "GB", "AU": // 영어권 (미국, 영국, 호주 등)
-//                timeZone = TimeZone(identifier: "America/New_York") ?? TimeZone.current
-//                
-//            default:
-//                //timeZone = TimeZone.current
-//                timeZone = TimeZone(identifier: "America/New_York") ?? TimeZone.current
-//            }
-//            
-//            // 선택된 날짜를 해당 국가 시간대로 변환
-//            let selectedDateInTimeZone = Calendar.current.date(byAdding: .hour, value: timeZone.secondsFromGMT(for: date) / 3600, to: date) ?? date
-//            
-//            //parent.selectedDate = selectedDateInTimeZone
-//            parent.selectedDate = date.localDate
-//            print("date: \(date)")
-//            print("local: \(date.localDate)")
-//            print("selectedDateInTimeZone: \(selectedDateInTimeZone)")
-//            print("그냥 선택: ", parent.selectedDate)
-//            
-//            print(Calendar.current.isDateInToday(parent.selectedDate))
-////            parent.selectedDate = date.localDate
-////            print("선택: \(date.localDate)")
-////            if Calendar.current.isDate(date.localDate, inSameDayAs: Date().localDate) {
-////                print("오늘맞음")
-////            }
         }
         
         
         func calendar(_ calendar: FSCalendar, subtitleFor date: Date) -> String? {
-            
-//            let timeZone = TimeZone.current
-//            
-//            let selectedDateInTimeZone = Calendar.current.date(byAdding: .second, value: timeZone.secondsFromGMT(for: date), to: date) ?? date
-//            
-//            let oneDayAgo = Calendar.current.date(byAdding: .day, value: -1, to: date) ?? date
-//            
-//            
-//            var test = Calendar(identifier: .gregorian)
-//            test.timeZone = .gmt
-//            
-//            //Calendar.current.isDate 애가 잘못됐음;; 아시아 기준으로 함
-//            //시간대 기준 어떤걸로 해야할까?: 아이폰 설정 시간대를 따르기 vs 아이폰 설정 지역을 따르기
-//            if Calendar.current.isDate(date, inSameDayAs: Date().localDate) {
-//                print("오늘: \(Date().localDate)")
-//                print("오늘2: \(selectedDateInTimeZone)")
-//                print("오늘3 : \(date)")
-//                print(Calendar.current.timeZone)
-//                print(oneDayAgo)
-//                return "오늘"
-//            }
-            
-            
-            //Realm에는 그냥 Date()로 저장하고, 꺼내 쓸 때 바꾸던지 한다
-            
             if Calendar.current.isDateInToday(date) {
-//                print("오늘: \(date)")
-//                print(Calendar.current.timeZone)
-//                let test = DateFormatter()
-//                let compo = Calendar.current.dateComponents([.month, .day, .hour, .minute], from: date)
-//                
-//                let timeZone = TimeZone.current
-//                let selectedDateInTimeZone = Calendar.current.date(byAdding: .second, value: timeZone.secondsFromGMT(for: date), to: date) ?? date
-//                print("이건 몇시?: ", selectedDateInTimeZone)
-                print(Calendar.current.timeZone)
                 return "today".localized()
             }
             
@@ -112,12 +36,9 @@ struct FSCalendarView: UIViewRepresentable {
         }
         
         func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-//            let timeZone = TimeZone.current
-//            
-//            let selectedDateInTimeZone = Calendar.current.date(byAdding: .second, value: timeZone.secondsFromGMT(for: date), to: date) ?? date
-//            
+
             let day = Calendar.current.component(.weekday, from: date) - 1
-//            
+            
             let current = Calendar.current.dateComponents([.year, .month, .day], from: parent.selectedDate) //현재 페이지
             let compare = Calendar.current.dateComponents([.year, .month, .day], from: date) //비교하고 싶은 날짜
             
