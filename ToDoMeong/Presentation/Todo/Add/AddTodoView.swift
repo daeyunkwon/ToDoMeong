@@ -24,11 +24,11 @@ struct AddTodoView: View {
     
     var body: some View {
         VStack {
-            Text("새로운 할 일 추가")
+            Text("addNewTodo".localized())
                 .font(.headline)
             
             ZStack(alignment: .trailing) {
-                TextField("내용을 입력해 주세요", text: Binding(get: {
+                TextField("textFieldPlaceholder", text: Binding(get: {
                     viewModel.output.text
                 }, set: { newValue in
                     viewModel.input.text.send(newValue)
@@ -65,7 +65,7 @@ struct AddTodoView: View {
                     RoundedRectangle(cornerRadius: 15)
                         .frame(height: 50)
                         .foregroundStyle(.brandGreen)
-                    Text("추가하기")
+                    Text("add".localized())
                         .font(Constant.AppFont.tmoneyRoundWindExtraBold15)
                         .foregroundStyle(.white)
                 }

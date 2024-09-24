@@ -166,7 +166,6 @@
 				44ED3B022C97F7AD00E3E9CF /* Model */,
 				44ED3AD52C92E40400E3E9CF /* Presentation */,
 				44ED3AD42C92E3FA00E3E9CF /* Resource */,
-				448960272CA2EACF00410DA7 /* Localizable.xcstrings */,
 			);
 			path = ToDoMeong;
 			sourceTree = "<group>";
@@ -182,6 +181,7 @@
 		44ED3AD42C92E3FA00E3E9CF /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				448960272CA2EACF00410DA7 /* Localizable.xcstrings */,
 				44ED3ADF2C92EF0900E3E9CF /* Font */,
 				44ED3AE42C92EFC500E3E9CF /* Info.plist */,
 				44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */,
