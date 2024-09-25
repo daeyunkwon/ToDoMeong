@@ -82,7 +82,6 @@ final class CalendarTodoViewModel: ViewModelType {
                         return false
                     }
                 })
-                print("@@@@@@ ", selectedDate)
                 self.selectedDate = selectedDate
                 output.selectedDate = self.selectedDate
             }

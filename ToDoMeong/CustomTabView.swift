@@ -15,7 +15,7 @@ struct CustomTabView: View {
     private let tabBarItems: [(image: String, title: String)] = [
         ("checklist", "todo".localized()),
         ("calendar", "calendarTitle".localized()),
-        //("chart.pie", "차트"),
+//        ("chart.pie", "차트"),
         ("gearshape", "설정")
     ]
     

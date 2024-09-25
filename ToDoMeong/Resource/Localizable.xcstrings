@@ -349,6 +349,9 @@
         }
       }
     },
+    "Label" : {
+
+    },
     "noTaskMessageForCalendar" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -440,6 +443,12 @@
           }
         }
       }
+    },
+    "test" : {
+
+    },
+    "text" : {
+
     },
     "textFieldPlaceholder" : {
       "extractionState" : "manual",
@@ -533,10 +542,10 @@
         }
       }
     },
-    "tt" : {
+    "설정" : {
 
     },
-    "설정" : {
+    "화면 테마" : {
 
     }
   },

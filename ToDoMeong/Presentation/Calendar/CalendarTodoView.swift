@@ -163,6 +163,12 @@ struct CalendarTodoView: View {
                 .useKeyboardSafeArea(true)
                 .isOpaque(true)
         }
+        
+        .onChange(value: viewModel.output.showAddTodoView, action: { isPresented in
+            if !isPresented {
+                UIApplication.shared.dismissKeyboard()
+            }
+        })
     }
     
     private func triangleImage(rotation: Double) -> some View {

@@ -15,6 +15,7 @@ struct FSCalendarView: UIViewRepresentable {
         
         var stopFlagToPreviousMonth = false
         var stopFlagToNextMonth = false
+        var currentSelectedMonth = Date()
         
         init(_ parent: FSCalendarView) {
             self.parent = parent
@@ -36,27 +37,31 @@ struct FSCalendarView: UIViewRepresentable {
         }
         
         func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-
+            
             let day = Calendar.current.component(.weekday, from: date) - 1
             
-            let current = Calendar.current.dateComponents([.year, .month, .day], from: parent.selectedDate) //현재 페이지
+            let current = Calendar.current.dateComponents([.year, .month, .day], from: currentSelectedMonth) //현재 페이지
             let compare = Calendar.current.dateComponents([.year, .month, .day], from: date) //비교하고 싶은 날짜
             
             if Calendar.current.isDateInToday(date) {
                 return .label //오늘
-            } else if Calendar.current.shortWeekdaySymbols[day] == "일" || Calendar.current.shortWeekdaySymbols[day] == "Sun" && current.month  == compare.month {
-                return .systemRed //현재 선택한 월에 포함되는 일요일
-            } else if Calendar.current.shortWeekdaySymbols[day] == "일" || Calendar.current.shortWeekdaySymbols[day] == "Sun" {
-                return .systemRed.withAlphaComponent(0.5) //현재 선택한 월에 포함되지 않는 일요일
+            } else if Calendar.current.shortWeekdaySymbols[day] == "일" || Calendar.current.shortWeekdaySymbols[day] == "Sun" || Calendar.current.shortWeekdaySymbols[day] == "日" {
+                if current.month  == compare.month {
+                    return .systemRed //현재 선택한 월에 포함되는 일요일
+                } else {
+                    return .systemRed.withAlphaComponent(0.5) //현재 선택한 월에 포함되지 않는 일요일
+                }
             } else {
                 return nil //그 외 색상 설정 안함
             }
         }
         
         func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
+            currentSelectedMonth = calendar.currentPage
             DispatchQueue.main.async {
                 self.parent.currentPageDate = calendar.currentPage
             }
+            calendar.reloadData()
         }
         
         func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
