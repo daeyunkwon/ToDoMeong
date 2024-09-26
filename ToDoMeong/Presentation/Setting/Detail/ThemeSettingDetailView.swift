@@ -55,10 +55,15 @@ struct ThemeSettingDetailView: View {
                 .overlay {
                     HStack {
                         Text(title)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 15, weight: .medium))
                         Spacer()
                         if getPreferredColorScheme() == option {
-                            Image(systemName: "checkmark")
+                            Image("pawprint", bundle: nil)
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(Color(uiColor: .label))
                         }
                     }
                     .padding(.trailing, 15)
