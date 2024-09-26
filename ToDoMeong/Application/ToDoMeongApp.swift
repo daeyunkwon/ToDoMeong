@@ -16,6 +16,7 @@ struct ToDoMeongApp: App {
     var body: some Scene {
         WindowGroup {
             MainTabView()
+                .environmentObject(TabViewManager.shared)
                 .preferredColorScheme(getPreferredColorScheme())
         }
     }

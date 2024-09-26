@@ -19,6 +19,7 @@ enum SettingNavigationLinkDetailType : Equatable, Hashable {
 
 enum SettingButtonDetailType: Equatable, Hashable {
     case sendMail
+    case appVersion
 }
 
 struct Setting: Hashable, Identifiable {

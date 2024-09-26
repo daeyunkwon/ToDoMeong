@@ -11,6 +11,7 @@ import RealmSwift
 struct MainTabView: View {
     
     @State private var tabSelection = 0
+    @EnvironmentObject var tabViewManager: TabViewManager
     
     var body: some View {
         TabView(selection: $tabSelection,
@@ -21,8 +22,10 @@ struct MainTabView: View {
             SettingView().tag(2)
         })
         .overlay(alignment: .bottom) {
-            CustomTabView(tabSelection: $tabSelection)
-                .offset(y: 7)
+            if !tabViewManager.isTabViewHidden{
+                CustomTabView(tabSelection: $tabSelection)
+                    .offset(y: 7)
+            }
         }
         .ignoresSafeArea(.keyboard)
         .onAppear() {
@@ -34,3 +37,5 @@ struct MainTabView: View {
 #Preview {
     MainTabView()
 }
+
+

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OnChangeWrapper<T: Equatable>: ViewModifier {
+private struct OnChangeWrapper<T: Equatable>: ViewModifier {
     
     let value: T
     

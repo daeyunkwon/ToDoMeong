@@ -10,6 +10,8 @@ import SwiftUI
 struct ThemeSettingDetailView: View {
     
     @AppStorage("themeMode") var themeMode: String = ThemeMode.system.rawValue
+    @EnvironmentObject private var tabViewManager: TabViewManager
+    
     
     var body: some View {
         VStack(spacing: 10) {
@@ -31,6 +33,15 @@ struct ThemeSettingDetailView: View {
         .navigationTitle("화면 테마")
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(getPreferredColorScheme())
+        
+        .onWillAppear {
+            DispatchQueue.main.async {
+                self.tabViewManager.isTabViewHidden = true
+            }
+        }
+        .onWillDisappear {
+            tabViewManager.isTabViewHidden = false
+        }
     }
     
     private func getPreferredColorScheme() -> ColorScheme? {
