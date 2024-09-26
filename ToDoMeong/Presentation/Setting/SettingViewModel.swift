@@ -26,7 +26,7 @@ final class SettingViewModel: ViewModelType {
     
     struct Output {
         var settings: [Setting] = [
-            Setting(title: "화면 테마", type: .navigationLink),
+            Setting(title: "화면 테마", type: .navigationLink(detailType: .theme)),
             Setting(title: "문의하기", type: .button(detailType: .sendMail))
         ]
         

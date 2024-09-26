@@ -16,10 +16,10 @@ struct SettingView: View {
             
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    ForEach(viewModel.output.settings, id: \.self) { item in
+                    ForEach(viewModel.output.settings, id: \.id) { item in
                         switch item.type {
-                        case .navigationLink:
-                            navigationLinkButtonRowView(item: item, destinationView: ThemeSettingDetailView())
+                        case .navigationLink(let detailType):
+                            navigationLinkButtonRowView(item: item)
                         case .toggle:
                             EmptyView()
                         case .button:
@@ -56,9 +56,20 @@ struct SettingView: View {
         .tint(Color(uiColor: .label))
     }
     
-    private func navigationLinkButtonRowView(item: Setting, destinationView: some View) -> some View {
+    private func navigationLinkButtonRowView(item: Setting) -> some View {
         NavigationLink {
-            NavigationLazyView(build: destinationView)
+            switch item.type {
+            case .navigationLink(let detailType):
+                switch detailType {
+                
+                case .theme:
+                    NavigationLazyView(build: ThemeSettingDetailView())
+                    
+                    
+                }
+            default:
+                EmptyView()
+            }
         } label: {
             ZStack {
                 Rectangle()
@@ -67,7 +78,7 @@ struct SettingView: View {
                     .cornerRadius(0)
                 HStack {
                     Text(item.title)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.system(size: 15, weight: .medium))
                         .padding(.leading, 15)
                     Spacer()
                     Image(systemName: "chevron.forward")
@@ -83,7 +94,7 @@ struct SettingView: View {
     private func toggleButtonRowView(isOn: Binding<Bool>) -> some View {
         Toggle(isOn: isOn, label: {
             Text("Label")
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 15, weight: .medium))
         })
         .padding(.trailing, 5)
         .frame(height: 55)
@@ -109,7 +120,7 @@ struct SettingView: View {
                 .overlay {
                     HStack {
                         Text(item.title)
-                            .font(.system(size: 14, weight: .medium))
+                            .font(.system(size: 15, weight: .medium))
                             .padding(.leading, 15)
                         Spacer()
                         Text("")
