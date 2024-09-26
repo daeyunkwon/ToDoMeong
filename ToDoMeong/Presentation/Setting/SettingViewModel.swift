@@ -21,14 +21,16 @@ final class SettingViewModel: ViewModelType {
     @Published var output = Output()
     
     struct Input {
-        let changeThemeMode = PassthroughSubject<ThemeMode, Never>()
+        let isShowMailView = PassthroughSubject<Bool, Never>()
     }
     
     struct Output {
         var settings: [Setting] = [
-            Setting(title: "화면 테마", type: .navigationLink)
+            Setting(title: "화면 테마", type: .navigationLink),
+            Setting(title: "문의하기", type: .button(detailType: .sendMail))
         ]
-        var themeMode: ColorScheme? = UserDefaultsManager.shared.themeMode == ThemeMode.dark.rawValue ? .dark : UserDefaultsManager.shared.themeMode == ThemeMode.light.rawValue ? .light : nil
+        
+        var showMailView = false
     }
     
     init() {
@@ -37,37 +39,26 @@ final class SettingViewModel: ViewModelType {
     
     func transform() {
         
-        input.changeThemeMode
-            .sink { [weak self] themeMode in
+        input.isShowMailView
+            .sink { [weak self] value in
                 guard let self else { return }
-                
-                switch themeMode {
-                case .system:
-                    UserDefaultsManager.shared.themeMode = ThemeMode.system.rawValue
-                    output.themeMode = .none
-                case .light:
-                    UserDefaultsManager.shared.themeMode = ThemeMode.light.rawValue
-                    output.themeMode = .light
-                case .dark:
-                    UserDefaultsManager.shared.themeMode = ThemeMode.dark.rawValue
-                    output.themeMode = .dark
-                }
+                self.output.showMailView = value
             }
             .store(in: &cancellables)
-        
         
     }
 }
 
 extension SettingViewModel {
+    
     enum Action {
-        case themeMode(setting: ThemeMode)
+        case showMailView(isShow: Bool)
     }
     
     func action(_ action: Action) {
         switch action {
-        case .themeMode(let setting):
-            input.changeThemeMode.send(setting)
+        case .showMailView(let isShow):
+            input.isShowMailView.send(isShow)
         }
     }
 }

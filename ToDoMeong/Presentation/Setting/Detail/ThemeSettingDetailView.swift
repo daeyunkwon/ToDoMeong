@@ -9,24 +9,19 @@ import SwiftUI
 
 struct ThemeSettingDetailView: View {
     
-    @StateObject var viewModel: SettingViewModel
     @AppStorage("themeMode") var themeMode: String = ThemeMode.system.rawValue
     
     var body: some View {
         VStack(spacing: 10) {
-            
             self.rowButton(title: "시스템 설정", option: nil) {
-                viewModel.action(.themeMode(setting: .system))
                 themeMode = ThemeMode.system.rawValue
             }
             
             self.rowButton(title: "다크 모드", option: .dark) {
-                viewModel.action(.themeMode(setting: .dark))
                 themeMode = ThemeMode.dark.rawValue
             }
             
             self.rowButton(title: "라이트 모드", option: .light) {
-                viewModel.action(.themeMode(setting: .light))
                 themeMode = ThemeMode.light.rawValue
             }
             
@@ -35,7 +30,18 @@ struct ThemeSettingDetailView: View {
         .padding()
         .navigationTitle("화면 테마")
         .navigationBarTitleDisplayMode(.inline)
-        .preferredColorScheme(viewModel.output.themeMode)
+        .preferredColorScheme(getPreferredColorScheme())
+    }
+    
+    private func getPreferredColorScheme() -> ColorScheme? {
+        switch themeMode {
+        case ThemeMode.dark.rawValue:
+            return .dark
+        case ThemeMode.light.rawValue:
+            return .light
+        default:
+            return nil
+        }
     }
     
     private func rowButton(title: String, option: ColorScheme?, action: @escaping () -> Void) -> some View {
@@ -51,7 +57,7 @@ struct ThemeSettingDetailView: View {
                         Text(title)
                             .font(.system(size: 14, weight: .medium))
                         Spacer()
-                        if viewModel.output.themeMode == option {
+                        if getPreferredColorScheme() == option {
                             Image(systemName: "checkmark")
                         }
                     }
@@ -65,5 +71,5 @@ struct ThemeSettingDetailView: View {
 }
 
 #Preview {
-    ThemeSettingDetailView(viewModel: SettingViewModel())
+    ThemeSettingDetailView()
 }

@@ -155,7 +155,6 @@ struct TodoView: View {
             }
         }
         
-        .preferredColorScheme(UserDefaultsManager.shared.themeMode == ThemeMode.dark.rawValue ? .dark : UserDefaultsManager.shared.themeMode == ThemeMode.light.rawValue ? .light : .light)
         
         .onAppear {
             viewModel.action(.onAppear)

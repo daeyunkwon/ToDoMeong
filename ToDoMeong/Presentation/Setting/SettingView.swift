@@ -19,11 +19,11 @@ struct SettingView: View {
                     ForEach(viewModel.output.settings, id: \.self) { item in
                         switch item.type {
                         case .navigationLink:
-                            navigationLinkButtonRowView(item: item, destinationView: ThemeSettingDetailView(viewModel: viewModel))
+                            navigationLinkButtonRowView(item: item, destinationView: ThemeSettingDetailView())
                         case .toggle:
                             EmptyView()
                         case .button:
-                            EmptyView()
+                            buttonRowView(item: item)
                         }
                     }
                 }
@@ -32,6 +32,15 @@ struct SettingView: View {
             .background(Color(uiColor: .systemGray6))
             .safeAreaInset(edge: .bottom, content: {
                 Color.clear.frame(height: 80)
+            })
+            
+            .sheet(isPresented: $viewModel.output.showMailView, content: {
+                MailView(isShowing: Binding(get: {
+                    viewModel.output.showMailView
+                }, set: { newValue in
+                    viewModel.action(.showMailView(isShow: newValue))
+                }))
+                .tint(.blue)
             })
             
             .toolbar {
@@ -44,7 +53,6 @@ struct SettingView: View {
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
         }
-        .preferredColorScheme(viewModel.output.themeMode)
         .tint(Color(uiColor: .label))
     }
     
@@ -75,15 +83,24 @@ struct SettingView: View {
     private func toggleButtonRowView(isOn: Binding<Bool>) -> some View {
         Toggle(isOn: isOn, label: {
             Text("Label")
+                .font(.system(size: 14, weight: .medium))
         })
         .padding(.trailing, 5)
         .frame(height: 55)
         .background()
     }
     
-    private func buttonRowView(action: @escaping () -> Void) -> some View {
+    private func buttonRowView(item: Setting) -> some View {
         Button {
-            action()
+            switch item.type {
+            case .button(let detailType):
+                switch detailType {
+                case .sendMail:
+                    viewModel.action(.showMailView(isShow: true))
+                }
+                
+            default: break
+            }
         } label: {
             Rectangle()
                 .frame(height: 55)
@@ -91,10 +108,12 @@ struct SettingView: View {
                 .cornerRadius(0)
                 .overlay {
                     HStack {
-                        Text("text")
-                            .font(.headline)
+                        Text(item.title)
+                            .font(.system(size: 14, weight: .medium))
+                            .padding(.leading, 15)
                         Spacer()
-                        Text("test")
+                        Text("")
+                            .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(Color(uiColor: .systemGray))
                     }
                     .padding(.trailing, 15)

@@ -24,7 +24,7 @@ struct ToDoMeongApp: App {
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "DEBUG: Realm Not Found")
     }
     
-    func getPreferredColorScheme() -> ColorScheme? {
+    private func getPreferredColorScheme() -> ColorScheme? {
         switch themeMode {
         case ThemeMode.dark.rawValue:
             return .dark

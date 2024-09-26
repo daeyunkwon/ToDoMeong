@@ -7,10 +7,14 @@
 
 import Foundation
 
-enum SettingButtonType {
+enum SettingButtonType: Equatable, Hashable {
     case navigationLink
     case toggle
-    case button
+    case button(detailType: SettingButtonDetailType)
+}
+
+enum SettingButtonDetailType: Equatable, Hashable {
+    case sendMail
 }
 
 struct Setting: Hashable, Identifiable {

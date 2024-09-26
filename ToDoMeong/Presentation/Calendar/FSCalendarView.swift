@@ -10,6 +10,21 @@ import FSCalendar
 
 struct FSCalendarView: UIViewRepresentable {
     
+    @Binding var selectedDate: Date
+    @Binding var currentPageDate: Date
+    @Binding var moveToday: Bool
+    @Binding var isImageUpdate: Bool
+    @Binding var movePreviousMonth: Bool
+    @Binding var moveNextMonth: Bool
+    
+    private enum UpdateType {
+        case moveToday
+        case isImageUpdate
+        case movePreviousMonth
+        case moveNextMonth
+        case none
+    }
+    
     class Coordinator: NSObject, FSCalendarDelegate, FSCalendarDataSource, FSCalendarDelegateAppearance {
         var parent: FSCalendarView
         
@@ -95,26 +110,7 @@ struct FSCalendarView: UIViewRepresentable {
             
             return scaledImage?.withRenderingMode(.automatic)
         }
-        
-        
-        
     }
-    
-    @Binding var selectedDate: Date
-    @Binding var currentPageDate: Date
-    @Binding var moveToday: Bool
-    @Binding var isImageUpdate: Bool
-    @Binding var movePreviousMonth: Bool
-    @Binding var moveNextMonth: Bool
-    
-    private enum UpdateType {
-        case moveToday
-        case isImageUpdate
-        case movePreviousMonth
-        case moveNextMonth
-        case none
-    }
-    
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)

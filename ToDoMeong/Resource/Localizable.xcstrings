@@ -444,12 +444,6 @@
         }
       }
     },
-    "test" : {
-
-    },
-    "text" : {
-
-    },
     "textFieldPlaceholder" : {
       "extractionState" : "manual",
       "localizations" : {
