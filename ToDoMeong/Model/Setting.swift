@@ -15,6 +15,7 @@ enum SettingButtonType: Equatable, Hashable {
 
 enum SettingNavigationLinkDetailType : Equatable, Hashable {
     case theme
+    case license
 }
 
 enum SettingButtonDetailType: Equatable, Hashable {

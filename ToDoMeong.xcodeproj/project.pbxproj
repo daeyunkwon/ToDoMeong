@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		440C30F62CA6A8080083DFF2 /* LicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30F52CA6A8080083DFF2 /* LicenseView.swift */; };
+		440C30F82CA6ABD70083DFF2 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30F72CA6ABD70083DFF2 /* License.swift */; };
+		440C30FB2CA6B4580083DFF2 /* MITLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30FA2CA6B4580083DFF2 /* MITLicenseView.swift */; };
+		440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */; };
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
@@ -74,6 +78,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		440C30F52CA6A8080083DFF2 /* LicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseView.swift; sourceTree = "<group>"; };
+		440C30F72CA6ABD70083DFF2 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		440C30FA2CA6B4580083DFF2 /* MITLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MITLicenseView.swift; sourceTree = "<group>"; };
+		440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApacheLicenseView.swift; sourceTree = "<group>"; };
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
@@ -138,6 +146,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		440C30F92CA6AC650083DFF2 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				440C30F52CA6A8080083DFF2 /* LicenseView.swift */,
+				440C30FA2CA6B4580083DFF2 /* MITLicenseView.swift */,
+				440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
 		44895FFD2C9C731100410DA7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,17 +172,18 @@
 				44AE6AD62CA422BA00087907 /* SettingViewModel.swift */,
 				448960232CA1B7E700410DA7 /* SettingView.swift */,
 				44AE6AE12CA4709900087907 /* MailView.swift */,
-				44AE6AE02CA45AEA00087907 /* Detail */,
+				44AE6AE02CA45AEA00087907 /* ThemeSetting */,
+				440C30F92CA6AC650083DFF2 /* License */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
 		};
-		44AE6AE02CA45AEA00087907 /* Detail */ = {
+		44AE6AE02CA45AEA00087907 /* ThemeSetting */ = {
 			isa = PBXGroup;
 			children = (
 				44AE6ADE2CA45A9E00087907 /* ThemeSettingDetailView.swift */,
 			);
-			path = Detail;
+			path = ThemeSetting;
 			sourceTree = "<group>";
 		};
 		44ED3ABA2C92E3F200E3E9CF = {
@@ -328,6 +347,7 @@
 			children = (
 				44ED3B0A2C98039800E3E9CF /* Todo.swift */,
 				44AE6AD82CA4262900087907 /* Setting.swift */,
+				440C30F72CA6ABD70083DFF2 /* License.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -450,6 +470,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */,
+				440C30FB2CA6B4580083DFF2 /* MITLicenseView.swift in Sources */,
 				44AE6AD72CA422BA00087907 /* SettingViewModel.swift in Sources */,
 				44ED3B1B2C987FCB00E3E9CF /* AddEditFailToastView.swift in Sources */,
 				448960062CA00A0500410DA7 /* CalendarTodoViewModel.swift in Sources */,
@@ -464,6 +485,7 @@
 				44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
+				440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44A02E792CA5AFE7003EE911 /* UIViewLifeCycleHandler.swift in Sources */,
 				44AE6ADF2CA45A9E00087907 /* ThemeSettingDetailView.swift in Sources */,
@@ -474,7 +496,9 @@
 				44ED3B172C986D7000E3E9CF /* TodoViewModel.swift in Sources */,
 				44ED3B242C9C16B300E3E9CF /* PhotoPicker.swift in Sources */,
 				44A02E732CA59FFB003EE911 /* TabViewManager.swift in Sources */,
+				440C30F62CA6A8080083DFF2 /* LicenseView.swift in Sources */,
 				44ED3B0D2C9812C000E3E9CF /* DogMessageBubbleView.swift in Sources */,
+				440C30F82CA6ABD70083DFF2 /* License.swift in Sources */,
 				44ED3B102C9823E400E3E9CF /* OnChangeWrapper.swift in Sources */,
 				44ED3AFF2C973E2B00E3E9CF /* UIApplication+Extension.swift in Sources */,
 				44A02E752CA5AF21003EE911 /* WillAppearModifier.swift in Sources */,

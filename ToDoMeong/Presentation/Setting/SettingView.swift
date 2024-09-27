@@ -63,6 +63,8 @@ struct SettingView: View {
                 switch detailType {
                 case .theme:
                     NavigationLazyView(build: ThemeSettingDetailView())
+                case .license:
+                    NavigationLazyView(build: LicenseView())
                 }
             default:
                 EmptyView()
