@@ -26,10 +26,10 @@ final class SettingViewModel: ViewModelType {
     
     struct Output {
         var settings: [Setting] = [
-            Setting(title: "화면 테마", type: .navigationLink(detailType: .theme)),
-            Setting(title: "문의하기", type: .button(detailType: .sendMail)),
-            Setting(title: "오픈소스 라이선스", type: .navigationLink(detailType: .license)),
-            Setting(title: "앱 버전", type: .button(detailType: .appVersion))
+            Setting(title: "displayTheme", type: .navigationLink(detailType: .theme)),
+            Setting(title: "contactUs", type: .button(detailType: .sendMail)),
+            Setting(title: "openSourceLicense", type: .navigationLink(detailType: .license)),
+            Setting(title: "appVersion", type: .button(detailType: .appVersion))
         ]
         
         var showMailView = false

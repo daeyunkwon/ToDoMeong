@@ -15,22 +15,22 @@ struct ThemeSettingDetailView: View {
     
     var body: some View {
         VStack(spacing: 10) {
-            self.rowButton(title: "시스템 설정", option: nil) {
+            self.rowButton(title: "systemSettings".localized(), option: nil) {
                 themeMode = ThemeMode.system.rawValue
             }
             
-            self.rowButton(title: "다크 모드", option: .dark) {
+            self.rowButton(title: "darkMode".localized(), option: .dark) {
                 themeMode = ThemeMode.dark.rawValue
             }
             
-            self.rowButton(title: "라이트 모드", option: .light) {
+            self.rowButton(title: "lightMode".localized(), option: .light) {
                 themeMode = ThemeMode.light.rawValue
             }
             
             Spacer()
         }
         .padding()
-        .navigationTitle("화면 테마")
+        .navigationTitle("displayTheme".localized())
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(getPreferredColorScheme())
         

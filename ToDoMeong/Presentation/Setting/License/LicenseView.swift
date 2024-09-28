@@ -27,7 +27,7 @@ struct LicenseView: View {
             }
         }
         
-        .navigationTitle("오픈소스 라이선스")
+        .navigationTitle("openSourceLicense".localized())
         .navigationBarTitleDisplayMode(.inline)
         
         .onAppear {

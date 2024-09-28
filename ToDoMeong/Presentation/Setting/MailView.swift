@@ -36,7 +36,7 @@ struct MailView: UIViewControllerRepresentable {
             let vc = MFMailComposeViewController()
             vc.mailComposeDelegate = context.coordinator
             vc.setToRecipients(["sweet_ray@naver.com"])
-            vc.setSubject("투두멍 문의하기")
+            vc.setSubject("contactToDoMeong".localized())
             return vc
         } else {
             return UIViewController()

@@ -16,7 +16,7 @@ struct CustomTabView: View {
         ("checklist", "todo".localized()),
         ("calendar", "calendarTitle".localized()),
 //        ("chart.pie", "차트"),
-        ("gearshape", "설정")
+        ("gearshape", "setting".localized())
     ]
     
     var body: some View {

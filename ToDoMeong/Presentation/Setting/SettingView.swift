@@ -45,7 +45,7 @@ struct SettingView: View {
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    Text("설정")
+                    Text("setting".localized())
                         .font(Constant.AppFont.jalnanTopLeading)
                         .padding(.top, 15)
                 }
@@ -76,8 +76,8 @@ struct SettingView: View {
                     .foregroundStyle(Color(uiColor: .systemBackground))
                     .cornerRadius(0)
                 HStack {
-                    Text(item.title)
-                        .font(.system(size: 15, weight: .medium))
+                    Text(item.title.localized())
+                        .font(.system(size: 16, weight: .medium))
                         .padding(.leading, 15)
                     Spacer()
                     Image(systemName: "chevron.forward")
@@ -93,7 +93,7 @@ struct SettingView: View {
     private func toggleButtonRowView(isOn: Binding<Bool>) -> some View {
         Toggle(isOn: isOn, label: {
             Text("Label")
-                .font(.system(size: 15, weight: .medium))
+                .font(.system(size: 16, weight: .medium))
         })
         .padding(.trailing, 5)
         .frame(height: 55)
@@ -134,12 +134,12 @@ struct SettingView: View {
                 .cornerRadius(0)
                 .overlay {
                     HStack {
-                        Text(item.title)
-                            .font(.system(size: 15, weight: .medium))
+                        Text(item.title.localized())
+                            .font(.system(size: 16, weight: .medium))
                             .padding(.leading, 15)
                         Spacer()
                         Text(rightTitle)
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.system(size: 14, weight: .medium))
                             .foregroundStyle(Color(uiColor: .systemGray))
                     }
                     .padding(.trailing, 15)
