@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  ToDoMeong
+
+  Created by 권대윤 on 9/28/24.
+  
+*/
+
+CFBundleDisplayName = "ToDoMeong";
