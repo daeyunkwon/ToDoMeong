@@ -37,10 +37,36 @@ struct MailView: UIViewControllerRepresentable {
             vc.mailComposeDelegate = context.coordinator
             vc.setToRecipients(["sweet_ray@naver.com"])
             vc.setSubject("contactToDoMeong".localized())
+            
+            // 기기 정보 및 OS 버전
+            let deviceInfo = """
+                        Device: \(getDeviceModel())
+                        OS Version: \(UIDevice.current.systemVersion)
+                        """
+            
+            // 메일 본문 설정
+            vc.setMessageBody("""
+            \(deviceInfo)
+            -------------------
+            
+            \("contactUs".localized()):
+            """, isHTML: false)
+            
             return vc
         } else {
             return UIViewController()
         }
+    }
+    
+    private func getDeviceModel() -> String {
+        var systemInfo = utsname()
+        uname(&systemInfo)
+        let modelCode = withUnsafePointer(to: &systemInfo.machine) {
+            $0.withMemoryRebound(to: CChar.self, capacity: 1) {
+                String(validatingUTF8: $0)
+            }
+        }
+        return modelCode ?? "unknown"
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
