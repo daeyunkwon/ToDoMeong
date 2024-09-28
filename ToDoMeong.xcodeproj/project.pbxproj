@@ -12,6 +12,7 @@
 		440C30FB2CA6B4580083DFF2 /* MITLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30FA2CA6B4580083DFF2 /* MITLicenseView.swift */; };
 		440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */; };
 		440C31002CA7F7E80083DFF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 440C30FE2CA7F7E80083DFF2 /* InfoPlist.strings */; };
+		440C31042CA882690083DFF2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440C31032CA882690083DFF2 /* Launch Screen.storyboard */; };
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
@@ -86,6 +87,7 @@
 		440C30FF2CA7F7E80083DFF2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		440C31012CA7F7F80083DFF2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		440C31022CA7F7F90083DFF2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		440C31032CA882690083DFF2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */,
 				44ED3ACC2C92E3F300E3E9CF /* Preview Content */,
 				440C30FE2CA7F7E80083DFF2 /* InfoPlist.strings */,
+				440C31032CA882690083DFF2 /* Launch Screen.storyboard */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				44ED3AE32C92EF1900E3E9CF /* Jalnan2TTF.ttf in Resources */,
 				44ED3AEE2C9435D300E3E9CF /* TmoneyRoundWindExtraBold.otf in Resources */,
 				440C31002CA7F7E80083DFF2 /* InfoPlist.strings in Resources */,
+				440C31042CA882690083DFF2 /* Launch Screen.storyboard in Resources */,
 				44ED3AED2C9435D300E3E9CF /* TmoneyRoundWindRegular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -670,7 +674,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeong;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -706,7 +710,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeong;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

@@ -147,6 +147,7 @@ struct SettingView: View {
         }
         .buttonStyle(DefaultButtonStyle())
         .tint(Color(uiColor: .label))
+        .accentColor(Color(uiColor: .label))
     }
     
     
