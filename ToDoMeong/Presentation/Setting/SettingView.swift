@@ -54,6 +54,7 @@ struct SettingView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .tint(Color(uiColor: .label))
+        .accentColor(Color(uiColor: .label))
     }
     
     private func navigationLinkButtonRowView(item: Setting) -> some View {
@@ -147,7 +148,6 @@ struct SettingView: View {
         }
         .buttonStyle(DefaultButtonStyle())
         .tint(Color(uiColor: .label))
-        .accentColor(Color(uiColor: .label))
     }
     
     
