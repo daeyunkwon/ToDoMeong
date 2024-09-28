@@ -23,7 +23,7 @@ struct ToDoMeongApp: App {
     
     init() {
         
-        Thread.sleep(forTimeInterval: 1) //런치스크린 딜레이 주기
+        Thread.sleep(forTimeInterval: 0.65) //런치스크린 딜레이 주기
             
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "DEBUG: Realm Not Found")
     }
