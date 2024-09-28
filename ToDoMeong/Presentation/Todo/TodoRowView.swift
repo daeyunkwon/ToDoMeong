@@ -46,6 +46,7 @@ struct TodoRowView: View {
                         .padding(.vertical, 15)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .multilineTextAlignment(.leading)
+                        .foregroundStyle(todo.done == true ? Color(uiColor: .lightGray) : Color(uiColor: .label))
                 })
                 .tint(Color(uiColor: UIColor.label))
                     
