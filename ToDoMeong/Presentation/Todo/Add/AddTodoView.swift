@@ -27,52 +27,9 @@ struct AddTodoView: View {
             Text("addNewTodo".localized())
                 .font(.headline)
             
-            ZStack(alignment: .trailing) {
-                TextField("textFieldPlaceholder", text: Binding(get: {
-                    viewModel.output.text
-                }, set: { newValue in
-                    viewModel.input.text.send(newValue)
-                }))
-                .font(.system(size: 14))
-                .padding()
-                .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
-                .frame(maxWidth: .infinity)
-                .frame(height: 50)
-                .background(Color(uiColor: .systemGray6))
-                .clipShape(.rect(cornerRadius: 15))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 15)
-                        .stroke(Color.clear, lineWidth: 2)
-                )
-                .padding(.horizontal, 15)
-                
-                if !viewModel.output.text.isEmpty {
-                    Button(action: {
-                        viewModel.input.text.send("")
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .foregroundColor(.gray)
-                            .padding(.trailing, 20)
-                    }
-                }
-            }
-            .padding(.top, 15)
+            self.textFieldView()
             
-            Button(action: {
-                viewModel.input.addButtonTapped.send(())
-            }, label: {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 15)
-                        .frame(height: 50)
-                        .foregroundStyle(.brandGreen)
-                    Text("add".localized())
-                        .font(Constant.AppFont.tmoneyRoundWindExtraBold15)
-                        .foregroundStyle(.white)
-                }
-            })
-            .padding(.horizontal, 15)
-            .buttonStyle(PlainButtonStyle())
-            .disabled(isAddButtonDisabled())
+            self.addButtonView()
         }
         .padding()
         .background {
@@ -105,6 +62,57 @@ struct AddTodoView: View {
     }
     
     //MARK: - Methods
+    
+    private func textFieldView() -> some View {
+        ZStack(alignment: .trailing) {
+            TextField("textFieldPlaceholder", text: Binding(get: {
+                viewModel.output.text
+            }, set: { newValue in
+                viewModel.input.text.send(newValue)
+            }))
+            .font(.system(size: 14))
+            .padding()
+            .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
+            .frame(maxWidth: .infinity)
+            .frame(height: 50)
+            .background(Color(uiColor: .systemGray6))
+            .clipShape(.rect(cornerRadius: 15))
+            .overlay(
+                RoundedRectangle(cornerRadius: 15)
+                    .stroke(Color.clear, lineWidth: 2)
+            )
+            .padding(.horizontal, 15)
+            
+            if !viewModel.output.text.isEmpty {
+                Button(action: {
+                    viewModel.input.text.send("")
+                }) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.gray)
+                        .padding(.trailing, 20)
+                }
+            }
+        }
+        .padding(.top, 15)
+    }
+    
+    private func addButtonView() -> some View {
+        Button(action: {
+            viewModel.input.addButtonTapped.send(())
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 15)
+                    .frame(height: 50)
+                    .foregroundStyle(.brandGreen)
+                Text("add".localized())
+                    .font(Constant.AppFont.tmoneyRoundWindExtraBold15)
+                    .foregroundStyle(.white)
+            }
+        })
+        .padding(.horizontal, 15)
+        .buttonStyle(PlainButtonStyle())
+        .disabled(isAddButtonDisabled())
+    }
     
     private func isAddButtonDisabled() -> Bool {
         if !viewModel.output.text.trimmingCharacters(in: .whitespaces).isEmpty {
