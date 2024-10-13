@@ -211,7 +211,7 @@ final class CalendarTodoViewModel: ViewModelType {
             case .update(_, _, _, _):
                 // 데이터 업데이트
                 print("DEBUG: Realm 데이터 변화 감지됨")
-                self.todoList = self.repository.fetchAllTodo()
+                self.todoList = Array(todos)
                 self.input.selectedDate.send(self.selectedDate)
                 self.output.isImageUpdate = true
             
