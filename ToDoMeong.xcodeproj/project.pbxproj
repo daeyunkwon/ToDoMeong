@@ -13,6 +13,13 @@
 		440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */; };
 		440C31002CA7F7E80083DFF2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 440C30FE2CA7F7E80083DFF2 /* InfoPlist.strings */; };
 		440C31042CA882690083DFF2 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 440C31032CA882690083DFF2 /* Launch Screen.storyboard */; };
+		444DE6372CC63B3C00821269 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444DE6362CC63B3C00821269 /* WidgetKit.framework */; };
+		444DE6392CC63B3C00821269 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 444DE6382CC63B3C00821269 /* SwiftUI.framework */; };
+		444DE63C2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444DE63B2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift */; };
+		444DE63E2CC63B3C00821269 /* ToDoMeongBasicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444DE63D2CC63B3C00821269 /* ToDoMeongBasicWidget.swift */; };
+		444DE6402CC63B3D00821269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444DE63F2CC63B3D00821269 /* Assets.xcassets */; };
+		444DE6442CC63B3D00821269 /* ToDoMeongBasicWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		444DE64F2CC6405A00821269 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 448960272CA2EACF00410DA7 /* Localizable.xcstrings */; };
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
@@ -65,7 +72,28 @@
 		44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3B252C9C225400E3E9CF /* ImageFileManager.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		444DE6422CC63B3D00821269 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 44ED3ABB2C92E3F200E3E9CF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 444DE6332CC63B3C00821269;
+			remoteInfo = ToDoMeongBasicWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
+		444DE6452CC63B3D00821269 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				444DE6442CC63B3D00821269 /* ToDoMeongBasicWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44ED3B072C97F8B500E3E9CF /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -88,6 +116,15 @@
 		440C31012CA7F7F80083DFF2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		440C31022CA7F7F90083DFF2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		440C31032CA882690083DFF2 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ToDoMeongBasicWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		444DE6362CC63B3C00821269 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		444DE6382CC63B3C00821269 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		444DE63B2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongBasicWidgetBundle.swift; sourceTree = "<group>"; };
+		444DE63D2CC63B3C00821269 /* ToDoMeongBasicWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoMeongBasicWidget.swift; sourceTree = "<group>"; };
+		444DE63F2CC63B3D00821269 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		444DE6412CC63B3D00821269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		444DE6492CC63B9F00821269 /* ToDoMeong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoMeong.entitlements; sourceTree = "<group>"; };
+		444DE64A2CC63BB700821269 /* ToDoMeongBasicWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoMeongBasicWidgetExtension.entitlements; sourceTree = "<group>"; };
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
@@ -139,6 +176,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		444DE6312CC63B3C00821269 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444DE6392CC63B3C00821269 /* SwiftUI.framework in Frameworks */,
+				444DE6372CC63B3C00821269 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44ED3AC02C92E3F200E3E9CF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,6 +206,26 @@
 				440C30FC2CA6BAF40083DFF2 /* ApacheLicenseView.swift */,
 			);
 			path = License;
+			sourceTree = "<group>";
+		};
+		444DE6352CC63B3C00821269 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				444DE6362CC63B3C00821269 /* WidgetKit.framework */,
+				444DE6382CC63B3C00821269 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		444DE63A2CC63B3C00821269 /* ToDoMeongBasicWidget */ = {
+			isa = PBXGroup;
+			children = (
+				444DE63B2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift */,
+				444DE63D2CC63B3C00821269 /* ToDoMeongBasicWidget.swift */,
+				444DE63F2CC63B3D00821269 /* Assets.xcassets */,
+				444DE6412CC63B3D00821269 /* Info.plist */,
+			);
+			path = ToDoMeongBasicWidget;
 			sourceTree = "<group>";
 		};
 		44895FFD2C9C731100410DA7 /* Calendar */ = {
@@ -195,8 +261,11 @@
 		44ED3ABA2C92E3F200E3E9CF = {
 			isa = PBXGroup;
 			children = (
+				444DE64A2CC63BB700821269 /* ToDoMeongBasicWidgetExtension.entitlements */,
 				44ED3AD72C92E45600E3E9CF /* .gitignore */,
 				44ED3AC52C92E3F200E3E9CF /* ToDoMeong */,
+				444DE63A2CC63B3C00821269 /* ToDoMeongBasicWidget */,
+				444DE6352CC63B3C00821269 /* Frameworks */,
 				44ED3AC42C92E3F200E3E9CF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -205,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED3AC32C92E3F200E3E9CF /* ToDoMeong.app */,
+				444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -212,6 +282,7 @@
 		44ED3AC52C92E3F200E3E9CF /* ToDoMeong */ = {
 			isa = PBXGroup;
 			children = (
+				444DE6492CC63B9F00821269 /* ToDoMeong.entitlements */,
 				44ED3AD62C92E41000E3E9CF /* Application */,
 				44ED3ADA2C92E4C100E3E9CF /* Common */,
 				44ED3B002C97F70D00E3E9CF /* Service */,
@@ -391,6 +462,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		444DE6332CC63B3C00821269 /* ToDoMeongBasicWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 444DE6482CC63B3D00821269 /* Build configuration list for PBXNativeTarget "ToDoMeongBasicWidgetExtension" */;
+			buildPhases = (
+				444DE6302CC63B3C00821269 /* Sources */,
+				444DE6312CC63B3C00821269 /* Frameworks */,
+				444DE6322CC63B3C00821269 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ToDoMeongBasicWidgetExtension;
+			productName = ToDoMeongBasicWidgetExtension;
+			productReference = 444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		44ED3AC22C92E3F200E3E9CF /* ToDoMeong */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 44ED3AD12C92E3F300E3E9CF /* Build configuration list for PBXNativeTarget "ToDoMeong" */;
@@ -399,10 +487,12 @@
 				44ED3AC02C92E3F200E3E9CF /* Frameworks */,
 				44ED3AC12C92E3F200E3E9CF /* Resources */,
 				44ED3B072C97F8B500E3E9CF /* Embed Frameworks */,
+				444DE6452CC63B3D00821269 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				444DE6432CC63B3D00821269 /* PBXTargetDependency */,
 			);
 			name = ToDoMeong;
 			packageProductDependencies = (
@@ -424,6 +514,9 @@
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					444DE6332CC63B3C00821269 = {
+						CreatedOnToolsVersion = 15.3;
+					};
 					44ED3AC22C92E3F200E3E9CF = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -450,11 +543,21 @@
 			projectRoot = "";
 			targets = (
 				44ED3AC22C92E3F200E3E9CF /* ToDoMeong */,
+				444DE6332CC63B3C00821269 /* ToDoMeongBasicWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		444DE6322CC63B3C00821269 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444DE6402CC63B3D00821269 /* Assets.xcassets in Resources */,
+				444DE64F2CC6405A00821269 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44ED3AC12C92E3F200E3E9CF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -475,6 +578,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		444DE6302CC63B3C00821269 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				444DE63C2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift in Sources */,
+				444DE63E2CC63B3C00821269 /* ToDoMeongBasicWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		44ED3ABF2C92E3F200E3E9CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -526,6 +638,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		444DE6432CC63B3D00821269 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 444DE6332CC63B3C00821269 /* ToDoMeongBasicWidgetExtension */;
+			targetProxy = 444DE6422CC63B3D00821269 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		440C30FE2CA7F7E80083DFF2 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -540,6 +660,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		444DE6462CC63B3D00821269 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ToDoMeongBasicWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9M37U587ZT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoMeongBasicWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeongBasicWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		444DE6472CC63B3D00821269 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ToDoMeongBasicWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9M37U587ZT;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ToDoMeongBasicWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeongBasicWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		44ED3ACF2C92E3F300E3E9CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -662,8 +848,10 @@
 		44ED3AD22C92E3F300E3E9CF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToDoMeong/ToDoMeong.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
@@ -698,8 +886,10 @@
 		44ED3AD32C92E3F300E3E9CF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ToDoMeong/ToDoMeong.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
@@ -734,6 +924,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		444DE6482CC63B3D00821269 /* Build configuration list for PBXNativeTarget "ToDoMeongBasicWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				444DE6462CC63B3D00821269 /* Debug */,
+				444DE6472CC63B3D00821269 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		44ED3ABE2C92E3F200E3E9CF /* Build configuration list for PBXProject "ToDoMeong" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

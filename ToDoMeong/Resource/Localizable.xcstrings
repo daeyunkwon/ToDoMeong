@@ -17,6 +17,26 @@
         }
       }
     },
+    "%lld" : {
+
+    },
+    "0" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
     "add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -858,6 +878,9 @@
         }
       }
     },
+    "ToDoMeong Widget" : {
+
+    },
     "Version 2.0, January 2004" : {
       "localizations" : {
         "ja" : {
@@ -870,6 +893,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        }
+      }
+    },
+    "오늘의 할 일" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today's Tasks"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日のタスク"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘의 할 일"
           }
         }
       }
