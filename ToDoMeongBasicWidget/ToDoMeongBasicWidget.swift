@@ -10,11 +10,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+        SimpleEntry(date: Date(), count: 0)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+        let entry = SimpleEntry(date: Date(), count: 0)
         completion(entry)
     }
 
@@ -25,7 +25,8 @@ struct Provider: TimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
+            let count = UserDefaults.init(suiteName: "group.com.daeyunkwon.ToDoMeong")?.integer(forKey: "count") ?? 0
+            let entry = SimpleEntry(date: entryDate, count: count)
             entries.append(entry)
         }
 
@@ -36,7 +37,7 @@ struct Provider: TimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let count: Int
 }
 
 struct ToDoMeongBasicWidgetEntryView : View {
@@ -44,11 +45,17 @@ struct ToDoMeongBasicWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Text("Time:")
-            Text(entry.date, style: .time)
-
-            Text("Emoji:")
-            Text(entry.emoji)
+            HStack {
+                Text("오늘의 할 일")
+                    .font(.system(size: 15, weight: .bold))
+                Text("\(UserDefaults.init(suiteName: "group.com.daeyunkwon.ToDoMeong")?.integer(forKey: "count") ?? 0)")
+                    .font(.system(size: 18, weight: .heavy))
+                    .foregroundStyle(Color(uiColor: .systemOrange))
+            }
+            
+            Image("pawprint", bundle: nil)
+                .resizable()
+                .frame(width: 90, height: 90)
         }
     }
 }
@@ -67,14 +74,15 @@ struct ToDoMeongBasicWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("ToDoMeong Widget")
+        //.description("This is an example widget.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
-#Preview(as: .systemSmall) {
-    ToDoMeongBasicWidget()
-} timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
-}
+//#Preview(as: .systemSmall) {
+//    ToDoMeongBasicWidget()
+//} timeline: {
+//    SimpleEntry(date: .now, emoji: "😀")
+//    SimpleEntry(date: .now, emoji: "🤩")
+//}

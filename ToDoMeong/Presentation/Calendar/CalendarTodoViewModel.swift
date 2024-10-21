@@ -7,10 +7,12 @@
 
 import Foundation
 import Combine
+import WidgetKit
 import RealmSwift
 
 final class CalendarTodoViewModel: ViewModelType {
     
+    private let userDefaults = UserDefaults(suiteName: "group.com.daeyunkwon.ToDoMeong")
     private let repository = TodoRepository()
     private var notificationToken: NotificationToken?
     private var todoList: [Todo] = []
@@ -214,6 +216,11 @@ final class CalendarTodoViewModel: ViewModelType {
                 self.todoList = Array(todos)
                 self.input.selectedDate.send(self.selectedDate)
                 self.output.isImageUpdate = true
+                
+                //위젯 업데이트
+                let todayCount = repository.fetchTodayTodo().count
+                self.userDefaults?.set(todayCount, forKey: "count")
+                WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
             
             case .error(let error):
                 print(error.localizedDescription)

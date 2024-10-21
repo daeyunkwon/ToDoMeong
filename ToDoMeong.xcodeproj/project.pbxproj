@@ -19,6 +19,7 @@
 		444DE63E2CC63B3C00821269 /* ToDoMeongBasicWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444DE63D2CC63B3C00821269 /* ToDoMeongBasicWidget.swift */; };
 		444DE6402CC63B3D00821269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444DE63F2CC63B3D00821269 /* Assets.xcassets */; };
 		444DE6442CC63B3D00821269 /* ToDoMeongBasicWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		444DE64F2CC6405A00821269 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 448960272CA2EACF00410DA7 /* Localizable.xcstrings */; };
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
@@ -553,6 +554,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				444DE6402CC63B3D00821269 /* Assets.xcassets in Resources */,
+				444DE64F2CC6405A00821269 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
