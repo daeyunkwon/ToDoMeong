@@ -10,20 +10,17 @@ import PopupView
 import RealmSwift
 
 struct TodoView: View {
-    
     @StateObject private var viewModel = TodoViewModel()
     
     var body: some View {
-        
         NavigationStack {
             VStack(alignment: .leading) {
+                CapsuleDateView()
                 
-                self.capsuleDateView()
-                
-                self.todoScrollView()
+                TodoListView(viewModel: viewModel)
                 
                 .overlay(alignment: .bottomTrailing) {
-                    self.plusCircleButtonView()
+                    PlusCircleButtonView(viewModel: viewModel)
                     .offset(x: -10, y: -50)
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 2)
@@ -155,13 +152,20 @@ struct TodoView: View {
             }
         }
         
-        
         .onAppear {
             viewModel.action(.onAppear)
         }
     }
-    
-    private func capsuleDateView() -> some View {
+}
+
+#Preview {
+    TodoView()
+}
+
+//MARK: - 캡슐모양 오늘 날짜 뷰
+
+private struct CapsuleDateView: View {
+    var body: some View {
         UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
             .fill(.brandGreen)
             .frame(maxWidth: .infinity)
@@ -181,8 +185,18 @@ struct TodoView: View {
             .shadow(radius: 1.5)
             .padding(.top, 7)
     }
+}
+
+//MARK: - Todo 목록 뷰
+
+private struct TodoListView: View {
+    @ObservedObject private var viewModel: TodoViewModel
     
-    private func todoScrollView() -> some View {
+    fileprivate init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
         ScrollView {
             Spacer()
             LazyVStack {
@@ -213,8 +227,18 @@ struct TodoView: View {
             }
         }
     }
+}
+
+//MARK: - Todo 추가 버튼
+
+private struct PlusCircleButtonView: View {
+    @ObservedObject private var viewModel: TodoViewModel
     
-    private func plusCircleButtonView() -> some View {
+    fileprivate init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    var body: some View {
         Button(action: {
             viewModel.output.showAddTodoView = true
         }, label: {
@@ -233,8 +257,4 @@ struct TodoView: View {
                 .padding(.bottom, 15)
         })
     }
-}
-
-#Preview {
-    TodoView()
 }
