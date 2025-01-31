@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingView: View {
     
     @StateObject private var viewModel = SettingViewModel()
-    @EnvironmentObject private var tabViewManager: TabViewManager
     
     var body: some View {
         NavigationStack {

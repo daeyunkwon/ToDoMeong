@@ -185,16 +185,18 @@ struct TodoView: View {
     private func todoScrollView() -> some View {
         ScrollView {
             Spacer()
-            ForEach($viewModel.output.todoList, id: \.id) { $item in
-                if !item.isInvalidated {
-                    TodoRowView(todo: $item, onDone: {
-                        viewModel.action(.done(target: item))
-                    }, onDelete: {
-                        viewModel.action(.delete(target: item))
-                        
-                    }, onEdit: { content, imageData in
-                        viewModel.action(.edit(target: item, content: content, imageData: imageData))
-                    })
+            LazyVStack {
+                ForEach($viewModel.output.todoList, id: \.id) { $item in
+                    if !item.isInvalidated {
+                        TodoRowView(todo: $item, onDone: {
+                            viewModel.action(.done(target: item))
+                        }, onDelete: {
+                            viewModel.action(.delete(target: item))
+                            
+                        }, onEdit: { content, imageData in
+                            viewModel.action(.edit(target: item, content: content, imageData: imageData))
+                        })
+                    }
                 }
             }
         }
