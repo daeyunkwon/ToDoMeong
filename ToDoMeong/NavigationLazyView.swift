@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NavigationLazyView<T: View>: View {
     
-    let build: () -> T
+    private let build: () -> T
     
     init(build: @autoclosure @escaping () -> T) {
         self.build = build
