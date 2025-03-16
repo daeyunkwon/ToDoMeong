@@ -19,6 +19,8 @@ struct AddTodoView: View {
     @Binding var todoList: [Todo]
     
     @StateObject var viewModel: AddTodoViewModel
+    
+    @FocusState var focused: Bool
 
     //MARK: - Body
     
@@ -46,6 +48,10 @@ struct AddTodoView: View {
             UIApplication.shared.dismissKeyboard()
         }
         
+        .onAppear {
+            self.focused = true
+        }
+        
         .onReceive(viewModel.output.addTodoResult, perform: { result in
                 switch result {
                 case .success(let todo):
@@ -70,6 +76,7 @@ struct AddTodoView: View {
             }, set: { newValue in
                 viewModel.input.text.send(newValue)
             }))
+            .focused($focused)
             .font(.system(size: 14))
             .padding()
             .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
