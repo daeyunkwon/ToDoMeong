@@ -61,7 +61,8 @@ struct CalendarTodoView: View {
                 .frame(height: 300)
             
             ScrollView {
-                Text("")
+                Spacer()
+                    .frame(height: 14)
                 HStack {
                     Text(viewModel.output.selectedDate.dayOfTheWeekDateString)
                         .font(.system(size: 13, weight: .medium))
@@ -88,7 +89,7 @@ struct CalendarTodoView: View {
                     }
                 }
                 
-                Text("")
+                Spacer()
                     .frame(height: 100)
             }
             .frame(maxWidth: .infinity)

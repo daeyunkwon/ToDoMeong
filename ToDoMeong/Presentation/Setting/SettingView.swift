@@ -10,7 +10,6 @@ import SwiftUI
 struct SettingView: View {
     
     @StateObject private var viewModel = SettingViewModel()
-    @EnvironmentObject private var tabViewManager: TabViewManager
     
     var body: some View {
         NavigationStack {
@@ -109,7 +108,7 @@ struct SettingView: View {
         case .button(let detailType):
             switch detailType {
             case .appVersion:
-                rightTitle = "1.1.0"
+                rightTitle = "1.1.1"
             default: break
             }
         default: break

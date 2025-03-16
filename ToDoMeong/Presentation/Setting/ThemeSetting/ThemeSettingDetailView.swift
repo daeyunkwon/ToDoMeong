@@ -88,4 +88,5 @@ struct ThemeSettingDetailView: View {
 
 #Preview {
     ThemeSettingDetailView()
+        .environmentObject(TabViewManager.shared)
 }
