@@ -49,12 +49,11 @@ struct TodoView: View {
         } customize: {
             $0
                 .type(.toast)
-                .position(.bottom)
+                .position(.center)
                 .closeOnTap(false)
                 .closeOnTapOutside(true)
                 .dragToDismiss(true)
                 .backgroundColor(.black.opacity(0.4))
-                .useKeyboardSafeArea(true)
                 .isOpaque(true)
         }
         
