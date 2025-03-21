@@ -19,8 +19,6 @@ struct AddTodoView: View {
     @Binding var todoList: [Todo]
     
     @StateObject var viewModel: AddTodoViewModel
-    
-    @FocusState var focused: Bool
 
     //MARK: - Body
     
@@ -44,14 +42,6 @@ struct AddTodoView: View {
                 .offset(y: 50)
         }
         
-        .onTapGesture {
-            UIApplication.shared.dismissKeyboard()
-        }
-        
-        .onAppear {
-            self.focused = true
-        }
-        
         .onReceive(viewModel.output.addTodoResult, perform: { result in
                 switch result {
                 case .success(let todo):
@@ -71,23 +61,16 @@ struct AddTodoView: View {
     
     private func textFieldView() -> some View {
         ZStack(alignment: .trailing) {
-            TextField("textFieldPlaceholder", text: Binding(get: {
+            CustomUIKitTextField(text:Binding(get: {
                 viewModel.output.text
             }, set: { newValue in
                 viewModel.input.text.send(newValue)
             }))
-            .focused($focused)
-            .font(.system(size: 14))
             .padding()
             .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
-            .frame(maxWidth: .infinity)
             .frame(height: 50)
             .background(Color(uiColor: .systemGray6))
             .clipShape(.rect(cornerRadius: 15))
-            .overlay(
-                RoundedRectangle(cornerRadius: 15)
-                    .stroke(Color.clear, lineWidth: 2)
-            )
             .padding(.horizontal, 15)
             
             if !viewModel.output.text.isEmpty {

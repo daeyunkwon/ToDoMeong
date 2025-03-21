@@ -28,6 +28,7 @@
 		448960242CA1B7E700410DA7 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960232CA1B7E700410DA7 /* SettingView.swift */; };
 		448960282CA2EACF00410DA7 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 448960272CA2EACF00410DA7 /* Localizable.xcstrings */; };
 		4489602A2CA2EB7100410DA7 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960292CA2EB7100410DA7 /* String+Extension.swift */; };
+		449B07C72D8D966C0030FE9D /* CustomUIKitTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449B07C62D8D966C0030FE9D /* CustomUIKitTextField.swift */; };
 		44A02E732CA59FFB003EE911 /* TabViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A02E722CA59FFB003EE911 /* TabViewManager.swift */; };
 		44A02E752CA5AF21003EE911 /* WillAppearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A02E742CA5AF21003EE911 /* WillAppearModifier.swift */; };
 		44A02E772CA5AFA3003EE911 /* WillDisappearModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44A02E762CA5AFA3003EE911 /* WillDisappearModifier.swift */; };
@@ -132,6 +133,7 @@
 		448960232CA1B7E700410DA7 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		448960272CA2EACF00410DA7 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		448960292CA2EB7100410DA7 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		449B07C62D8D966C0030FE9D /* CustomUIKitTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUIKitTextField.swift; sourceTree = "<group>"; };
 		44A02E722CA59FFB003EE911 /* TabViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewManager.swift; sourceTree = "<group>"; };
 		44A02E742CA5AF21003EE911 /* WillAppearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillAppearModifier.swift; sourceTree = "<group>"; };
 		44A02E762CA5AFA3003EE911 /* WillDisappearModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillDisappearModifier.swift; sourceTree = "<group>"; };
@@ -369,6 +371,7 @@
 				44ED3B112C98282900E3E9CF /* AddEditCompleteToastView.swift */,
 				44ED3B1A2C987FCA00E3E9CF /* AddEditFailToastView.swift */,
 				44A02E782CA5AFE7003EE911 /* UIViewLifeCycleHandler.swift */,
+				449B07C62D8D966C0030FE9D /* CustomUIKitTextField.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				44ED3B262C9C225400E3E9CF /* ImageFileManager.swift in Sources */,
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
+				449B07C72D8D966C0030FE9D /* CustomUIKitTextField.swift in Sources */,
 				440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44A02E792CA5AFE7003EE911 /* UIViewLifeCycleHandler.swift in Sources */,
