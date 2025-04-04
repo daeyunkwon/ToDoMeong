@@ -22,6 +22,7 @@ final class TodoViewModel: ViewModelType {
         let delete = PassthroughSubject<Todo, Never>()
         let edit = PassthroughSubject<(Todo, String, Data?), Never>()
         let done = PassthroughSubject<Todo, Never>()
+        let addButtonTapped = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -114,6 +115,12 @@ final class TodoViewModel: ViewModelType {
                 }
             }
             .store(in: &cancellables)
+        
+        input.addButtonTapped
+            .sink { [weak self] _ in
+                self?.output.showAddTodoView = true
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -125,18 +132,25 @@ extension TodoViewModel {
         case delete(target: Todo)
         case edit(target: Todo, content: String, imageData: Data?)
         case done(target: Todo)
+        case addButtonTapped
     }
     
     func action(_ action: Action) {
         switch action {
         case .onAppear:
             input.fetchTodo.send(())
+        
         case .delete(let todo):
             input.delete.send((todo))
+        
         case .edit(let target, let content, let imageData):
             input.edit.send((target, content, imageData))
+        
         case .done(let target):
             input.done.send((target))
+            
+        case .addButtonTapped:
+            input.addButtonTapped.send(())
         }
     }
 }

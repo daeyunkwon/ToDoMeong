@@ -239,7 +239,7 @@ private struct PlusCircleButtonView: View {
     
     var body: some View {
         Button(action: {
-            viewModel.output.showAddTodoView = true
+            viewModel.action(.addButtonTapped)
         }, label: {
             Image(systemName: "plus")
                 .resizable()
