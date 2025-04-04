@@ -17,20 +17,25 @@ final class TodoViewModel: ViewModelType {
     var input = Input()
     @Published var output = Output()
     
+    enum AddResultFeedbackType {
+        case succeed
+        case failed
+    }
+    
     struct Input {
-        let viewOnAppear = PassthroughSubject<Void, Never>()
+        let fetchTodo = PassthroughSubject<Void, Never>()
         let delete = PassthroughSubject<Todo, Never>()
         let edit = PassthroughSubject<(Todo, String, Data?), Never>()
         let done = PassthroughSubject<Todo, Never>()
+        let addButtonTapped = PassthroughSubject<Void, Never>()
+        let showAddCompletionFeedback = PassthroughSubject<AddResultFeedbackType, Never>()
     }
     
     struct Output {
         var todoList: [Todo] = []
         var showAddTodoView = false
         var showAddNewCompletionToast = false
-        var isAddNewTodo = false
         var showFailedToAddToast = false
-        var isFailedAddTodo = false
         var showFailedToDeleteToast = false
         var showUpdateSucceedToast = false
         var showUpdateFailedToast = false
@@ -42,7 +47,7 @@ final class TodoViewModel: ViewModelType {
     
     func transform() {
         
-        input.viewOnAppear.sink { [weak self] _ in
+        input.fetchTodo.sink { [weak self] _ in
             self?.output.todoList = self?.repository.fetchTodayTodo() ?? []
         }
         .store(in: &cancellables)
@@ -53,7 +58,7 @@ final class TodoViewModel: ViewModelType {
                 self?.repository.deleteTodo(data: todo) { result in
                     switch result {
                     case .success(_):
-                        self?.input.viewOnAppear.send(())
+                        self?.input.fetchTodo.send(())
                         
                     case .failure(let error):
                         print(error)
@@ -75,7 +80,7 @@ final class TodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: nil) { result in
                         switch result {
                         case .success(_):
-                            self.input.viewOnAppear.send(())
+                            self.input.fetchTodo.send(())
                             self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
@@ -89,7 +94,7 @@ final class TodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: target.id.stringValue) { result in
                         switch result {
                         case .success(_):
-                            self.input.viewOnAppear.send(())
+                            self.input.fetchTodo.send(())
                             self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
@@ -107,11 +112,30 @@ final class TodoViewModel: ViewModelType {
                 repository.updateTodoDone(target: targetTodo) { result in
                     switch result {
                     case .success(_):
-                        self.input.viewOnAppear.send(())
+                        self.input.fetchTodo.send(())
                     case .failure(let error):
                         print(error)
                     }
                 }
+            }
+            .store(in: &cancellables)
+        
+        input.addButtonTapped
+            .sink { [weak self] _ in
+                self?.output.showAddTodoView = true
+            }
+            .store(in: &cancellables)
+        
+        input.showAddCompletionFeedback
+            .sink { [weak self] result in
+                switch result {
+                case .succeed:
+                    self?.output.showAddNewCompletionToast = true
+                
+                case .failed:
+                    self?.output.showFailedToAddToast = true
+                }
+                HapticManager.shared.impact(style: .light)
             }
             .store(in: &cancellables)
     }
@@ -125,18 +149,34 @@ extension TodoViewModel {
         case delete(target: Todo)
         case edit(target: Todo, content: String, imageData: Data?)
         case done(target: Todo)
+        case addButtonTapped
+        case showAddCompletionFeedback(type: AddResultFeedbackType)
     }
     
     func action(_ action: Action) {
         switch action {
         case .onAppear:
-            input.viewOnAppear.send(())
+            input.fetchTodo.send(())
+        
         case .delete(let todo):
             input.delete.send((todo))
+        
         case .edit(let target, let content, let imageData):
             input.edit.send((target, content, imageData))
+        
         case .done(let target):
             input.done.send((target))
+            
+        case .addButtonTapped:
+            input.addButtonTapped.send(())
+            
+        case .showAddCompletionFeedback(let type):
+            switch type {
+            case .succeed:
+                input.showAddCompletionFeedback.send(.succeed)
+            case .failed:
+                input.showAddCompletionFeedback.send(.failed)
+            }
         }
     }
 }

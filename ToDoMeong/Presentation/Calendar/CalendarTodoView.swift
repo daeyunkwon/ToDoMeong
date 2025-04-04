@@ -109,6 +109,7 @@ struct CalendarTodoView: View {
             }
         }
         
+        // 성공 안내 메시지 팝업
         .popup(isPresented: $viewModel.output.showSucceedToast.0, view: {
             switch viewModel.output.showSucceedToast.1 {
             case .addNewTodo: AddEditCompleteToastView(type: .addNewTodo)
@@ -125,6 +126,7 @@ struct CalendarTodoView: View {
                 .isOpaque(false)
         })
         
+        // 실패 안내 메시지 팝업
         .popup(isPresented: $viewModel.output.showFailedToast.0, view: {
             switch viewModel.output.showFailedToast.1 {
             case .failedToAdd: AddEditFailToastView(type: .failedToAdd)
@@ -144,15 +146,21 @@ struct CalendarTodoView: View {
         })
         
         .popup(isPresented: $viewModel.output.showAddTodoView) {
-            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: Binding(get: {
-                viewModel.output.isAddNewTodo
-            }, set: { _ in
-                viewModel.action(.showSucceedToast(.addNewTodo))
-            }), isFailedToAdd: Binding(get: {
-                viewModel.output.isFailedAddTodo
-            }, set: { _ in
-                viewModel.action(.showFailedToast(.failedToAdd))
-            }), todoList: $viewModel.output.selectedDateTodoList, viewModel: AddTodoViewModel(selectedDate: viewModel.output.selectedDate))
+            AddTodoView(
+                isShowing: $viewModel.output.showAddTodoView,
+                addSucceed: Binding(get: {
+                    
+                }, set: { _ in
+                    viewModel.action(.showSucceedToast(.addNewTodo))
+                }),
+                addFailed: Binding(get: {
+                    
+                }, set: { _ in
+                    viewModel.action(.showFailedToast(.failedToAdd))
+                }),
+                todoList: $viewModel.output.selectedDateTodoList,
+                viewModel: AddTodoViewModel(selectedDate: viewModel.output.selectedDate)
+            )
         } customize: {
             $0
                 .type(.toast)

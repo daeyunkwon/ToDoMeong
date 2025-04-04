@@ -45,7 +45,21 @@ struct TodoView: View {
         
         //새로운 할 일 추가 화면 팝업
         .popup(isPresented: $viewModel.output.showAddTodoView) {
-            AddTodoView(isShowing: $viewModel.output.showAddTodoView, isAddNewTodo: $viewModel.output.isAddNewTodo, isFailedToAdd: $viewModel.output.isFailedAddTodo, todoList: $viewModel.output.todoList, viewModel: AddTodoViewModel(selectedDate: nil))
+            AddTodoView(
+                isShowing: $viewModel.output.showAddTodoView,
+                addSucceed: Binding(get: {
+                    
+                }, set: { _ in
+                    viewModel.action(.showAddCompletionFeedback(type: .succeed))
+                }),
+                addFailed: Binding(get: {
+                    
+                }, set: { _ in
+                    viewModel.action(.showAddCompletionFeedback(type: .failed))
+                }),
+                todoList: $viewModel.output.todoList,
+                viewModel: AddTodoViewModel(selectedDate: nil)
+            )
         } customize: {
             $0
                 .type(.toast)
@@ -132,24 +146,6 @@ struct TodoView: View {
                 UIApplication.shared.dismissKeyboard()
             }
         })
-        
-        //새로운 할 일 추가 팝업 띄우기
-        .onChange(value: viewModel.output.isAddNewTodo) { isAdd in
-            if isAdd {
-                viewModel.output.isAddNewTodo = false
-                viewModel.output.showAddNewCompletionToast = true
-                HapticManager.shared.impact(style: .light)
-            }
-        }
-        
-        //새로운 할 일 추가 실패 팝업 띄우기
-        .onChange(value: viewModel.output.isFailedAddTodo) { isFailed in
-            if isFailed {
-                viewModel.output.isFailedAddTodo = false
-                viewModel.output.showFailedToAddToast = true
-                HapticManager.shared.impact(style: .light)
-            }
-        }
         
         .onAppear {
             viewModel.action(.onAppear)
@@ -239,7 +235,7 @@ private struct PlusCircleButtonView: View {
     
     var body: some View {
         Button(action: {
-            viewModel.output.showAddTodoView = true
+            viewModel.action(.addButtonTapped)
         }, label: {
             Image(systemName: "plus")
                 .resizable()

@@ -13,8 +13,8 @@ struct AddTodoView: View {
     //MARK: - Properties
     
     @Binding var isShowing: Bool
-    @Binding var isAddNewTodo: Bool
-    @Binding var isFailedToAdd: Bool
+    @Binding var addSucceed: Void
+    @Binding var addFailed: Void
     
     @Binding var todoList: [Todo]
     
@@ -43,17 +43,17 @@ struct AddTodoView: View {
         }
         
         .onReceive(viewModel.output.addTodoResult, perform: { result in
-                switch result {
-                case .success(let todo):
-                    self.todoList.append(todo)
-                    isShowing = false
-                    isAddNewTodo = true
+            switch result {
+            case .success(let todo):
+                self.todoList.append(todo)
+                isShowing = false
+                addSucceed = ()
                 
-                case .failure(let error):
-                    print(error)
-                    isShowing = false
-                    isFailedToAdd = true
-                }
+            case .failure(let error):
+                print(error)
+                isShowing = false
+                addFailed = ()
+            }
         })
     }
     
@@ -114,5 +114,11 @@ struct AddTodoView: View {
 }
 
 #Preview {
-    AddTodoView(isShowing: .constant(true), isAddNewTodo: .constant(false), isFailedToAdd: .constant(false), todoList: .constant([]), viewModel: AddTodoViewModel(selectedDate: nil))
+    AddTodoView(
+        isShowing: .constant(true),
+        addSucceed: .constant(()),
+        addFailed: .constant(()),
+        todoList: .constant([]),
+        viewModel: AddTodoViewModel(selectedDate: nil)
+    )
 }
