@@ -18,7 +18,7 @@ final class TodoViewModel: ViewModelType {
     @Published var output = Output()
     
     struct Input {
-        let viewOnAppear = PassthroughSubject<Void, Never>()
+        let fetchTodo = PassthroughSubject<Void, Never>()
         let delete = PassthroughSubject<Todo, Never>()
         let edit = PassthroughSubject<(Todo, String, Data?), Never>()
         let done = PassthroughSubject<Todo, Never>()
@@ -42,7 +42,7 @@ final class TodoViewModel: ViewModelType {
     
     func transform() {
         
-        input.viewOnAppear.sink { [weak self] _ in
+        input.fetchTodo.sink { [weak self] _ in
             self?.output.todoList = self?.repository.fetchTodayTodo() ?? []
         }
         .store(in: &cancellables)
@@ -53,7 +53,7 @@ final class TodoViewModel: ViewModelType {
                 self?.repository.deleteTodo(data: todo) { result in
                     switch result {
                     case .success(_):
-                        self?.input.viewOnAppear.send(())
+                        self?.input.fetchTodo.send(())
                         
                     case .failure(let error):
                         print(error)
@@ -75,7 +75,7 @@ final class TodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: nil) { result in
                         switch result {
                         case .success(_):
-                            self.input.viewOnAppear.send(())
+                            self.input.fetchTodo.send(())
                             self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
@@ -89,7 +89,7 @@ final class TodoViewModel: ViewModelType {
                     repository.updateTodo(target: target, content: content, photo: target.id.stringValue) { result in
                         switch result {
                         case .success(_):
-                            self.input.viewOnAppear.send(())
+                            self.input.fetchTodo.send(())
                             self.output.showUpdateSucceedToast = true
                         case .failure(let error):
                             print(error)
@@ -107,7 +107,7 @@ final class TodoViewModel: ViewModelType {
                 repository.updateTodoDone(target: targetTodo) { result in
                     switch result {
                     case .success(_):
-                        self.input.viewOnAppear.send(())
+                        self.input.fetchTodo.send(())
                     case .failure(let error):
                         print(error)
                     }
@@ -130,7 +130,7 @@ extension TodoViewModel {
     func action(_ action: Action) {
         switch action {
         case .onAppear:
-            input.viewOnAppear.send(())
+            input.fetchTodo.send(())
         case .delete(let todo):
             input.delete.send((todo))
         case .edit(let target, let content, let imageData):
