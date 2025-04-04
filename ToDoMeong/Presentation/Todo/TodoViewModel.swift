@@ -17,21 +17,25 @@ final class TodoViewModel: ViewModelType {
     var input = Input()
     @Published var output = Output()
     
+    enum AddResultFeedbackType {
+        case succeed
+        case failed
+    }
+    
     struct Input {
         let fetchTodo = PassthroughSubject<Void, Never>()
         let delete = PassthroughSubject<Todo, Never>()
         let edit = PassthroughSubject<(Todo, String, Data?), Never>()
         let done = PassthroughSubject<Todo, Never>()
         let addButtonTapped = PassthroughSubject<Void, Never>()
+        let showAddCompletionFeedback = PassthroughSubject<AddResultFeedbackType, Never>()
     }
     
     struct Output {
         var todoList: [Todo] = []
         var showAddTodoView = false
         var showAddNewCompletionToast = false
-        var isAddNewTodo = false
         var showFailedToAddToast = false
-        var isFailedAddTodo = false
         var showFailedToDeleteToast = false
         var showUpdateSucceedToast = false
         var showUpdateFailedToast = false
@@ -121,6 +125,19 @@ final class TodoViewModel: ViewModelType {
                 self?.output.showAddTodoView = true
             }
             .store(in: &cancellables)
+        
+        input.showAddCompletionFeedback
+            .sink { [weak self] result in
+                switch result {
+                case .succeed:
+                    self?.output.showAddNewCompletionToast = true
+                
+                case .failed:
+                    self?.output.showFailedToAddToast = true
+                }
+                HapticManager.shared.impact(style: .light)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -133,6 +150,7 @@ extension TodoViewModel {
         case edit(target: Todo, content: String, imageData: Data?)
         case done(target: Todo)
         case addButtonTapped
+        case showAddCompletionFeedback(type: AddResultFeedbackType)
     }
     
     func action(_ action: Action) {
@@ -151,6 +169,14 @@ extension TodoViewModel {
             
         case .addButtonTapped:
             input.addButtonTapped.send(())
+            
+        case .showAddCompletionFeedback(let type):
+            switch type {
+            case .succeed:
+                input.showAddCompletionFeedback.send(.succeed)
+            case .failed:
+                input.showAddCompletionFeedback.send(.failed)
+            }
         }
     }
 }
