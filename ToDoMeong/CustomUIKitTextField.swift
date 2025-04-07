@@ -10,22 +10,6 @@ import SwiftUI
 struct CustomUIKitTextField: UIViewRepresentable {
     @Binding var text: String
 
-    final class Coordinator: NSObject, UITextFieldDelegate {
-        var parent: CustomUIKitTextField
-
-        init(_ parent: CustomUIKitTextField) {
-            self.parent = parent
-        }
-
-        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            return false // 키보드 닫힘을 막음
-        }
-        
-        @objc func textChanged(_ textField: UITextField) {
-            parent.text = textField.text ?? ""
-        }
-    }
-
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
@@ -46,5 +30,25 @@ struct CustomUIKitTextField: UIViewRepresentable {
 
     func updateUIView(_ uiView: UITextField, context: Context) {
         uiView.text = text
+    }
+}
+
+//MARK: - Coordinator
+
+extension CustomUIKitTextField {
+    final class Coordinator: NSObject, UITextFieldDelegate {
+        private let parent: CustomUIKitTextField
+
+        init(_ parent: CustomUIKitTextField) {
+            self.parent = parent
+        }
+
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            return false // 키보드 닫힘을 막음
+        }
+        
+        @objc func textChanged(_ textField: UITextField) {
+            parent.text = textField.text ?? ""
+        }
     }
 }
