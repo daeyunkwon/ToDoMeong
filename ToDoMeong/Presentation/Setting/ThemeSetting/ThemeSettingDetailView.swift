@@ -33,7 +33,7 @@ struct ThemeSettingDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .preferredColorScheme(getPreferredColorScheme())
         
-        .onWillAppear {
+        .onAppear {
             tabViewManager.isTabViewHidden = true
         }
         
