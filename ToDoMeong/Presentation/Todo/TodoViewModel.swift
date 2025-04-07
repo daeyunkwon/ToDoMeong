@@ -48,7 +48,15 @@ final class TodoViewModel: ViewModelType {
     func transform() {
         
         input.fetchTodo.sink { [weak self] _ in
-            self?.output.todoList = self?.repository.fetchTodayTodo() ?? []
+            self?.repository.fetchTodayTodo { result in
+                switch result {
+                case .success(let todoList):
+                    self?.output.todoList = todoList
+                
+                case .failure(let error):
+                    print(error.description)
+                }
+            }
         }
         .store(in: &cancellables)
         

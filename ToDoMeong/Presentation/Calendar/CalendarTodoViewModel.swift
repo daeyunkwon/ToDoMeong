@@ -199,33 +199,45 @@ final class CalendarTodoViewModel: ViewModelType {
     }
     
     private func observeTodos() {
-        let realm = try! Realm()
-        let todos = realm.objects(Todo.self)
-        
-        notificationToken = todos.observe { [weak self] changes in
-            guard let self else { return }
-            switch changes {
-            case .initial:
-                // 초기 데이터 로드
-                self.todoList = Array(todos)
-                self.input.selectedDate.send(self.selectedDate)
+        do {
+            let realm = try Realm()
+            let todos = realm.objects(Todo.self)
             
-            case .update(_, _, _, _):
-                // 데이터 업데이트
-                print("DEBUG: Realm 데이터 변화 감지됨")
-                self.todoList = Array(todos)
-                self.input.selectedDate.send(self.selectedDate)
-                self.output.isImageUpdate = true
+            notificationToken = todos.observe { [weak self] changes in
+                guard let self else { return }
+                switch changes {
+                case .initial:
+                    // 초기 데이터 로드
+                    self.todoList = Array(todos)
+                    self.input.selectedDate.send(self.selectedDate)
                 
-                //위젯 업데이트
-                let todayCount = repository.fetchTodayTodo().count
-                self.userDefaults?.set(todayCount, forKey: "count")
-                WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
-            
-            case .error(let error):
-                print(error.localizedDescription)
-                self.input.showFailedToast.send(.failedToLoad)
+                case .update(_, _, _, _):
+                    // 데이터 업데이트
+                    print("DEBUG: Realm 데이터 변화 감지됨")
+                    self.todoList = Array(todos)
+                    self.input.selectedDate.send(self.selectedDate)
+                    self.output.isImageUpdate = true
+                    
+                    //위젯 업데이트
+                    self.repository.fetchTodayTodo { result in
+                        switch result {
+                        case .success(let todoList):
+                            self.userDefaults?.set(todoList.count, forKey: "count")
+                            WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
+                            
+                        case .failure(let error):
+                            print(error.description)
+                        }
+                    }
+                
+                case .error(let error):
+                    print(error.localizedDescription)
+                    self.input.showFailedToast.send(.failedToLoad)
+                }
             }
+        } catch {
+            print(error.localizedDescription)
+            self.input.showFailedToast.send(.failedToLoad)
         }
     }
     

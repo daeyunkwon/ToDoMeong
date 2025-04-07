@@ -11,12 +11,15 @@ import RealmSwift
 final class TodoRepository {
     
     enum RealmError: Error {
+        case failedToLoad
         case failedToCreate
         case failedToUpdate
         case failedToDelete
         
         var description: String {
             switch self {
+            case .failedToLoad:
+                return "Error: Realm에 Todo 데이터 읽기 실패되었습니다."
             case .failedToCreate:
                 return "Error: Realm에 Todo 데이터 생성 실패되었습니다."
             case .failedToUpdate:
@@ -27,34 +30,69 @@ final class TodoRepository {
         }
     }
     
-    private let realm = try! Realm()
-    
-    
-    func fetchTodayTodo() -> [Todo] {
-        let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true)
-        let todayTodoList = result.filter { todo in
-            return Calendar.current.isDateInToday(todo.createDate)
+    func fetchTodayTodo(completionHandler: @escaping ((Result<[Todo], RealmError>) -> Void)) {
+        do {
+            let realm = try Realm()
+            let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true)
+            let todayTodoList = result.filter { todo in
+                return Calendar.current.isDateInToday(todo.createDate)
+            }
+            completionHandler(.success(Array(todayTodoList)))
+        } catch {
+            print(error)
+            completionHandler(.failure(.failedToLoad))
         }
-        return Array(todayTodoList)
     }
     
-    func fetchTodo(date: Date) -> [Todo] {
-        let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true).filter { todo in
+    func fetchTodo(date: Date) -> Result<[Todo], RealmError> {
+        do {
+            let realm = try Realm()
             
-            let isSameDay = Calendar.current.isDate(todo.createDate, inSameDayAs: date)
+            let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true).filter { todo in
                 
-            return isSameDay
+                let isSameDay = Calendar.current.isDate(todo.createDate, inSameDayAs: date)
+                    
+                return isSameDay
+            }
+            return .success(Array(result))
+        } catch {
+            print(error)
+            return .failure(.failedToLoad)
         }
-        
-        return Array(result)
     }
     
-    func fetchAllTodo() -> [Todo] {
-        return Array(realm.objects(Todo.self))
+    func fetchTodo(date: Date, completionHandler: @escaping ((Result<[Todo], RealmError>) -> Void)) {
+        do {
+            let realm = try Realm()
+            
+            let result = realm.objects(Todo.self).sorted(byKeyPath: Todo.Key.createDate.rawValue, ascending: true).filter { todo in
+                
+                let isSameDay = Calendar.current.isDate(todo.createDate, inSameDayAs: date)
+                    
+                return isSameDay
+            }
+            
+            completionHandler(.success(Array(result)))
+        } catch {
+            print(error)
+            completionHandler(.failure(.failedToLoad))
+        }
+    }
+    
+    func fetchAllTodo(completionHandler: @escaping (Result<[Todo], RealmError>) -> Void) {
+        do {
+            let realm = try Realm()
+            let result = Array(realm.objects(Todo.self))
+            completionHandler(.success(result))
+        } catch {
+            print(error)
+            completionHandler(.failure(.failedToLoad))
+        }
     }
     
     func createTodo(data: Todo, completionHandler: @escaping (Result<Todo, RealmError>) -> Void) {
         do {
+            let realm = try Realm()
             try realm.write {
                 realm.create(Todo.self, value: data)
                 print("DEBUG: Realm Create Succeed")
@@ -68,6 +106,7 @@ final class TodoRepository {
     
     func updateTodo(target: Todo, content: String, photo: String?, completion: @escaping (Result<Void, RealmError>) -> Void) {
         do {
+            let realm = try Realm()
             try realm.write {
                 let value = [
                     Todo.Key.id.rawValue: target.id,
@@ -88,6 +127,7 @@ final class TodoRepository {
     
     func updateTodoDone(target: Todo, completion: @escaping (Result<Void, RealmError>) -> Void) {
         do {
+            let realm = try Realm()
             try realm.write {
                 target.done.toggle()
                 let newValue = target.done
@@ -109,9 +149,10 @@ final class TodoRepository {
     
     func deleteTodo(data: Todo, completionHandler: @escaping (Result<Void, RealmError>) -> Void) {
         do {
+            let realm = try Realm()
             try realm.write {
                 if let object = realm.object(ofType: Todo.self, forPrimaryKey: data.id) {
-                    self.realm.delete(object)
+                    realm.delete(object)
                     print("DEBUG: Realm Delete Succeed")
                     completionHandler(.success(()))
                 }

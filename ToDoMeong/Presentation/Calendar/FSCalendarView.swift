@@ -81,13 +81,23 @@ struct FSCalendarView: UIViewRepresentable {
         
         func calendar(_ calendar: FSCalendar, imageFor date: Date) -> UIImage? {
             let repo = TodoRepository()
-            let todos = repo.fetchTodo(date: date)
+            let result = repo.fetchTodo(date: date) // 동기 처리로 진행
+            var image: UIImage?
             
-            if !todos.isEmpty {
-                return resizeImage(image: UIImage(named: "pawprint") ?? UIImage(), targetSize: CGSize(width: 10, height: 10))?.withTintColor(.label)
-            } else {
-                return nil
+            switch result {
+            case .success(let todos):
+                if !todos.isEmpty {
+                    image = resizeImage(image: UIImage(named: "pawprint") ?? UIImage(), targetSize: CGSize(width: 10, height: 10))?.withTintColor(.label)
+                } else {
+                    image = nil
+                }
+                
+            case .failure(let error):
+                print(error.description)
+                image = nil
             }
+            
+            return image
         }
         
         private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
