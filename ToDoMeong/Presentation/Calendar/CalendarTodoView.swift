@@ -12,11 +12,8 @@ struct CalendarTodoView: View {
     
     @StateObject private var viewModel = CalendarTodoViewModel()
 
-    
     var body: some View {
-        
         NavigationStack {
-            
             Text(viewModel.output.currentPageDate.yearMonthDateString)
                 .bold()
                 .frame(maxWidth: .infinity)

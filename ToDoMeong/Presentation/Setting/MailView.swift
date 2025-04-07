@@ -12,21 +12,6 @@ struct MailView: UIViewControllerRepresentable {
     
     @Binding var isShowing: Bool
     
-    class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
-        
-        var parent: MailView
-        
-        init(_ parent: MailView) {
-            self.parent = parent
-        }
-        
-        func mailComposeController(_ controller: MFMailComposeViewController,
-                                   didFinishWith result: MFMailComposeResult, error: Error?) {
-            
-            parent.isShowing = false
-        }
-    }
-    
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
     }
@@ -70,4 +55,21 @@ struct MailView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+}
+
+//MARK: - Coordinator
+
+extension MailView {
+    final class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
+        
+        private let parent: MailView
+        
+        init(_ parent: MailView) {
+            self.parent = parent
+        }
+        
+        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+            parent.isShowing = false
+        }
+    }
 }

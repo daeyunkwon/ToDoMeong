@@ -11,10 +11,8 @@ import PhotosUI
 struct EditTodoView: View {
     
     @StateObject var viewModel: EditTodoViewModel
-    
     @Binding var isPresented: Bool
     @State var showImagePicker: Bool = false
-    
     
     var body: some View {
         VStack {
@@ -53,7 +51,7 @@ struct EditTodoView: View {
         TextField("textFieldPlaceholder".localized(), text: Binding(get: {
             viewModel.output.text
         }, set: { newValue in
-            viewModel.input.text.send(newValue)
+            viewModel.action(.inputText(newValue))
         }))
         .font(.system(size: 14))
         .padding()
@@ -69,7 +67,7 @@ struct EditTodoView: View {
         
         if !viewModel.output.text.isEmpty {
             Button(action: {
-                viewModel.input.text.send("")
+                viewModel.action(.inputText(""))
             }) {
                 Image(systemName: "xmark.circle.fill")
                     .foregroundColor(.gray)

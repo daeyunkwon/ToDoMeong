@@ -47,7 +47,6 @@ final class EditTodoViewModel: ViewModelType {
             }
         }
         
-        
         transform()
     }
     
@@ -90,6 +89,7 @@ final class EditTodoViewModel: ViewModelType {
 
 extension EditTodoViewModel {
     enum Action {
+        case inputText(String)
         case deleteButtonTapped
         case editButtonTapped
         case selectedImage(imageData: Data)
@@ -98,6 +98,9 @@ extension EditTodoViewModel {
     
     func action(_ action: Action) {
         switch action {
+        case .inputText(let text):
+            input.text.send(text)
+            
         case .deleteButtonTapped:
             input.deleteButtonTapped.send(())
         

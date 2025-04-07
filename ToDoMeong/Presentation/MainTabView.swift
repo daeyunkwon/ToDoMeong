@@ -11,7 +11,7 @@ import RealmSwift
 struct MainTabView: View {
     
     @State private var tabSelection = 0
-    @EnvironmentObject var tabViewManager: TabViewManager
+    @EnvironmentObject private var tabViewManager: TabViewManager
     
     var body: some View {
         TabView(selection: $tabSelection,
@@ -36,6 +36,7 @@ struct MainTabView: View {
 
 #Preview {
     MainTabView()
+        .environmentObject(TabViewManager.shared)
 }
 
 

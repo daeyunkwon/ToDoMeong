@@ -64,7 +64,7 @@ struct AddTodoView: View {
             CustomUIKitTextField(text:Binding(get: {
                 viewModel.output.text
             }, set: { newValue in
-                viewModel.input.text.send(newValue)
+                viewModel.action(.inputText(newValue))
             }))
             .padding()
             .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
@@ -75,7 +75,7 @@ struct AddTodoView: View {
             
             if !viewModel.output.text.isEmpty {
                 Button(action: {
-                    viewModel.input.text.send("")
+                    viewModel.action(.inputText(""))
                 }) {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundColor(.gray)
@@ -88,7 +88,7 @@ struct AddTodoView: View {
     
     private func addButtonView() -> some View {
         Button(action: {
-            viewModel.input.addButtonTapped.send(())
+            viewModel.action(.addButtonTapped)
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 15)

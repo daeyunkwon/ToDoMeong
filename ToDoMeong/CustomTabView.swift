@@ -30,7 +30,6 @@ struct CustomTabView: View {
                 .stroke(.gray, lineWidth: 0.25)
                 .frame(height: 65)
                 
-            
             HStack {
                 ForEach(0..<3) { index in
                     Button(action: {
@@ -52,7 +51,7 @@ struct CustomTabView: View {
                                 Capsule()
                                     .frame(height: 5)
                                     .foregroundStyle(.brandGreen)
-                                    .matchedGeometryEffect(id: "SelecedTabId", in: animationNamespace)
+                                    .matchedGeometryEffect(id: "SelectedTabID", in: animationNamespace)
                                     .offset(y: -2)
                             } else {
                                 Capsule()

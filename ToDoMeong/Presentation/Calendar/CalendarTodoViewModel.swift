@@ -267,24 +267,34 @@ extension CalendarTodoViewModel {
         switch action {
         case .selectedDate(let date):
             input.selectedDate.send(date)
+        
         case .updateCurrentPageDate(let date):
             input.currentPageDate.send(date)
+        
         case .todayButtonTapped:
             input.todayButtonTapped.send(())
+        
         case .onDone(let target):
             input.onDone.send(target)
+        
         case .onDelete(let target):
             input.onDelete.send(target)
+        
         case .onEdit(let target, let content, let imageData):
             input.onEdit.send((target, content, imageData))
+        
         case .movePreviousMonth:
             input.moveToPreviousMonthButtonTapped.send(())
+        
         case .moveNextMonth:
             input.moveToNextMonthButtonTapped.send(())
+        
         case .addTodoButtonTapped:
             input.addTodoButtonTapped.send(())
+        
         case .showSucceedToast(let type):
             input.showSucceedToast.send(type)
+        
         case .showFailedToast(let type):
             input.showFailedToast.send(type)
         }

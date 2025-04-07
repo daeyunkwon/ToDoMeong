@@ -11,11 +11,11 @@ struct NavigationLazyView<T: View>: View {
     
     private let build: () -> T
     
-    init(build: @autoclosure @escaping () -> T) {
-        self.build = build
-    }
-    
     var body: some View {
         build()
+    }
+    
+    init(build: @autoclosure @escaping () -> T) {
+        self.build = build
     }
 }

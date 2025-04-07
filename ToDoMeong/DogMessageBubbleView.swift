@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct DogMessageBubbleView: View {
+    
     let message: String
     
     var body: some View {
         VStack {
-            
             Text(message)
                 .font(Constant.AppFont.tmoneyRoundWindRegular14)
                 .multilineTextAlignment(.center)

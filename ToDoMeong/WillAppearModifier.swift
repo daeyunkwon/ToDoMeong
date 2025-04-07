@@ -8,7 +8,12 @@
 import SwiftUI
 
 private struct WillAppearModifier: ViewModifier {
-    let callback: () -> Void
+    
+    private let callback: () -> Void
+    
+    fileprivate init(callback: @escaping () -> Void) {
+        self.callback = callback
+    }
 
     func body(content: Content) -> some View {
         content.background(UIViewLifeCycleHandler(onWillAppear: callback))

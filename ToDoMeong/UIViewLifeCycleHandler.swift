@@ -9,8 +9,13 @@ import SwiftUI
 
 struct UIViewLifeCycleHandler: UIViewControllerRepresentable {
     
-    var onWillAppear: () -> Void = { }
-    var onWillDisappear: () -> Void = { }
+    private var onWillAppear: () -> Void = { }
+    private var onWillDisappear: () -> Void = { }
+    
+    init(onWillAppear: @escaping () -> Void = { }, onWillDisappear: @escaping () -> Void = { }) {
+        self.onWillAppear = onWillAppear
+        self.onWillDisappear = onWillDisappear
+    }
     
     func makeUIViewController(context: Context) -> UIViewController {
         context.coordinator
@@ -22,9 +27,9 @@ struct UIViewLifeCycleHandler: UIViewControllerRepresentable {
         Coordinator(onWillAppear: onWillAppear, onWillDisappear: onWillDisappear)
     }
 
-    class Coordinator: UIViewController {
-        let onWillAppear: () -> Void
-        let onWillDisappear: () -> Void
+    final class Coordinator: UIViewController {
+        private let onWillAppear: () -> Void
+        private let onWillDisappear: () -> Void
 
         init(onWillAppear: @escaping () -> Void, onWillDisappear: @escaping () -> Void) {
             self.onWillAppear = onWillAppear

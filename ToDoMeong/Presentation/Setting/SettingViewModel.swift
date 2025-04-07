@@ -47,12 +47,12 @@ final class SettingViewModel: ViewModelType {
                 self.output.showMailView = value
             }
             .store(in: &cancellables)
-        
     }
 }
 
+//MARK: - Action
+
 extension SettingViewModel {
-    
     enum Action {
         case showMailView(isShow: Bool)
     }

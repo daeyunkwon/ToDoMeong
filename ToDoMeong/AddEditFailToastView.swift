@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AddEditFailToastView: View {
+    
     enum ToastType {
         case failedToAdd
         case failedToEdit

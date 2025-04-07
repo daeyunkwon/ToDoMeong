@@ -8,7 +8,6 @@
 import Foundation
 
 extension Date {
-    
     var dayOfTheWeekDateString: String {
         let formatStyle = Date.FormatStyle.dateTime.month().day().weekday(.wide)
         return self.formatted(formatStyle)

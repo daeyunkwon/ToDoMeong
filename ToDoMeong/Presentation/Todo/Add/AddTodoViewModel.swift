@@ -93,3 +93,22 @@ final class AddTodoViewModel: ViewModelType {
             .store(in: &cancellables)
     }
 }
+
+//MARK: - Action
+
+extension AddTodoViewModel {
+    enum Action {
+        case inputText(String)
+        case addButtonTapped
+    }
+    
+    func action(_ action: Action) {
+        switch action {
+        case .inputText(let text):
+            self.input.text.send(text)
+        
+        case .addButtonTapped:
+            self.input.addButtonTapped.send(())
+        }
+    }
+}

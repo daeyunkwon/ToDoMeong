@@ -13,7 +13,6 @@ struct LicenseView: View {
     private let licenses = License.list
     
     var body: some View {
-        
         ScrollView {
             LazyVStack {
                 ForEach(licenses, id: \.id) { item in
@@ -60,4 +59,5 @@ struct LicenseView: View {
 
 #Preview {
     LicenseView()
+        .environmentObject(TabViewManager.shared)
 }
