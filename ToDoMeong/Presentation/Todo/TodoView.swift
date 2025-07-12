@@ -18,12 +18,14 @@ struct TodoView: View {
                 CapsuleDateView()
                 
                 TodoListView(viewModel: viewModel)
+                    .onDrop(of: [.text], delegate: TodoDropDelegate(viewModel: self.viewModel, shouldHandleDrop: false))
                 
                 .overlay(alignment: .bottomTrailing) {
                     PlusCircleButtonView(viewModel: viewModel)
                     .offset(x: -10, y: -50)
                     .buttonStyle(PlainButtonStyle())
                     .shadow(radius: 2)
+                    .onDrop(of: [.text], delegate: TodoDropDelegate(viewModel: self.viewModel, shouldHandleDrop: true))
                 }
                 .ignoresSafeArea(.keyboard)
             }
@@ -205,6 +207,21 @@ private struct TodoListView: View {
                         }, onEdit: { content, imageData in
                             viewModel.action(.edit(target: item, content: content, imageData: imageData))
                         })
+                        .onDrag {
+                            // todo 개수 동기화 시에만 drop delete를 handling
+                            if viewModel.count == viewModel.output.todoList.count || viewModel.count == -1 {
+                                HapticManager.shared.impact(style: .light)
+                                viewModel.count = viewModel.output.todoList.count
+                                
+                                viewModel.action(.onDragging)
+                                return NSItemProvider(object: String(item.id.stringValue) as NSString)
+                                
+                            } else {
+                                // 더미 데이터를 보내 삭제 처리 방지
+                                viewModel.action(.onDragging)
+                                return NSItemProvider(object: String("") as NSString)
+                            }
+                        }
                     }
                 }
             }
@@ -224,7 +241,7 @@ private struct TodoListView: View {
     }
 }
 
-//MARK: - Todo 추가 버튼
+//MARK: - Todo 추가 플로팅 버튼
 
 private struct PlusCircleButtonView: View {
     @ObservedObject private var viewModel: TodoViewModel
@@ -237,15 +254,22 @@ private struct PlusCircleButtonView: View {
         Button(action: {
             viewModel.action(.addButtonTapped)
         }, label: {
-            Image(systemName: "plus")
+            Image(systemName:
+                    viewModel.output.isDragging ? "trash" : "plus")
                 .resizable()
-                .aspectRatio(contentMode: .fill)
+                .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
                 .fontWeight(.bold)
                 .foregroundStyle(.white)
                 .clipShape(Circle())
                 .padding()
-                .background(Color.brandGreen)
+                .background(
+                    viewModel.output.isDragging ? Color.pink : Color.brandGreen
+                )
+                .scaleEffect(viewModel.output.isDragging && viewModel.output.bounce ? 1.3 : 1.0)
+                .animation(viewModel.output.bounce
+                    ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true) : .default,
+                    value: viewModel.output.bounce)
                 .frame(width: 54, height: 54)
                 .clipShape(Circle())
                 .padding()
