@@ -33,6 +33,7 @@ final class SettingViewModel: ViewModelType {
         ]
         
         var showMailView = false
+        var releaseVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     }
     
     init() {

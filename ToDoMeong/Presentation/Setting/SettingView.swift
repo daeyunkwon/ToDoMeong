@@ -108,7 +108,7 @@ struct SettingView: View {
         case .button(let detailType):
             switch detailType {
             case .appVersion:
-                rightTitle = "1.1.1"
+                rightTitle = viewModel.output.releaseVersion
             default: break
             }
         default: break
