@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CustomUIKitTextField: UIViewRepresentable {
     @Binding var text: String
+    var onReturnKeyTapped: (() -> Void)?
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -44,7 +45,13 @@ extension CustomUIKitTextField {
         }
 
         func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-            return false // 키보드 닫힘을 막음
+            if parent.text.isEmpty {
+                return false
+            } else {
+                textField.resignFirstResponder()
+                parent.onReturnKeyTapped?()
+                return true
+            }
         }
         
         @objc func textChanged(_ textField: UITextField) {

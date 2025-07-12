@@ -65,7 +65,10 @@ struct AddTodoView: View {
                 viewModel.output.text
             }, set: { newValue in
                 viewModel.action(.inputText(newValue))
-            }))
+            })) {
+                // return key tap handling
+                viewModel.action(.addButtonTapped)
+            }
             .padding()
             .padding(.trailing, viewModel.output.text.isEmpty ? 10 : 20)
             .frame(height: 50)
