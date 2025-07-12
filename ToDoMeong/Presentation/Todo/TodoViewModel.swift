@@ -10,12 +10,16 @@ import Combine
 import RealmSwift
 
 final class TodoViewModel: ViewModelType {
+    //MARK: - State
     
     private let repository = TodoRepository()
     
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
+    
+    private var draggingCancelTimer: AnyCancellable?
+    var count: Int = -1
     
     enum AddResultFeedbackType {
         case succeed
@@ -25,10 +29,13 @@ final class TodoViewModel: ViewModelType {
     struct Input {
         let fetchTodo = PassthroughSubject<Void, Never>()
         let delete = PassthroughSubject<Todo, Never>()
+        let dropDelete = PassthroughSubject<ObjectId, Never>()
         let edit = PassthroughSubject<(Todo, String, Data?), Never>()
         let done = PassthroughSubject<Todo, Never>()
         let addButtonTapped = PassthroughSubject<Void, Never>()
         let showAddCompletionFeedback = PassthroughSubject<AddResultFeedbackType, Never>()
+        let onDragging = PassthroughSubject<Void, Never>()
+        let draggingCancelTimerStop = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -39,11 +46,15 @@ final class TodoViewModel: ViewModelType {
         var showFailedToDeleteToast = false
         var showUpdateSucceedToast = false
         var showUpdateFailedToast = false
+        var bounce = false
+        var isDragging = false
     }
     
     init() {
         transform()
     }
+    
+    //MARK: - Bind
     
     func transform() {
         
@@ -52,6 +63,7 @@ final class TodoViewModel: ViewModelType {
                 switch result {
                 case .success(let todoList):
                     self?.output.todoList = todoList
+                    self?.count = todoList.count
                 
                 case .failure(let error):
                     print(error.description)
@@ -62,11 +74,37 @@ final class TodoViewModel: ViewModelType {
         
         input.delete
             .sink { [weak self] todo in
-                
                 self?.repository.deleteTodo(data: todo) { result in
                     switch result {
                     case .success(_):
                         self?.input.fetchTodo.send(())
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+            .store(in: &cancellables)
+        
+        input.dropDelete
+            .sink { [weak self] todoID in
+                self?.repository.deleteTodo(todoID: todoID) { result in
+                    switch result {
+                    case .success(_):
+                        self?.repository.fetchTodayTodo { result in
+                            switch result {
+                            case .success(let todoList):
+                                self?.output.todoList = todoList
+                                HapticManager.shared.impact(style: .light)
+                                self?.output.bounce = true
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                    self?.output.bounce = false
+                                }
+                            
+                            case .failure(let error):
+                                print(error.description)
+                            }
+                        }
                         
                     case .failure(let error):
                         print(error)
@@ -116,7 +154,6 @@ final class TodoViewModel: ViewModelType {
         input.done
             .sink { [weak self] targetTodo in
                 guard let self else { return }
-                
                 repository.updateTodoDone(target: targetTodo) { result in
                     switch result {
                     case .success(_):
@@ -139,11 +176,36 @@ final class TodoViewModel: ViewModelType {
                 switch result {
                 case .succeed:
                     self?.output.showAddNewCompletionToast = true
+                    self?.count = self?.output.todoList.count ?? -1
                 
                 case .failed:
                     self?.output.showFailedToAddToast = true
                 }
                 HapticManager.shared.impact(style: .light)
+            }
+            .store(in: &cancellables)
+        
+        input.onDragging
+            .sink { [weak self] _ in
+                self?.output.isDragging = true
+                
+                // 이전 타이머 취소 (중복 방지)
+                self?.draggingCancelTimer?.cancel()
+                
+                // 새로운 타이머 시작
+                self?.draggingCancelTimer = Just(())
+                    .delay(for: .seconds(0.25), scheduler: RunLoop.main)
+                    .sink { _ in
+                        self?.output.isDragging = false
+                        self?.count = self?.output.todoList.count ?? -1
+                    }
+            }
+            .store(in: &cancellables)
+        
+        input.draggingCancelTimerStop
+            .sink { [weak self] _ in
+                self?.draggingCancelTimer?.cancel()
+                self?.output.isDragging = true
             }
             .store(in: &cancellables)
     }
@@ -155,10 +217,13 @@ extension TodoViewModel {
     enum Action {
         case onAppear
         case delete(target: Todo)
+        case dropDelete(targetID: ObjectId)
         case edit(target: Todo, content: String, imageData: Data?)
         case done(target: Todo)
         case addButtonTapped
         case showAddCompletionFeedback(type: AddResultFeedbackType)
+        case onDragging
+        case draggingCancelTimerStop
     }
     
     func action(_ action: Action) {
@@ -168,6 +233,9 @@ extension TodoViewModel {
         
         case .delete(let todo):
             input.delete.send((todo))
+            
+        case .dropDelete(let targetID):
+            input.dropDelete.send(targetID)
         
         case .edit(let target, let content, let imageData):
             input.edit.send((target, content, imageData))
@@ -185,6 +253,12 @@ extension TodoViewModel {
             case .failed:
                 input.showAddCompletionFeedback.send(.failed)
             }
+            
+        case .onDragging:
+            input.onDragging.send(())
+            
+        case .draggingCancelTimerStop:
+            input.draggingCancelTimerStop.send(())
         }
     }
 }

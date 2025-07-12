@@ -162,4 +162,21 @@ final class TodoRepository {
             completionHandler(.failure(.failedToDelete))
         }
     }
+    
+    /// 일치하는 ObjectID의 데이터를 삭제합니다.
+    func deleteTodo(todoID: ObjectId, completionHandler: @escaping (Result<Void, RealmError>) -> Void) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                if let object = realm.object(ofType: Todo.self, forPrimaryKey: todoID) {
+                    realm.delete(object)
+                    print("DEBUG: Realm Delete Succeed")
+                    completionHandler(.success(()))
+                }
+            }
+        } catch {
+            print(error)
+            completionHandler(.failure(.failedToDelete))
+        }
+    }
 }
