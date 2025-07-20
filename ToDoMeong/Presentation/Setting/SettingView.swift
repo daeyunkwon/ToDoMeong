@@ -122,7 +122,7 @@ struct SettingView: View {
                         .font(.system(size: 16, weight: .medium))
                         .padding(.leading, 15)
                     Spacer()
-                    Text("오전 00:00")
+                    Text(viewModel.output.localAlarmTime)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(Color(uiColor: .systemGray))
                         .padding(.trailing, 10)

@@ -594,6 +594,52 @@
         }
       }
     },
+    "localAlarmTime_en" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%02d:%02d %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%02d:%02d %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%02d:%02d %@"
+          }
+        }
+      }
+    },
+    "localAlarmTime_ko_jp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %02d:%02d"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %02d:%02d"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %02d:%02d"
+          }
+        }
+      }
+    },
     "MIT License" : {
       "localizations" : {
         "ja" : {
@@ -941,9 +987,6 @@
           }
         }
       }
-    },
-    "오전 00:00" : {
-
     }
   },
   "version" : "1.0"

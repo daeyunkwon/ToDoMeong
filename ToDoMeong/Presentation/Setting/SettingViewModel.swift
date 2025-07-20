@@ -23,6 +23,7 @@ final class SettingViewModel: ViewModelType {
     struct Input {
         let isShowMailView = PassthroughSubject<Bool, Never>()
         let setLocalAlarmOnOff = PassthroughSubject<Bool, Never>()
+        let setLocalAlarmTime = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -37,11 +38,13 @@ final class SettingViewModel: ViewModelType {
         var showMailView = false
         var releaseVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         var isLocalAlarmOn: Bool = false
+        var localAlarmTime: String = ""
     }
     
     init() {
         transform()
         self.action(.toggleLocalAlarm(isOn: UserDefaults.standard.value(forKey: "isLocalAlarmOn") as? Bool ?? false))
+        self.action(.setLocalAlarmTime)
     }
     
     func transform() {
@@ -60,6 +63,14 @@ final class SettingViewModel: ViewModelType {
                 self.output.isLocalAlarmOn = newValue
             }
             .store(in: &cancellables)
+        
+        input.setLocalAlarmTime
+            .sink { [weak self] in
+                guard let self else { return }
+                let timeDate = UserDefaults.standard.value(forKey: "localAlarmTime") as? Date ?? Date()
+                self.output.localAlarmTime = self.localizedLocalAlarmTime(timeDate)
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -69,6 +80,7 @@ extension SettingViewModel {
     enum Action {
         case showMailView(isShow: Bool)
         case toggleLocalAlarm(isOn: Bool)
+        case setLocalAlarmTime
     }
     
     func action(_ action: Action) {
@@ -78,6 +90,39 @@ extension SettingViewModel {
             
         case .toggleLocalAlarm(let isOn):
             input.setLocalAlarmOnOff.send(isOn)
+            
+        case .setLocalAlarmTime:
+            input.setLocalAlarmTime.send(())
+        }
+    }
+}
+
+//MARK: - Logic
+
+extension SettingViewModel {
+    private func localizedLocalAlarmTime(_ date: Date) -> String {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(in: TimeZone.current, from: date)
+        let hour24 = components.hour ?? 0
+        let minute = components.minute ?? 0
+
+        let isAM = hour24 < 12
+        let hour12 = hour24 % 12 == 0 ? 12 : hour24 % 12
+        
+        let langCode = Locale.current.language.languageCode?.identifier ?? "en"
+
+        switch langCode {
+        case "ko":
+            let a = isAM ? "오전" : "오후"
+            return String(format: "localAlarmTime_ko_jp".localized(), a, hour12, minute)
+
+        case "ja":
+            let a = isAM ? "午前" : "午後"
+            return String(format: "localAlarmTime_ko_jp".localized(), a, hour12, minute)
+
+        default:
+            let a = isAM ? "AM" : "PM"
+            return String(format: "localAlarmTime_en".localized(), hour12, minute, a)
         }
     }
 }
