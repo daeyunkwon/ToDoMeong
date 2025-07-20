@@ -22,6 +22,8 @@ struct SettingView: View {
                             navigationLinkButtonRowView(item: item)
                         case .toggle:
                             EmptyView()
+                        case .toggleWithNavigationLink:
+                            toggleWithNavigationLinkButtonRowView(item: item)
                         case .button:
                             buttonRowView(item: item)
                         }
@@ -80,6 +82,59 @@ struct SettingView: View {
                         .font(.system(size: 16, weight: .medium))
                         .padding(.leading, 15)
                     Spacer()
+                    Image(systemName: "chevron.forward")
+                }
+                .padding(.trailing, 15)
+            }
+            .padding(.horizontal, 0)
+        }
+        .buttonStyle(DefaultButtonStyle())
+        .tint(Color(uiColor: .label))
+    }
+    
+    private func toggleWithNavigationLinkButtonRowView(item: Setting) -> some View {
+        var isOn: Binding<Bool>
+        switch item.type {
+           case .toggleWithNavigationLink(detailType: .localAlarm):
+               isOn = $viewModel.output.isLocalAlarmOn
+           default:
+               isOn = .constant(false)
+           }
+        
+        return NavigationLink {
+            switch item.type {
+            case .toggleWithNavigationLink(let detailType):
+                switch detailType {
+                case .localAlarm:
+                    NavigationLazyView(build: EmptyView())
+                }
+            default:
+                EmptyView()
+            }
+        } label: {
+            ZStack {
+                Rectangle()
+                    .frame(height: 55)
+                    .foregroundStyle(Color(uiColor: .systemBackground))
+                    .cornerRadius(0)
+                HStack {
+                    Text(item.title.localized())
+                        .font(.system(size: 16, weight: .medium))
+                        .padding(.leading, 15)
+                    Spacer()
+                    Text("오전 00:00")
+                        .font(.system(size: 13, weight: .medium))
+                        .foregroundStyle(Color(uiColor: .systemGray))
+                        .padding(.trailing, 10)
+                    Toggle("", isOn: Binding(get: {
+                        isOn.wrappedValue
+                    }, set: { newValue in
+                        viewModel.action(.toggleLocalAlarm(isOn: newValue))
+                    }))
+                        .padding(.trailing, 15)
+                        .scaleEffect(1.0)
+                        .frame(width: 50)
+                        .background(.clear)
                     Image(systemName: "chevron.forward")
                 }
                 .padding(.trailing, 15)

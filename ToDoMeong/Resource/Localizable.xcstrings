@@ -571,6 +571,29 @@
         }
       }
     },
+    "localAlarm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alarm"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アラーム"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
+          }
+        }
+      }
+    },
     "MIT License" : {
       "localizations" : {
         "ja" : {
@@ -918,6 +941,9 @@
           }
         }
       }
+    },
+    "오전 00:00" : {
+
     }
   },
   "version" : "1.0"

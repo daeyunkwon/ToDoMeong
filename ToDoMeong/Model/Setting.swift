@@ -9,6 +9,7 @@ import Foundation
 
 enum SettingButtonType: Equatable, Hashable {
     case navigationLink(detailType: SettingNavigationLinkDetailType)
+    case toggleWithNavigationLink(detailType: SettingToggleNavigationLinkDetailType)
     case toggle
     case button(detailType: SettingButtonDetailType)
 }
@@ -16,6 +17,10 @@ enum SettingButtonType: Equatable, Hashable {
 enum SettingNavigationLinkDetailType : Equatable, Hashable {
     case theme
     case license
+}
+
+enum SettingToggleNavigationLinkDetailType : Equatable, Hashable {
+    case localAlarm
 }
 
 enum SettingButtonDetailType: Equatable, Hashable {
