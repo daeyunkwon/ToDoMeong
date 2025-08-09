@@ -23,7 +23,7 @@ final class SettingViewModel: ViewModelType {
     struct Input {
         let isShowMailView = PassthroughSubject<Bool, Never>()
         let setLocalAlarmOnOff = PassthroughSubject<Bool, Never>()
-        let setLocalAlarmTime = PassthroughSubject<Void, Never>()
+        let setLocalAlarmTime = PassthroughSubject<Date, Never>()
     }
     
     struct Output {
@@ -37,14 +37,14 @@ final class SettingViewModel: ViewModelType {
         
         var showMailView = false
         var releaseVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-        var isLocalAlarmOn: Bool = false
-        var localAlarmTime: String = ""
+        var isLocalAlarmOn: Bool = UserDefaults.standard.value(forKey: "isLocalAlarmOn") as? Bool ?? false
+        var localAlarmTime: Date = UserDefaults.standard.value(forKey: "localAlarmTime") as? Date ?? Date()
+        var localAlarmTimeTitle: String = ""
     }
     
     init() {
         transform()
-        self.action(.toggleLocalAlarm(isOn: UserDefaults.standard.value(forKey: "isLocalAlarmOn") as? Bool ?? false))
-        self.action(.setLocalAlarmTime)
+        output.localAlarmTimeTitle = localizedLocalAlarmTime(output.localAlarmTime)
     }
     
     func transform() {
@@ -58,17 +58,17 @@ final class SettingViewModel: ViewModelType {
         input.setLocalAlarmOnOff
             .sink { [weak self] newValue in
                 guard let self else { return }
-                print("로컬알람 켬? -> \(newValue)")
                 UserDefaults.standard.set(newValue, forKey: "isLocalAlarmOn")
                 self.output.isLocalAlarmOn = newValue
             }
             .store(in: &cancellables)
         
         input.setLocalAlarmTime
-            .sink { [weak self] in
+            .sink { [weak self] time in
                 guard let self else { return }
-                let timeDate = UserDefaults.standard.value(forKey: "localAlarmTime") as? Date ?? Date()
-                self.output.localAlarmTime = self.localizedLocalAlarmTime(timeDate)
+                UserDefaults.standard.set(time, forKey: "localAlarmTime")
+                self.output.localAlarmTime = time
+                self.output.localAlarmTimeTitle = self.localizedLocalAlarmTime(time)
             }
             .store(in: &cancellables)
     }
@@ -80,7 +80,7 @@ extension SettingViewModel {
     enum Action {
         case showMailView(isShow: Bool)
         case toggleLocalAlarm(isOn: Bool)
-        case setLocalAlarmTime
+        case setLocalAlarmTime(time: Date)
     }
     
     func action(_ action: Action) {
@@ -91,8 +91,8 @@ extension SettingViewModel {
         case .toggleLocalAlarm(let isOn):
             input.setLocalAlarmOnOff.send(isOn)
             
-        case .setLocalAlarmTime:
-            input.setLocalAlarmTime.send(())
+        case .setLocalAlarmTime(let date):
+            input.setLocalAlarmTime.send((date))
         }
     }
 }
@@ -106,8 +106,8 @@ extension SettingViewModel {
         let hour24 = components.hour ?? 0
         let minute = components.minute ?? 0
 
-        let isAM = hour24 < 12
-        let hour12 = hour24 % 12 == 0 ? 12 : hour24 % 12
+        let isAM: Bool = hour24 < 12
+        let hour12: Int = hour24 % 12 == 0 ? 12 : hour24 % 12
         
         let langCode = Locale.current.language.languageCode?.identifier ?? "en"
 

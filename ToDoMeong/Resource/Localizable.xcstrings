@@ -20,23 +20,6 @@
     "%lld" : {
 
     },
-    "0" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -577,19 +560,88 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Alarm"
+            "value" : "Notifications"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "アラーム"
+            "value" : "通知"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "알림"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.infoMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "If you have unfinished tasks,\nwe’ll send you a reminder every day at your set time 🐾"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もし未完了のタスクがあれば、\n毎日設定した時間に通知しますよ🐾"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "알림"
+            "value" : "완료하지 못한 할 일이 있다면 \n매일 설정한 시간대에 알림을 드릴게요🐾"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.save.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time Setting"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간 설정하기"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "알림 설정"
           }
         }
       }

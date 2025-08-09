@@ -106,7 +106,7 @@ struct SettingView: View {
             case .toggleWithNavigationLink(let detailType):
                 switch detailType {
                 case .localAlarm:
-                    NavigationLazyView(build: EmptyView())
+                    NavigationLazyView(build: AlarmSettingDetailView(viewModel: self.viewModel))
                 }
             default:
                 EmptyView()
@@ -122,7 +122,7 @@ struct SettingView: View {
                         .font(.system(size: 16, weight: .medium))
                         .padding(.leading, 15)
                     Spacer()
-                    Text(viewModel.output.localAlarmTime)
+                    Text(viewModel.output.localAlarmTimeTitle)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(Color(uiColor: .systemGray))
                         .padding(.trailing, 8)
