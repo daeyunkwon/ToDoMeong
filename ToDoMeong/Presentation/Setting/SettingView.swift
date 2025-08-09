@@ -125,7 +125,7 @@ struct SettingView: View {
                     Text(viewModel.output.localAlarmTime)
                         .font(.system(size: 13, weight: .medium))
                         .foregroundStyle(Color(uiColor: .systemGray))
-                        .padding(.trailing, 10)
+                        .padding(.trailing, 8)
                     Toggle("", isOn: Binding(get: {
                         isOn.wrappedValue
                     }, set: { newValue in
@@ -133,7 +133,8 @@ struct SettingView: View {
                     }))
                         .padding(.trailing, 15)
                         .scaleEffect(1.0)
-                        .frame(width: 50)
+                        .frame(width: 60)
+                        .tint(.brandBegie)
                         .background(.clear)
                     Image(systemName: "chevron.forward")
                 }
