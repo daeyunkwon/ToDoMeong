@@ -23,9 +23,15 @@ struct AlarmSettingDetailView: View {
             
             Spacer().frame(height: 55)
             
-            datePickerView()
+            RoundedRectangle(cornerRadius: 15)
+                .fill(Color(uiColor: .systemGray6))
+                .overlay {
+                    datePickerView()
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 40)
             
-            Spacer()
+            Spacer().frame(height: 55)
             
             saveButtonView()
             Spacer().frame(height: 50)
