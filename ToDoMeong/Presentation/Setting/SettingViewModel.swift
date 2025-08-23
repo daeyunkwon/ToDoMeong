@@ -40,6 +40,7 @@ final class SettingViewModel: ViewModelType {
         var isLocalAlarmOn: Bool = UserDefaults.standard.value(forKey: "isLocalAlarmOn") as? Bool ?? false
         var localAlarmTime: Date = UserDefaults.standard.value(forKey: "localAlarmTime") as? Date ?? Date()
         var localAlarmTimeTitle: String = ""
+        var showNotiPermissionAlert: Bool = false
     }
     
     init() {
@@ -60,6 +61,22 @@ final class SettingViewModel: ViewModelType {
                 guard let self else { return }
                 UserDefaults.standard.set(newValue, forKey: "isLocalAlarmOn")
                 self.output.isLocalAlarmOn = newValue
+                
+                Task {
+                    await self.setLocalAlarm(with: newValue)
+                }
+                
+                if newValue {
+                    LocalNotificationManager.shared.checkPermission { granted in
+                        DispatchQueue.main.async {
+                            if !granted {
+                                self.output.showNotiPermissionAlert = true
+                                UserDefaults.standard.set(false, forKey: "isLocalAlarmOn")
+                                self.output.isLocalAlarmOn = false
+                            }
+                        }
+                    }
+                }
             }
             .store(in: &cancellables)
         
@@ -69,6 +86,10 @@ final class SettingViewModel: ViewModelType {
                 UserDefaults.standard.set(time, forKey: "localAlarmTime")
                 self.output.localAlarmTime = time
                 self.output.localAlarmTimeTitle = self.localizedLocalAlarmTime(time)
+                
+                Task {
+                    await self.setLocalAlarm(with: self.output.isLocalAlarmOn)
+                }
             }
             .store(in: &cancellables)
     }
@@ -100,29 +121,70 @@ extension SettingViewModel {
 //MARK: - Logic
 
 extension SettingViewModel {
+    // TODO: 테스트 -> 알림 매일 오는지
     private func localizedLocalAlarmTime(_ date: Date) -> String {
-        let calendar = Calendar.current
-        let components = calendar.dateComponents(in: TimeZone.current, from: date)
-        let hour24 = components.hour ?? 0
-        let minute = components.minute ?? 0
-
-        let isAM: Bool = hour24 < 12
-        let hour12: Int = hour24 % 12 == 0 ? 12 : hour24 % 12
+        let (isAM, _, hour12, minute) = convertTimeComponents(date: date)
+        let hour = String(hour12)
         
         let langCode = Locale.current.language.languageCode?.identifier ?? "en"
 
         switch langCode {
         case "ko":
             let a = isAM ? "오전" : "오후"
-            return String(format: "localAlarmTime_ko_jp".localized(), a, hour12, minute)
+            return String(format: "localAlarmTime_ko_jp".localized(), a, hour, minute)
 
         case "ja":
             let a = isAM ? "午前" : "午後"
-            return String(format: "localAlarmTime_ko_jp".localized(), a, hour12, minute)
+            return String(format: "localAlarmTime_ko_jp".localized(), a, hour, minute)
 
         default:
             let a = isAM ? "AM" : "PM"
-            return String(format: "localAlarmTime_en".localized(), hour12, minute, a)
+            return String(format: "localAlarmTime_en".localized(), hour, minute, a)
+        }
+    }
+    
+    private func convertTimeComponents(date: Date) -> (Bool, Int, Int, Int) {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents(in: TimeZone.current, from: date)
+        let hour24 = components.hour ?? 0
+        let minute = components.minute ?? 0
+        let isAM: Bool = hour24 < 12
+        let hour12: Int = hour24 % 12 == 0 ? 12 : hour24 % 12
+        
+        return (isAM, hour24, hour12, minute)
+    }
+    
+    private func setLocalAlarm(with isOn: Bool) async {
+        if isOn {
+            let title = "localAlarm.noti.title".localized()
+            let (_, hour24, _, minute) = convertTimeComponents(date: self.output.localAlarmTime)
+//            let hour = String(hour12)
+            let body: String
+            
+//            let langCode = Locale.current.language.languageCode?.identifier ?? "en"
+//            
+//            switch langCode {
+//            case "ko", "ja":
+//                let a: String
+//                
+//                if langCode == "ko" {
+//                    a = isAM ? "오전" : "오후"
+//                } else {
+//                    a = isAM ? "午前" : "午後"
+//                }
+//                
+//                body = String(format: "localAlarm.noti.body_ko_jp".localized(), a, hour, minute)
+//            
+//            default:
+//                let a = isAM ? "AM" : "PM"
+//                body = String(format: "localAlarm.noti.body.en".localized(), hour, minute, a)
+//            }
+            
+            body = "localAlarm.noti.body".localized()
+            
+            await LocalNotificationManager.shared.registerDailyNotification(title: title, body: body, hour: hour24, minute: minute)
+        } else {
+            LocalNotificationManager.shared.clear()
         }
     }
 }

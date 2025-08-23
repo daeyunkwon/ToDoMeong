@@ -44,6 +44,18 @@ struct SettingView: View {
                 .tint(.blue)
             })
             
+            .alert("alert.title.info".localized(), isPresented: $viewModel.output.showNotiPermissionAlert, actions: {
+                Button("alert.button.go_to_system") {
+                    if let url = URL(string: UIApplication.openSettingsURLString),
+                       UIApplication.shared.canOpenURL(url) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+                Button("alert.button.close".localized(), role: .cancel) { }
+            }, message: {
+                Text("alert.message.permission.local_noti".localized())
+            })
+            
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Text("setting".localized())
