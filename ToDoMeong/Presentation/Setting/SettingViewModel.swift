@@ -121,7 +121,6 @@ extension SettingViewModel {
 //MARK: - Logic
 
 extension SettingViewModel {
-    // TODO: 테스트 -> 알림 매일 오는지
     private func localizedLocalAlarmTime(_ date: Date) -> String {
         let (isAM, _, hour12, minute) = convertTimeComponents(date: date)
         let hour = String(hour12)
