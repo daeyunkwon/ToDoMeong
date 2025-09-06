@@ -12,6 +12,7 @@ import RealmSwift
 struct ToDoMeongApp: App {
     
     @AppStorage("themeMode") var themeMode: String = ThemeMode.system.rawValue
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     var body: some Scene {
         WindowGroup {
