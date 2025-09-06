@@ -20,23 +20,6 @@
     "%lld" : {
 
     },
-    "0" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : ""
-          }
-        }
-      }
-    },
     "add" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -148,6 +131,98 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "+ 할 일 추가하기"
+          }
+        }
+      }
+    },
+    "alert.button.close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "閉じる"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "닫기"
+          }
+        }
+      }
+    },
+    "alert.button.go_to_system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定へ移動"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정으로 이동"
+          }
+        }
+      }
+    },
+    "alert.message.permission.local_noti" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We need your notification permission 📩\nTurn it on in Settings to receive timely updates."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知の許可が必要です 📩\n設定からオンにすると、タイムリーにお知らせできます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림이 비활성화되어 있습니다. 📩\n설정에서 알림을 켜고 편리하게 이용하세요!"
+          }
+        }
+      }
+    },
+    "alert.title.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Alert"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "システム通知"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시스템 알림"
           }
         }
       }
@@ -567,6 +642,213 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "라이트 모드"
+          }
+        }
+      }
+    },
+    "localAlarm" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
+          }
+        }
+      }
+    },
+    "localAlarm.noti.body" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It's already time for the notification we promised 🙌 Have a great day today🐾"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もうすぐお知らせをお届けする時間になりました🙌 今日も一日、がんばってください🐾"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "벌써 알림을 보내드리기로 약속한 시간이 되었어요🙌 오늘 하루도 힘내세요🐾"
+          }
+        }
+      }
+    },
+    "localAlarm.noti.body.en" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s already %@:%02d %@! Have a great day🐾"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s already %@:%02d %@! Have a great day🐾"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "It’s already %@:%02d %@! Have a great day🐾"
+          }
+        }
+      }
+    },
+    "localAlarm.noti.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shall we check today’s tasks?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日のやることを確認してみましょう！"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘 할 일 확인해 볼까요?"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.infoMessage" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications will reach you daily at your chosen time 🐾"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "毎日、設定した時間に通知をお届けしますよ🐾"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매일 설정한 시간에 알림을 드릴게요🐾"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.save.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time Setting"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간 설정하기"
+          }
+        }
+      }
+    },
+    "localAlarm.setting.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification Settings"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知設定"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 설정"
+          }
+        }
+      }
+    },
+    "localAlarmTime_en" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:%02d %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:%02d %@"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@:%02d %@"
+          }
+        }
+      }
+    },
+    "localAlarmTime_ko_jp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %@:%02d"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %@:%02d"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %@:%02d"
           }
         }
       }

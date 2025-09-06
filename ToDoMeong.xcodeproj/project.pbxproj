@@ -20,6 +20,9 @@
 		444DE6402CC63B3D00821269 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 444DE63F2CC63B3D00821269 /* Assets.xcassets */; };
 		444DE6442CC63B3D00821269 /* ToDoMeongBasicWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 444DE6342CC63B3C00821269 /* ToDoMeongBasicWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		444DE64F2CC6405A00821269 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 448960272CA2EACF00410DA7 /* Localizable.xcstrings */; };
+		445C60102E474F950061EB01 /* AlarmSettingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C600F2E474F950061EB01 /* AlarmSettingDetailView.swift */; };
+		445C60122E4778EC0061EB01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C60112E4778EC0061EB01 /* AppDelegate.swift */; };
+		445C61DE2E4F430C0061EB01 /* LocalNotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 445C61DD2E4F430C0061EB01 /* LocalNotificationManager.swift */; };
 		44895FFC2C9C36D900410DA7 /* DetailPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */; };
 		44895FFF2C9C734D00410DA7 /* CalendarTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */; };
 		448960022C9C85AB00410DA7 /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 448960012C9C85AB00410DA7 /* FSCalendar */; };
@@ -127,6 +130,9 @@
 		444DE6412CC63B3D00821269 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		444DE6492CC63B9F00821269 /* ToDoMeong.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoMeong.entitlements; sourceTree = "<group>"; };
 		444DE64A2CC63BB700821269 /* ToDoMeongBasicWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ToDoMeongBasicWidgetExtension.entitlements; sourceTree = "<group>"; };
+		445C600F2E474F950061EB01 /* AlarmSettingDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingDetailView.swift; sourceTree = "<group>"; };
+		445C60112E4778EC0061EB01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		445C61DD2E4F430C0061EB01 /* LocalNotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationManager.swift; sourceTree = "<group>"; };
 		44895FFB2C9C36D900410DA7 /* DetailPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPhotoView.swift; sourceTree = "<group>"; };
 		44895FFE2C9C734D00410DA7 /* CalendarTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarTodoView.swift; sourceTree = "<group>"; };
 		448960032C9C862000410DA7 /* FSCalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FSCalendarView.swift; sourceTree = "<group>"; };
@@ -232,6 +238,14 @@
 			path = ToDoMeongBasicWidget;
 			sourceTree = "<group>";
 		};
+		445C600E2E474F430061EB01 /* AlarmSetting */ = {
+			isa = PBXGroup;
+			children = (
+				445C600F2E474F950061EB01 /* AlarmSettingDetailView.swift */,
+			);
+			path = AlarmSetting;
+			sourceTree = "<group>";
+		};
 		44895FFD2C9C731100410DA7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,6 +263,7 @@
 				448960232CA1B7E700410DA7 /* SettingView.swift */,
 				44AE6AE12CA4709900087907 /* MailView.swift */,
 				44AE6AE02CA45AEA00087907 /* ThemeSetting */,
+				445C600E2E474F430061EB01 /* AlarmSetting */,
 				440C30F92CA6AC650083DFF2 /* License */,
 			);
 			path = Setting;
@@ -334,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */,
+				445C60112E4778EC0061EB01 /* AppDelegate.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -349,6 +365,7 @@
 				44ED3AF22C94B27700E3E9CF /* HapticManager.swift */,
 				44ED3B252C9C225400E3E9CF /* ImageFileManager.swift */,
 				44A02E722CA59FFB003EE911 /* TabViewManager.swift */,
+				445C61DD2E4F430C0061EB01 /* LocalNotificationManager.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -518,7 +535,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1530;
-				LastUpgradeCheck = 1620;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					444DE6332CC63B3C00821269 = {
 						CreatedOnToolsVersion = 15.3;
@@ -614,11 +631,13 @@
 				44ED3ADC2C92E51B00E3E9CF /* Constant.swift in Sources */,
 				44ED3B122C98282900E3E9CF /* AddEditCompleteToastView.swift in Sources */,
 				449B07C72D8D966C0030FE9D /* CustomUIKitTextField.swift in Sources */,
+				445C61DE2E4F430C0061EB01 /* LocalNotificationManager.swift in Sources */,
 				440C30FD2CA6BAF40083DFF2 /* ApacheLicenseView.swift in Sources */,
 				44ED3AE72C94328F00E3E9CF /* NavigationLazyView.swift in Sources */,
 				44A02E792CA5AFE7003EE911 /* UIViewLifeCycleHandler.swift in Sources */,
 				44AE6ADF2CA45A9E00087907 /* ThemeSettingDetailView.swift in Sources */,
 				448960042C9C862000410DA7 /* FSCalendarView.swift in Sources */,
+				445C60122E4778EC0061EB01 /* AppDelegate.swift in Sources */,
 				44ED3B222C9920A800E3E9CF /* EditTodoViewModel.swift in Sources */,
 				44AE6AE22CA4709900087907 /* MailView.swift in Sources */,
 				44ED3AF52C9583C900E3E9CF /* CustomTabView.swift in Sources */,
@@ -641,6 +660,7 @@
 				448960242CA1B7E700410DA7 /* SettingView.swift in Sources */,
 				4489602A2CA2EB7100410DA7 /* String+Extension.swift in Sources */,
 				44ED3B202C99159600E3E9CF /* EditTodoView.swift in Sources */,
+				445C60102E474F950061EB01 /* AlarmSettingDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,7 +696,6 @@
 				CODE_SIGN_ENTITLEMENTS = ToDoMeongBasicWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDoMeongBasicWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeongBasicWidget;
@@ -687,7 +706,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -709,7 +728,6 @@
 				CODE_SIGN_ENTITLEMENTS = ToDoMeongBasicWidgetExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9M37U587ZT;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDoMeongBasicWidget/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ToDoMeongBasicWidget;
@@ -720,7 +738,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -770,6 +788,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -834,6 +853,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -864,7 +884,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
-				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDoMeong/Resource/Info.plist;
@@ -901,7 +920,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ToDoMeong/Resource/Preview Content\"";
-				DEVELOPMENT_TEAM = 9M37U587ZT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ToDoMeong/Resource/Info.plist;
