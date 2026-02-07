@@ -15,6 +15,17 @@ struct TodoView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
+                
+                Spacer()
+                    .frame(height: 10)
+                
+                Text("todayTodo".localized())
+                    .font(Constant.AppFont.jalnanTopLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+                    .background(Color(uiColor: .systemBackground))
+                    .frame(height: 20)
+                
                 CapsuleDateView()
                 
                 TodoListView(viewModel: viewModel)
@@ -35,14 +46,8 @@ struct TodoView: View {
                     .frame(height: 50)
                     .offset(y: 50)
             })
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("todayTodo".localized())
-                        .font(Constant.AppFont.jalnanTopLeading)
-                        .padding(.top, 15)
-                }
-            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
         }
         
         //새로운 할 일 추가 화면 팝업

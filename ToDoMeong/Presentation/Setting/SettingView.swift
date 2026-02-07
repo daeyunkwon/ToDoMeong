@@ -14,6 +14,16 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             
+            Spacer()
+                .frame(height: 10)
+            
+            Text("setting".localized())
+                .font(Constant.AppFont.jalnanTopLeading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .background(Color(uiColor: .systemBackground))
+                .frame(height: 20)
+            
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.output.settings, id: \.id) { item in
@@ -64,14 +74,6 @@ struct SettingView: View {
                 Button("alert.button.close".localized(), role: .cancel) { }
             } message: {
                 Text("alert.message.mailNotConfigured".localized())
-            }
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("setting".localized())
-                        .font(Constant.AppFont.jalnanTopLeading)
-                        .padding(.top, 15)
-                }
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
