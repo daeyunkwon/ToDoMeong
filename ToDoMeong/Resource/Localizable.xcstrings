@@ -181,6 +181,29 @@
         }
       }
     },
+    "alert.message.mailNotConfigured" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No mail account is configured on this device.\nPlease contact us directly at sweet_ray@naver.com\n."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この端末にはメールアカウントが設定されていません。\nsweet_ray@naver.com\n まで直接お問い合わせください。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기기에 메일 계정이 설정되어 있지 않습니다.\nsweet_ray@naver.com으로 직접 문의해주세요!"
+          }
+        }
+      }
+    },
     "alert.message.permission.local_noti" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1202,5 +1225,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }

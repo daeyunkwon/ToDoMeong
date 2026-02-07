@@ -40,6 +40,10 @@ struct SettingView: View {
                     viewModel.output.showMailView
                 }, set: { newValue in
                     viewModel.action(.showMailView(isShow: newValue))
+                }), showMailError: Binding(get: {
+                    viewModel.output.showMailErrorAlert
+                }, set: { newValue in
+                    viewModel.action(.showMailErrorAlert(isShow: newValue))
                 }))
                 .tint(.blue)
             })
@@ -55,6 +59,12 @@ struct SettingView: View {
             }, message: {
                 Text("alert.message.permission.local_noti".localized())
             })
+            
+            .alert("alert.title.info".localized(), isPresented: $viewModel.output.showMailErrorAlert) {
+                Button("alert.button.close".localized(), role: .cancel) { }
+            } message: {
+                Text("alert.message.mailNotConfigured".localized())
+            }
             
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
