@@ -181,25 +181,48 @@
         }
       }
     },
+    "alert.button.goToAppStore" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to the App Store"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Storeで開く"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱스토어로 이동"
+          }
+        }
+      }
+    },
     "alert.message.mailNotConfigured" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No mail account is configured on this device.\nPlease contact us directly at sweet_ray@naver.com\n."
+            "value" : "The Mail app is not set up on your device, so you can’t send an email.\nPlease contact us directly at sweet_ray@naver.com\n, or leave your inquiry in the App Store review section and we’ll get back to you as soon as possible. 🙇‍♂️"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "この端末にはメールアカウントが設定されていません。\nsweet_ray@naver.com\n まで直接お問い合わせください。"
+            "value" : "メールアプリにアカウントが設定されていないため、メールを送信できません。\nsweet_ray@naver.com\n まで直接お問い合わせいただくか、App Storeのレビュー欄にご記入ください。確認後、返信いたします。🙇‍♂️"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "기기에 메일 계정이 설정되어 있지 않습니다.\nsweet_ray@naver.com으로 직접 문의해주세요!"
+            "value" : "메일 앱에 계정이 설정되어 있지 않아 메일을 보낼 수 없습니다.\nsweet_ray@naver.com 으로 직접 문의해주시거나, 앱스토어 리뷰를 통해 남겨주시면 확인 후 답변드리겠습니다.🙇‍♂️"
           }
         }
       }

@@ -71,6 +71,11 @@ struct SettingView: View {
             })
             
             .alert("alert.title.info".localized(), isPresented: $viewModel.output.showMailErrorAlert) {
+                Button("alert.button.goToAppStore".localized()) {
+                    if let url = URL(string: "itms-apps://itunes.apple.com/app/id6720724136?action=write-review") {
+                        UIApplication.shared.open(url)
+                    }
+                }
                 Button("alert.button.close".localized(), role: .cancel) { }
             } message: {
                 Text("alert.message.mailNotConfigured".localized())
