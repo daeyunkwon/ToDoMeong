@@ -39,6 +39,7 @@ final class TodoViewModel: ViewModelType {
     }
     
     struct Output {
+        var today: Date = Date()
         var todoList: [Todo] = []
         var showAddTodoView = false
         var showAddNewCompletionToast = false
@@ -64,6 +65,7 @@ final class TodoViewModel: ViewModelType {
                 case .success(let todoList):
                     self?.output.todoList = todoList
                     self?.count = todoList.count
+                    self?.output.today = Date()
                 
                 case .failure(let error):
                     print(error.description)

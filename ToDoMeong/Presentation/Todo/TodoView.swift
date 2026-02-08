@@ -26,7 +26,7 @@ struct TodoView: View {
                     .background(Color(uiColor: .systemBackground))
                     .frame(height: 20)
                 
-                CapsuleDateView()
+                CapsuleDateView(viewModel: viewModel)
                 
                 TodoListView(viewModel: viewModel)
                     .onDrop(of: [.text], delegate: TodoDropDelegate(viewModel: self.viewModel, shouldHandleDrop: false))
@@ -157,6 +157,10 @@ struct TodoView: View {
         .onAppear {
             viewModel.action(.onAppear)
         }
+
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            viewModel.action(.onAppear)
+        }
     }
 }
 
@@ -167,6 +171,12 @@ struct TodoView: View {
 //MARK: - 캡슐모양 오늘 날짜 뷰
 
 private struct CapsuleDateView: View {
+    @ObservedObject private var viewModel: TodoViewModel
+    
+    fileprivate init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
             .fill(.brandGreen)
@@ -174,7 +184,7 @@ private struct CapsuleDateView: View {
             .frame(height: 40)
             .padding(.horizontal, 7)
             .overlay {
-                Text(Date().dayOfTheWeekDateString)
+                Text(viewModel.output.today.dayOfTheWeekDateString)
                     .font(Constant.AppFont.jalnan13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 15)
