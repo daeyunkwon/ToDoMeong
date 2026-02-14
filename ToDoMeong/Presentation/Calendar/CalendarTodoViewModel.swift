@@ -30,7 +30,6 @@ final class CalendarTodoViewModel: ViewModelType {
         case editTodo
     }
     
-    
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -47,6 +46,7 @@ final class CalendarTodoViewModel: ViewModelType {
         let addTodoButtonTapped = PassthroughSubject<Void, Never>()
         let showSucceedToast = PassthroughSubject<CompletionToastType, Never>()
         let showFailedToast = PassthroughSubject<ErrorToastType, Never>()
+        let reloadCalendar = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -54,7 +54,7 @@ final class CalendarTodoViewModel: ViewModelType {
         var selectedDate: Date = Date()
         var currentPageDate: Date = Date()
         var moveToday = false
-        var isImageUpdate = false
+        var reloadCalendar = false
         var showFailedToast: (Bool, ErrorToastType) = (false, ErrorToastType.failedToAdd)
         var showSucceedToast: (Bool, CompletionToastType) = (false, CompletionToastType.addNewTodo)
         var moveToPreviousMonth = false
@@ -196,6 +196,12 @@ final class CalendarTodoViewModel: ViewModelType {
                 self?.output.showFailedToast = (true, type)
             }
             .store(in: &cancellables)
+        
+        input.reloadCalendar
+            .sink { [weak self] in
+                self?.output.reloadCalendar = true
+            }
+            .store(in: &cancellables)
     }
     
     private func observeTodos() {
@@ -216,7 +222,7 @@ final class CalendarTodoViewModel: ViewModelType {
                     print("DEBUG: Realm 데이터 변화 감지됨")
                     self.todoList = Array(todos)
                     self.input.selectedDate.send(self.selectedDate)
-                    self.output.isImageUpdate = true
+                    input.reloadCalendar.send()
                     
                     //위젯 업데이트
                     self.repository.fetchTodayTodo { result in
@@ -261,6 +267,7 @@ extension CalendarTodoViewModel {
         case addTodoButtonTapped
         case showSucceedToast(CompletionToastType)
         case showFailedToast(ErrorToastType)
+        case reloadCalendar
     }
     
     func action(_ action: Action) {
@@ -297,6 +304,10 @@ extension CalendarTodoViewModel {
         
         case .showFailedToast(let type):
             input.showFailedToast.send(type)
+            
+        case .reloadCalendar:
+            input.reloadCalendar.send()
+            
         }
     }
 }

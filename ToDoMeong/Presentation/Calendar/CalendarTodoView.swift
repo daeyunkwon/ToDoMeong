@@ -57,16 +57,25 @@ struct CalendarTodoView: View {
                     .padding(.trailing, 15)
                 }
             
-            FSCalendarView(selectedDate: Binding(get: {
-                viewModel.output.selectedDate
-            }, set: { newDate in
-                viewModel.action(.selectedDate(date: newDate))
-            }), currentPageDate: Binding(get: {
-                viewModel.output.currentPageDate
-            }, set: { newPageDate in
-                viewModel.action(.updateCurrentPageDate(date: newPageDate))
-            }), moveToday: $viewModel.output.moveToday, isImageUpdate: $viewModel.output.isImageUpdate, movePreviousMonth: $viewModel.output.moveToPreviousMonth, moveNextMonth: $viewModel.output.moveToNextMonth)
-                .frame(height: 300)
+            FSCalendarView(
+                selectedDate: Binding(get: {
+                    viewModel.output.selectedDate
+                }, set: { newDate in
+                    viewModel.action(.selectedDate(date: newDate))
+                }),
+                currentPageDate: Binding(
+                    get: {
+                        viewModel.output.currentPageDate
+                    },
+                    set: { newPageDate in
+                        viewModel.action(.updateCurrentPageDate(date: newPageDate))
+                    }),
+                moveToday: $viewModel.output.moveToday,
+                isReloadCalendar: $viewModel.output.reloadCalendar,
+                movePreviousMonth: $viewModel.output.moveToPreviousMonth,
+                moveNextMonth: $viewModel.output.moveToNextMonth
+            )
+            .frame(height: 300)
             
             ScrollView {
                 Spacer()
@@ -179,6 +188,10 @@ struct CalendarTodoView: View {
                 UIApplication.shared.dismissKeyboard()
             }
         })
+        
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            viewModel.action(.reloadCalendar)
+        }
     }
     
     private func triangleImage(rotation: Double) -> some View {
@@ -194,3 +207,4 @@ struct CalendarTodoView: View {
 #Preview {
     CalendarTodoView()
 }
+
