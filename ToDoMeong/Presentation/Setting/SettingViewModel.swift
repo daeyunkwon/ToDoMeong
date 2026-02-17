@@ -24,6 +24,7 @@ final class SettingViewModel: ViewModelType {
         let isShowMailView = PassthroughSubject<Bool, Never>()
         let setLocalAlarmOnOff = PassthroughSubject<Bool, Never>()
         let setLocalAlarmTime = PassthroughSubject<Date, Never>()
+        let showMailErrorAlert = PassthroughSubject<Bool, Never>()
     }
     
     struct Output {
@@ -36,6 +37,7 @@ final class SettingViewModel: ViewModelType {
         ]
         
         var showMailView = false
+        var showMailErrorAlert = false
         var releaseVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
         var isLocalAlarmOn: Bool = UserDefaults.standard.value(forKey: "isLocalAlarmOn") as? Bool ?? false
         var localAlarmTime: Date = UserDefaults.standard.value(forKey: "localAlarmTime") as? Date ?? Date()
@@ -92,6 +94,14 @@ final class SettingViewModel: ViewModelType {
                 }
             }
             .store(in: &cancellables)
+        
+        input.showMailErrorAlert
+            .delay(for: .seconds(1), scheduler: DispatchQueue.main)
+            .sink { [weak self] value in
+                guard let self else { return }
+                self.output.showMailErrorAlert = value
+            }
+            .store(in: &cancellables)
     }
 }
 
@@ -102,6 +112,7 @@ extension SettingViewModel {
         case showMailView(isShow: Bool)
         case toggleLocalAlarm(isOn: Bool)
         case setLocalAlarmTime(time: Date)
+        case showMailErrorAlert(isShow: Bool)
     }
     
     func action(_ action: Action) {
@@ -114,6 +125,9 @@ extension SettingViewModel {
             
         case .setLocalAlarmTime(let date):
             input.setLocalAlarmTime.send((date))
+            
+        case .showMailErrorAlert(let isShow):
+            input.showMailErrorAlert.send(isShow)
         }
     }
 }

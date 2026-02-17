@@ -30,7 +30,6 @@ final class CalendarTodoViewModel: ViewModelType {
         case editTodo
     }
     
-    
     var cancellables = Set<AnyCancellable>()
     var input = Input()
     @Published var output = Output()
@@ -47,6 +46,7 @@ final class CalendarTodoViewModel: ViewModelType {
         let addTodoButtonTapped = PassthroughSubject<Void, Never>()
         let showSucceedToast = PassthroughSubject<CompletionToastType, Never>()
         let showFailedToast = PassthroughSubject<ErrorToastType, Never>()
+        let reloadCalendar = PassthroughSubject<Void, Never>()
     }
     
     struct Output {
@@ -54,7 +54,7 @@ final class CalendarTodoViewModel: ViewModelType {
         var selectedDate: Date = Date()
         var currentPageDate: Date = Date()
         var moveToday = false
-        var isImageUpdate = false
+        var reloadCalendar = false
         var showFailedToast: (Bool, ErrorToastType) = (false, ErrorToastType.failedToAdd)
         var showSucceedToast: (Bool, CompletionToastType) = (false, CompletionToastType.addNewTodo)
         var moveToPreviousMonth = false
@@ -196,6 +196,12 @@ final class CalendarTodoViewModel: ViewModelType {
                 self?.output.showFailedToast = (true, type)
             }
             .store(in: &cancellables)
+        
+        input.reloadCalendar
+            .sink { [weak self] in
+                self?.output.reloadCalendar = true
+            }
+            .store(in: &cancellables)
     }
     
     private func observeTodos() {
@@ -216,14 +222,31 @@ final class CalendarTodoViewModel: ViewModelType {
                     print("DEBUG: Realm 데이터 변화 감지됨")
                     self.todoList = Array(todos)
                     self.input.selectedDate.send(self.selectedDate)
-                    self.output.isImageUpdate = true
+                    input.reloadCalendar.send()
                     
-                    //위젯 업데이트
+                    // 위젯 업데이트 (오늘/내일 할 일 개수 저장)
                     self.repository.fetchTodayTodo { result in
                         switch result {
                         case .success(let todoList):
                             self.userDefaults?.set(todoList.count, forKey: "count")
-                            WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
+                            
+                            let calendar = Calendar.current
+                            if let tomorrow = calendar.date(byAdding: .day, value: 1, to: Date()) {
+                                let tomorrowStart = calendar.startOfDay(for: tomorrow)
+                                self.repository.fetchTodo(date: tomorrowStart) { result in
+                                    switch result {
+                                    case .success(let tomorrowTodos):
+                                        self.userDefaults?.set(tomorrowTodos.count, forKey: "tomorrow")
+                                    
+                                    case .failure(let error):
+                                        print(error.description)
+                                        self.userDefaults?.set(0, forKey: "tomorrow")
+                                    }
+                                    WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
+                                }
+                            } else {
+                                WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
+                            }
                             
                         case .failure(let error):
                             print(error.description)
@@ -261,6 +284,7 @@ extension CalendarTodoViewModel {
         case addTodoButtonTapped
         case showSucceedToast(CompletionToastType)
         case showFailedToast(ErrorToastType)
+        case reloadCalendar
     }
     
     func action(_ action: Action) {
@@ -297,6 +321,10 @@ extension CalendarTodoViewModel {
         
         case .showFailedToast(let type):
             input.showFailedToast.send(type)
+            
+        case .reloadCalendar:
+            input.reloadCalendar.send()
+            
         }
     }
 }

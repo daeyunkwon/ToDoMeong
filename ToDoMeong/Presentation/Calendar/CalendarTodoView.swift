@@ -14,6 +14,17 @@ struct CalendarTodoView: View {
 
     var body: some View {
         NavigationStack {
+            
+            Spacer()
+                .frame(height: 10)
+            
+            Text("calendarTitle".localized())
+                .font(Constant.AppFont.jalnanTopLeading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .background(Color(uiColor: .systemBackground))
+                .frame(height: 20)
+            
             Text(viewModel.output.currentPageDate.yearMonthDateString)
                 .bold()
                 .frame(maxWidth: .infinity)
@@ -46,16 +57,25 @@ struct CalendarTodoView: View {
                     .padding(.trailing, 15)
                 }
             
-            FSCalendarView(selectedDate: Binding(get: {
-                viewModel.output.selectedDate
-            }, set: { newDate in
-                viewModel.action(.selectedDate(date: newDate))
-            }), currentPageDate: Binding(get: {
-                viewModel.output.currentPageDate
-            }, set: { newPageDate in
-                viewModel.action(.updateCurrentPageDate(date: newPageDate))
-            }), moveToday: $viewModel.output.moveToday, isImageUpdate: $viewModel.output.isImageUpdate, movePreviousMonth: $viewModel.output.moveToPreviousMonth, moveNextMonth: $viewModel.output.moveToNextMonth)
-                .frame(height: 300)
+            FSCalendarView(
+                selectedDate: Binding(get: {
+                    viewModel.output.selectedDate
+                }, set: { newDate in
+                    viewModel.action(.selectedDate(date: newDate))
+                }),
+                currentPageDate: Binding(
+                    get: {
+                        viewModel.output.currentPageDate
+                    },
+                    set: { newPageDate in
+                        viewModel.action(.updateCurrentPageDate(date: newPageDate))
+                    }),
+                moveToday: $viewModel.output.moveToday,
+                isReloadCalendar: $viewModel.output.reloadCalendar,
+                movePreviousMonth: $viewModel.output.moveToPreviousMonth,
+                moveNextMonth: $viewModel.output.moveToNextMonth
+            )
+            .frame(height: 300)
             
             ScrollView {
                 Spacer()
@@ -96,14 +116,8 @@ struct CalendarTodoView: View {
                     DogMessageBubbleView(message: "noTaskMessageForCalendar".localized())
                 }
             }
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("calendarTitle".localized())
-                        .font(Constant.AppFont.jalnanTopLeading)
-                        .padding(.top, 15)
-                }
-            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
         }
         
         // 성공 안내 메시지 팝업
@@ -174,6 +188,10 @@ struct CalendarTodoView: View {
                 UIApplication.shared.dismissKeyboard()
             }
         })
+        
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            viewModel.action(.reloadCalendar)
+        }
     }
     
     private func triangleImage(rotation: Double) -> some View {
@@ -189,3 +207,4 @@ struct CalendarTodoView: View {
 #Preview {
     CalendarTodoView()
 }
+

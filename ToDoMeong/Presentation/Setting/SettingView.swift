@@ -14,6 +14,16 @@ struct SettingView: View {
     var body: some View {
         NavigationStack {
             
+            Spacer()
+                .frame(height: 10)
+            
+            Text("setting".localized())
+                .font(Constant.AppFont.jalnanTopLeading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+                .background(Color(uiColor: .systemBackground))
+                .frame(height: 20)
+            
             ScrollView {
                 LazyVStack(spacing: 0) {
                     ForEach(viewModel.output.settings, id: \.id) { item in
@@ -40,6 +50,10 @@ struct SettingView: View {
                     viewModel.output.showMailView
                 }, set: { newValue in
                     viewModel.action(.showMailView(isShow: newValue))
+                }), showMailError: Binding(get: {
+                    viewModel.output.showMailErrorAlert
+                }, set: { newValue in
+                    viewModel.action(.showMailErrorAlert(isShow: newValue))
                 }))
                 .tint(.blue)
             })
@@ -56,12 +70,15 @@ struct SettingView: View {
                 Text("alert.message.permission.local_noti".localized())
             })
             
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("setting".localized())
-                        .font(Constant.AppFont.jalnanTopLeading)
-                        .padding(.top, 15)
+            .alert("alert.title.info".localized(), isPresented: $viewModel.output.showMailErrorAlert) {
+                Button("alert.button.goToAppStore".localized()) {
+                    if let url = URL(string: "itms-apps://itunes.apple.com/app/id6720724136?action=write-review") {
+                        UIApplication.shared.open(url)
+                    }
                 }
+                Button("alert.button.close".localized(), role: .cancel) { }
+            } message: {
+                Text("alert.message.mailNotConfigured".localized())
             }
             .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)

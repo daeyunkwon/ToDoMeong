@@ -13,13 +13,13 @@ struct FSCalendarView: UIViewRepresentable {
     @Binding var selectedDate: Date
     @Binding var currentPageDate: Date
     @Binding var moveToday: Bool
-    @Binding var isImageUpdate: Bool
+    @Binding var isReloadCalendar: Bool
     @Binding var movePreviousMonth: Bool
     @Binding var moveNextMonth: Bool
     
     private enum UpdateType {
         case moveToday
-        case isImageUpdate
+        case reloadCalendar
         case movePreviousMonth
         case moveNextMonth
         case none
@@ -69,8 +69,8 @@ struct FSCalendarView: UIViewRepresentable {
             type = .movePreviousMonth
         } else if moveNextMonth {
             type = .moveNextMonth
-        } else if isImageUpdate {
-            type = .isImageUpdate
+        } else if isReloadCalendar {
+            type = .reloadCalendar
         } else {
             type = .none
         }
@@ -84,10 +84,10 @@ struct FSCalendarView: UIViewRepresentable {
                 self.moveToday = false
             }
             
-        case .isImageUpdate:
+        case .reloadCalendar:
             DispatchQueue.main.async {
                 uiView.reloadData()
-                isImageUpdate = false
+                isReloadCalendar = false
             }
         
         case .movePreviousMonth:
@@ -158,15 +158,21 @@ extension FSCalendarView {
             
             if Calendar.current.isDateInToday(date) {
                 return .label //오늘
-            } else if Calendar.current.shortWeekdaySymbols[day] == "일" || Calendar.current.shortWeekdaySymbols[day] == "Sun" || Calendar.current.shortWeekdaySymbols[day] == "日" {
+            }
+            
+            if Calendar.current.shortWeekdaySymbols[day] == "일" || Calendar.current.shortWeekdaySymbols[day] == "Sun" || Calendar.current.shortWeekdaySymbols[day] == "日" {
                 if current.month  == compare.month {
                     return .systemRed //현재 선택한 월에 포함되는 일요일
                 } else {
                     return .systemRed.withAlphaComponent(0.5) //현재 선택한 월에 포함되지 않는 일요일
                 }
-            } else {
-                return nil //그 외 색상 설정 안함
             }
+            
+            return .label // 그 외 명확히 label 반환
+        }
+        
+        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleSelectionColorFor date: Date) -> UIColor? {
+            return .white
         }
         
         func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
@@ -196,6 +202,13 @@ extension FSCalendarView {
             }
             
             return image
+        }
+        
+        func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, subtitleDefaultColorFor date: Date) -> UIColor? {
+            if Calendar.current.isDateInToday(date) {
+                return .systemOrange
+            }
+            return nil
         }
         
         private func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {

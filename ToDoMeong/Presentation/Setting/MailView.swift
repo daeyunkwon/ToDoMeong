@@ -11,6 +11,7 @@ import MessageUI
 struct MailView: UIViewControllerRepresentable {
     
     @Binding var isShowing: Bool
+    @Binding var showMailError: Bool
     
     func makeCoordinator() -> Coordinator {
         return Coordinator(self)
@@ -39,6 +40,10 @@ struct MailView: UIViewControllerRepresentable {
             
             return vc
         } else {
+            DispatchQueue.main.async {
+                self.isShowing = false
+                self.showMailError = true
+            }
             return UIViewController()
         }
     }

@@ -15,7 +15,18 @@ struct TodoView: View {
     var body: some View {
         NavigationStack {
             VStack(alignment: .leading) {
-                CapsuleDateView()
+                
+                Spacer()
+                    .frame(height: 10)
+                
+                Text("todayTodo".localized())
+                    .font(Constant.AppFont.jalnanTopLeading)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 16)
+                    .background(Color(uiColor: .systemBackground))
+                    .frame(height: 20)
+                
+                CapsuleDateView(viewModel: viewModel)
                 
                 TodoListView(viewModel: viewModel)
                     .onDrop(of: [.text], delegate: TodoDropDelegate(viewModel: self.viewModel, shouldHandleDrop: false))
@@ -35,14 +46,8 @@ struct TodoView: View {
                     .frame(height: 50)
                     .offset(y: 50)
             })
-            
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Text("todayTodo".localized())
-                        .font(Constant.AppFont.jalnanTopLeading)
-                        .padding(.top, 15)
-                }
-            }
+            .navigationTitle("")
+            .navigationBarTitleDisplayMode(.inline)
         }
         
         //새로운 할 일 추가 화면 팝업
@@ -152,6 +157,10 @@ struct TodoView: View {
         .onAppear {
             viewModel.action(.onAppear)
         }
+
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+            viewModel.action(.onAppear)
+        }
     }
 }
 
@@ -162,6 +171,12 @@ struct TodoView: View {
 //MARK: - 캡슐모양 오늘 날짜 뷰
 
 private struct CapsuleDateView: View {
+    @ObservedObject private var viewModel: TodoViewModel
+    
+    fileprivate init(viewModel: TodoViewModel) {
+        self.viewModel = viewModel
+    }
+    
     var body: some View {
         UnevenRoundedRectangle(topLeadingRadius: 20, bottomLeadingRadius: 20, bottomTrailingRadius: 20, topTrailingRadius: 20, style: .continuous)
             .fill(.brandGreen)
@@ -169,7 +184,7 @@ private struct CapsuleDateView: View {
             .frame(height: 40)
             .padding(.horizontal, 7)
             .overlay {
-                Text(Date().dayOfTheWeekDateString)
+                Text(viewModel.output.today.dayOfTheWeekDateString)
                     .font(Constant.AppFont.jalnan13)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 15)
