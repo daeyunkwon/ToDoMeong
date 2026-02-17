@@ -1225,7 +1225,8 @@
         }
       }
     },
-    "오늘의 할 일" : {
+    "widget.title.today" : {
+      "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {

@@ -17,20 +17,28 @@ struct Provider: TimelineProvider {
         let entry = SimpleEntry(date: Date(), count: 0)
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+        
         let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let count = UserDefaults.init(suiteName: "group.com.daeyunkwon.ToDoMeong")?.integer(forKey: "count") ?? 0
-            let entry = SimpleEntry(date: entryDate, count: count)
-            entries.append(entry)
-        }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let userDefaults = UserDefaults.init(suiteName: "group.com.daeyunkwon.ToDoMeong")
+        let todayCount = userDefaults?.integer(forKey: "count") ?? 0
+        let tomorrowCount = userDefaults?.integer(forKey: "tomorrow") ?? 0
+        
+        // 현재 시점의 entry 추가
+        let entry = SimpleEntry(date: currentDate, count: todayCount)
+        entries.append(entry)
+        
+        // 다음 자정 entry 추가
+        let calendar = Calendar.current
+        guard let tomorrow = calendar.date(byAdding: .day, value: 1, to: currentDate) else { return }
+        let tomorrowStart = calendar.startOfDay(for: tomorrow)
+        let nextEntry = SimpleEntry(date: tomorrowStart, count: tomorrowCount)
+        entries.append(nextEntry)
+        
+        
+        let timeline = Timeline(entries: entries, policy: .after(tomorrowStart))
         completion(timeline)
     }
 }
@@ -46,9 +54,10 @@ struct ToDoMeongBasicWidgetEntryView : View {
     var body: some View {
         VStack {
             HStack {
-                Text("오늘의 할 일")
+                Text("widget.title.today".localized())
                     .font(.system(size: 15, weight: .bold))
-                Text("\(UserDefaults.init(suiteName: "group.com.daeyunkwon.ToDoMeong")?.integer(forKey: "count") ?? 0)")
+                
+                Text("\(entry.count)")
                     .font(.system(size: 18, weight: .heavy))
                     .foregroundStyle(Color(uiColor: .systemOrange))
             }
