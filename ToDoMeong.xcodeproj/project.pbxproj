@@ -41,6 +41,7 @@
 		44AE6AD92CA4262900087907 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE6AD82CA4262900087907 /* Setting.swift */; };
 		44AE6ADF2CA45A9E00087907 /* ThemeSettingDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE6ADE2CA45A9E00087907 /* ThemeSettingDetailView.swift */; };
 		44AE6AE22CA4709900087907 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44AE6AE12CA4709900087907 /* MailView.swift */; };
+		44B1818B2F449A10008E066B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448960292CA2EB7100410DA7 /* String+Extension.swift */; };
 		44ED3AC72C92E3F200E3E9CF /* ToDoMeongApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC62C92E3F200E3E9CF /* ToDoMeongApp.swift */; };
 		44ED3AC92C92E3F200E3E9CF /* TodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44ED3AC82C92E3F200E3E9CF /* TodoView.swift */; };
 		44ED3ACB2C92E3F300E3E9CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 44ED3ACA2C92E3F300E3E9CF /* Assets.xcassets */; };
@@ -606,6 +607,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				444DE63C2CC63B3C00821269 /* ToDoMeongBasicWidgetBundle.swift in Sources */,
+				44B1818B2F449A10008E066B /* String+Extension.swift in Sources */,
 				444DE63E2CC63B3C00821269 /* ToDoMeongBasicWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,7 +708,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -738,7 +740,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong.ToDoMeongBasicWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -898,7 +900,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -934,7 +936,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.daeyunkwon.ToDoMeong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
