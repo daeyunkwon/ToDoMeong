@@ -54,7 +54,7 @@ struct ToDoMeongApp: App {
         }
     }
     
-    /// 오늘 및 내일 할 일 개수를 가져와 위젯 업데이트
+    /// 앱이 Active 상태로 진입 시 오늘 및 내일 할 일 개수를 가져와 위젯 업데이트
     private func refreshTodoCountWidgets() {
         repository.fetchTodayTodo { result in
             switch result {
@@ -73,8 +73,9 @@ struct ToDoMeongApp: App {
                         
                         case .failure(let error):
                             print(error.description)
-                            self.userDefaults?.set(0, forKey: "tomorrow")
                         }
+                        
+                        userDefaults?.set(Date(), forKey: "lastUpdatedDate")
                         WidgetCenter.shared.reloadTimelines(ofKind: "ToDoMeongBasicWidget")
                     }
                 }
